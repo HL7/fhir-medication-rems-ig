@@ -1,0 +1,36 @@
+<ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="toc.html">Table of Contents</a></li>
+
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Guidance<b class="caret">
+      </b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="use-cases.html">Use Cases</a>
+      </li>
+     <li>
+        <a href="cds-triggers.html">Triggering During Patient Care</a>
+      </li>
+     <li>
+        <a href="cds-data-sharing.html">Sharing EHR Data in CDS Hook Events</a>
+      </li>
+     <li>
+        <a href="smart-launch-and-security.html">SMART App Launch and Security</a>
+      </li>
+     <li>
+        <a href="questionnaires.html">Use of Questionnaires Within SMART Apps</a>
+      </li>
+	  <li>
+        <a href="technical-background.html">Technical</a>
+      </li>
+	  <li>
+        <a href="credits.html">Credits</a>
+      </li>
+	</ul>
+  </li>
+  <li><a href="specification.html">Specification</a></li>
+  <li><a href="artifacts.html">Artifacts</a></li>
+  <li><a href="downloads.html">Downloads</a></li>
+</ul>      
