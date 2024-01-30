@@ -5,7 +5,7 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: hl7.fhir.us.medication-rems
 canonical: http://example.org
-name: RemsIG
+name: Medication REMS
 title: US Medication Risk Evaluation and Mitigation Strategies (REMS) FHIR IG
 description: FHIR implementation options and guidance for medication REMS participants
 status: draft # draft | active | retired | unknown
