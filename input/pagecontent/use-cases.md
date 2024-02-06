@@ -16,14 +16,15 @@ The scenarios below may be encountered in two different system contexts, where t
 
 This guide recommends initiating exchanges with the REMS Administrator from within the EHR workflow wherever possible--to enable interactions to be triggered based on relevant treatment actions and to avoid the need for the provider to manually navigate to external applications, maintain separate login credentials, etc. 
 
-However, ther
+However, there are situations where the ordering of a REMS drug may involve steps prior to the provider entering the EHR's order flow or where initiating a REMS interaction may not be able to be initiated based on EHR activities. In these cases, the interaction between the REMS Administrator system and the EHR may be initiated from outside the EHR (using standalone SMART launch).
 
-### Prescriber and Patient-Focused System Scenarios
-As introduced in [Participants and Roles](roles.html), prescribers and patients need a way to more easily interact with the REMS Administrator during treatment. The following scenarios illustrate how those needs fit into patient care events.
+### Prescriber Focused System Scenarios
+As introduced in [Participants and Roles](roles.html), prescribers need a way to more easily interact with the REMS Administrator during treatment. The following scenarios illustrate how those needs fit into patient care events.
 
 
 #### Scenario: Prescriber EHR initiates patient enrollment during patient care
-During the course of evaluating a patient, the prescriber decides to prescribe a medication that has a REMS program. At an appropriate point in the process (e.g., when the prescriber starts creating the medication request within their EHR, at the start of a related encounter, etc.), it contacts the REMS Administration system using CDS Hooks to supply patient treatment information and learn of any unmet program requirements, for example provider certification or patient enrollment.
+During the course of evaluating a patient, the prescriber decides to prescribe a medication that has a REMS program. At an appropriate point in the process (e.g., when the prescriber starts creating the medication request within their EHR, at the start of a related encounter, etc.), the EHR contacts the REMS Administration system using a CDS Hooks call. 
+- During this interaction, the EHR supplies patient, provider and medication information to the REMS Administrator.
 
 The REMS Administrator responds in one or more of the following ways:
 - No further program information or requirements need to be shared
@@ -31,6 +32,9 @@ The REMS Administrator responds in one or more of the following ways:
 - The patient must enroll in a REMS program before starting on the medication
 - Additional program information is available
 - No REMS program applies to the event
+
+#### Alternative Scenario: Provider begins patient enrollment from an external REMS Administrator application
+In this variation, the provider accesses an external REMS Administrator application from outside the EHR. During that application's workflow, it retrieves patient, provider and medication information from the EHR using standalone SMART launch.
 
 #### Alternative Follow-On Flows
 ##### Prescriber Certification Required

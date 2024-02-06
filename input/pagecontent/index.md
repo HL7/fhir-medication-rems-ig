@@ -3,26 +3,17 @@
 ### Overview
 A Risk Evaluation and Mitigation Strategy (REMS) is a drug safety program that the United States Food and Drug Administration (FDA) requires for medications with serious safety concerns. REMS are designed to reinforce medication use behaviors and actions that support the safe use of the medication. While all medications have labeling that informs health care stakeholders about medication risks, only a small number of medications require REMS programs.
 
-This implementation guide focuses on provider workflows during the ordering of REMS medications and associated patient encounters—and the supporting information exchanges between... 
-- the provider and the REMS Administrator that manages the associated program
-- the provider and the pharmacy to which the prescription is sent for dispensing
-- the pharmacist or other involved party and the REMS Administrator, to learn the status of REMS steps associated with a patient prescription and/or additional REMS requirements for which they are responsible (discuss)
-
-The guide describes the use of FHIR features including CDS Hooks and SMART App Launch to exchange REMS-related information between providers and REMS Administrators during patient care, and it provides guidance for including REMS-related information in the resulting prescription sent to the pharmacy in an NCPDP SCRIPT transaction.
-
-The goal of this guide is to establish information exchange conventions that support...
+This implementation guide describes the use of FHIR features including CDS Hooks and SMART App Launch to exchange REMS-related information between providers and REMS Administrators during patient care with the aims of...
 - notifying providers and patients of REMS requirements early in the ordering process
 - satisfying REMS information needs using data from the patient's electronic record where possible--minimizing manual data entry
-- capturing REMS case information--including case identifiers or other information assigned by the REMS Administrator--in the provider system
-- reducing prescription fulfillment delays by completing up-front REMS steps before the order is sent to the pharmacy and including relevant case information in the prescription
-- enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements.
-
-... with the aim of ensuring safe use in a way that gets the medication to the patient quicker.
+- reducing prescription fulfillment delays by completing up-front REMS steps before the order is sent to the pharmacy
+- getting the medication to the patient quicker.
 
 <p></p>
 
 ### Content and organization
 The implementation guide is organized into the following sections:
+* [REMS Process Steps and Timeframes](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance
 * [Participants and Roles](roles.html) identifies the REMS program participants and the systems they use
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
 * [Triggering During Patient Care](cds-triggers.html) provides guidance for initiating interactions between the EHR and REMS Administrator at appropriate points in the patient's care
@@ -40,11 +31,11 @@ The implementation guide is organized into the following sections:
 ### Dependencies 
 This implementation guide relies on the following other specifications: 
 
+* [FHIR R4](http://hl7.org/fhir/R4/) - The current official version of FHIR as of the time this implementation guide was published
+* [US Core](http://hl7.org/fhir/us/core) - The current published version of US Core profiles based on FHIR R4
 * [CDS Hooks 2.0](https://cds-hooks.hl7.org/2.0/) - The official standard for trial use publication of CDS Hooks that defines the CDS Hooks protocol and interfaces used by this implementation guide
 * [CDS Hooks CI Build](https://cds-hooks.org/specification/current/) - The most recent draft release that defines additional event hooks beyond those in CDS Hooks 2.0
 * [SMART on FHIR](http://hl7.org/fhir/smart-app-launch) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
-* [FHIR R4](http://hl7.org/fhir/R4/) - The current official version of FHIR as of the time this implementation guide was published
-* [US Core](http://hl7.org/fhir/us/core) - The current published version of US Core profiles based on FHIR R4
 * _Use of the following specifications within this IG is to be determined:_
   * [Da Vinci CRD](https://build.fhir.org/ig/HL7/davinci-crd/)
   * [Da Vinci DTR](https://build.fhir.org/ig/HL7/davinci-dtr/)
@@ -73,7 +64,7 @@ This implementation guide relies on the following other specifications:
   	  </tr>
 	  <tr>
 		<td>Frank McKinney</td>
-		<td><a href="mailto:fm@frankmckinney.com">fm@frankmckinney.com</a></td>
+		<td><a href="mailto:frank.mckinney@pocp.com">frank.mckinney@pocp.com</a></td>
 	  </tr>
 	</tbody>
   </table>
