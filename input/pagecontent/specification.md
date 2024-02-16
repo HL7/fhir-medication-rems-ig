@@ -21,20 +21,15 @@ This implementation guide uses specific terminology to flag statements that have
 * **MAY** describes optional behaviors that implementers are free to consider but where there is no recommendation for or against adoption.
 
 
-#### Systems
-This implementation guide sets expectations for two types of systems:
+### Required / optional CDS Hooks specifics (hooks, prefetch, ...)
 
-* **REMS Clients** 
+### Required / optional SMART launch specifics (scopes, deferring, ...)
 
-* **REMS Administration Services** 
+### Required / optional actions / content to be exchanged at enrollment or other events
 
-#### Security and Privacy 
+### Conventions for exchanging pieces of information (e.g., patient REMS ID as an identifier)
 
-#### PHI/PII 
+### Search specifics or other mechanics for retrieving status (TBD
 
-#### SMART on FHIR Hook Invocation 
-
-#### Levels of REMS Administrator Integration
-
-
+<p></p>
 

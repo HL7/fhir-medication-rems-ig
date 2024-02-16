@@ -17,26 +17,56 @@
         <a href="use-cases.html">Use Cases</a>
       </li>
      <li>
+        <a href="eprescribing.html">REMS Within E-Prescribing Flows</a>
+      </li>
+     <li>
         <a href="event-triggers.html">REMS Interaction Events and Triggers</a>
       </li>
      <li>
-        <a href="cds-data-sharing.html">Sharing Data in CDS Hook Events</a>
+        <a href="cds.html">Sharing Data in CDS Hook Events</a>
       </li>
      <li>
-        <a href="smart-launch-and-security.html">SMART App Launch and Security</a>
+        <a href="smart.html">SMART App Launch Usage</a>
+      </li>
+     <li>
+        <a href="architecture.html">Architectural Approach</a>
       </li>
      <li>
         <a href="questionnaires.html">Use of Questionnaires Within SMART Apps</a>
       </li>
-	  <li>
-        <a href="technical-background.html">Technical Background</a>
+     <li>
+        <a href="out-of-scope.html">Areas Out of Scope</a>
       </li>
 	  <li>
         <a href="credits.html">Credits</a>
       </li>
 	</ul>
   </li>
-  <li><a href="specification.html">Specification</a></li>
+  <li class="dropdown">
+	<a data-toggle="dropdown" href="#" class="dropdown-toggle">Guidance<b class="caret">
+	  </b>
+	</a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="technical-background.html">Technical Background</a>
+      </li>
+      <li>
+      	<a href="specification.html">Formal Specification</a>
+      </li>
+     <li>
+        <a href="cds-cards.html">CDS Card Profiles</a>
+      </li>
+     <li>
+        <a href="privacy-security.html">Privacy and Security</a>
+      </li>
+      <li>
+      	<a href="us-core.html">Applicable US Core Profiles</a>
+      </li>
+      <li>
+      	<a href="da-vinci-burden-reduction.html">Relationship to Da Vinci Burden Reduction IGs</a>
+      </li>
+	</ul>
+  </li>	  
   <li><a href="artifacts.html">Artifacts</a></li>
   <li><a href="downloads.html">Downloads</a></li>
 </ul>      
