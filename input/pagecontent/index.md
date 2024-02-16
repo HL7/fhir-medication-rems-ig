@@ -21,10 +21,10 @@ The goal of this guide is to establish information exchange conventions that sup
 
 ### Content and organization
 The implementation guide is organized into the following sections:
-* [REMS Process Steps and Timeframes](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance
-* [Participants and Roles](roles.html) identifies the REMS program participants and the systems they use
+* [REMS Steps and Terminology](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance
+* [Participant Roles and Needs](roles.html) identifies the REMS program participants, the systems they use, and their needs addressed by this implementation guide
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
-* [Triggering During Patient Care](cds-triggers.html) provides guidance for initiating interactions between the EHR and REMS Administrator at appropriate points in the patient's care
+* [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the EHR and REMS Administrator at appropriate points in the patient's care
 * [Sharing Care Data in CDS Hook Events](cds-data-sharing.html) discusses information provided during the EHR-to-REMS Administrator CDS Hooks interaction that enables the Administrator to identify program information needs, notifications and next process steps
 * [SMART App Launch and Security](smart-launch-and-security.html) gives guidance related to the SMART on FHIR app launch process and associated security considerations
 * [Use of Questionnaires Within SMART Apps](questionnaires.html) discusses the option of using FHIR Questionnaires in the REMS process for gathering information from EHR users and system records

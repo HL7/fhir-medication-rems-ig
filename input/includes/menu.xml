@@ -8,19 +8,19 @@
     </a>
     <ul class="dropdown-menu">
      <li>
-       <a href="process.html">REMS Steps and Timeframes</a>
+       <a href="process.html">REMS Steps and Terminology</a>
      </li>
      <li>
-       <a href="roles.html">Participants and Roles</a>
+       <a href="roles.html">Participant Roles and Needs</a>
      </li>
      <li>
         <a href="use-cases.html">Use Cases</a>
       </li>
      <li>
-        <a href="cds-triggers.html">Triggering During Patient Care</a>
+        <a href="event-triggers.html">REMS Interaction Events and Triggers</a>
       </li>
      <li>
-        <a href="cds-data-sharing.html">Sharing EHR Data in CDS Hook Events</a>
+        <a href="cds-data-sharing.html">Sharing Data in CDS Hook Events</a>
       </li>
      <li>
         <a href="smart-launch-and-security.html">SMART App Launch and Security</a>
@@ -29,7 +29,7 @@
         <a href="questionnaires.html">Use of Questionnaires Within SMART Apps</a>
       </li>
 	  <li>
-        <a href="technical-background.html">Technical</a>
+        <a href="technical-background.html">Technical Background</a>
       </li>
 	  <li>
         <a href="credits.html">Credits</a>
