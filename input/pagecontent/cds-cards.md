@@ -139,17 +139,17 @@ For example, this [Card](https://cds-hooks.hl7.org/2.0/#cds-service-response) co
 ### Deferred Launch SMART application
 This response type can be used to present a Card that indicates there is a SMART Application that can be launched at a future time to achieve some goal.  In general for the REMS workflows, this card type will be used to defer launching of a SMART application for the purpose of registering providers or patients on a REMS program or for the collection of periodic clinical information to ensure the safe use of a medication as may be required by a REMS program. 
 
-This suggestion will always include a "create" action for a Task resource. The Task will point to the SMART application to launch using a Task.input element with a Task.input.type.text of "smart-app-endpoint". The Task will include an additional Task.input element with a Task.input.type.text of "app-context" which will hold the application context to use to launch the SMART application with. The Task.code will always include the REMS specific 'launch-smart-app' code. 
+This suggestion will always include a "create" action for a Task resource. The Task will be either a `task-ehr-launch` or a `task-standalone-launch` as defined by the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/task-launch.html).  The Task will point to the SMART application to launch using a Task.input element with a Task.input.type.coding.code of "smartonfhir-application". The Task will include an additional Task.input element with a Task.input.type.coding.code of "smartonfhir-appcontext" which will hold the application context to use to launch the SMART application with. 
 
 <table class="grid">
   <thead>
     <tr>
-      <th>REMS Profiles</th>
+      <th>SMART Task Profiles</th>
       <th>US Core Profiles</th>
     </tr>
   </thead>
   <tr>
-    <td><a href="StructureDefinition-profile-rems-task.html">profile-task-smart-application</a></td>
+    <td><a href="https://hl7.org/fhir/smart-app-launch/task-launch.html">task launch</a></td>
     <td/>
   </tr>
 </table>
@@ -166,18 +166,14 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/2.0/
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.description">description</a>" : "Add deferred SMART Launch for DRUG-X to the task list",
       "<a href="http://hl7.org/fhir/R4/task.html#Task">resource</a>" : {
         "<a href="http://hl7.org/fhir/R4/task.html">resourceType</a>" : "Task",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.basedOn">basedOn</a>" : [
-          {
-            "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Appointment/27"
-          }
-        ],
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.status">status</a>" : "ready",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.intent">intent</a>" : "order",
+        "<a href="http://hl7.org/fhir/R4/task.html#Task.status">status</a>" : "requested",
+        "<a href="http://hl7.org/fhir/R4/task.html#Task.intent">intent</a>" : "proposal",
         "<a href="http://hl7.org/fhir/R4/task.html#Task.code">code</a>" : {
           "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
             {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/uv/sdc/CodeSystem/temp",
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-smart-app"
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-ehr-app",
+               "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Launch application using the SMART EHR launch"
             }
           ]
         },
@@ -187,17 +183,27 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/2.0/
         },
         "<a href="http://hl7.org/fhir/R4/task.html#Task.authoredOn">authoredOn</a>" : "2024-02-13",
         "<a href="http://hl7.org/fhir/R4/task.html#Task.input">input</a>" : [
-          {
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.text">text</a>" : "smart-app-endpoint"
-            },
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueUri</a>" : "http://example.org/DRUG-X/smart-app"
-          },
-          {
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.text">text</a>" : "app-context"
-            },
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{providerId:'1234'}"
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
+          "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+            {
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-application",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "SMART on FHIR application URL"
+              
+            }
+          ],
+           "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "https://example.com/DRG-X/smart-application"
+        },
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
+          "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+            {
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-appcontext",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Application context related to this launch."
+              
+            }
+          ],
+            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{field:'value'}"
           }
         ]
       }
@@ -208,4 +214,5 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/2.0/
 
 
 ### Other considerations 
+Important to note is that the DaVinci CRD specification outlines other return types related to filling out forms via FHIR Questionnaires.  While there are no examples provided here, there is nothing within this specification that precludes the use of that return type for a REMS workflow.
 
