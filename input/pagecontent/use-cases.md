@@ -2,14 +2,24 @@ _See [Participant Roles and Needs](roles.html) for descriptions of the actors an
 
 <p></p>
 
-#### Note Regarding REMS Program and Scenario Variations
-REMS programs impose differing requirements on providers and patients. In some cases, patients must enroll in the program and assert their understanding of the potential medication risks and commit to certain behaviors before starting treatment. Other REMS programs are limited to providing educational information to the patient. Others require prescriber training and certification.
+### Use Case Context
+The use case scenarios described in this section reflect a range of REMS program requirements and treatment situations and two different system contexts, as described below.
 
-Likewise, the needs of a particular treatment situation may differ from others. For example, the applicable REMS program may require providers to train and certify before prescribing the medication, but the particular prescriber previously completed those steps through an offline process.
+#### REMS Program Requirements and Variations
+REMS requirements for providers, patients and other participants differ by drug:
+- In some cases, patients must enroll in the program and assert their understanding of the potential medication risks and commit to certain behaviors before starting treatment. 
+- Other REMS programs are limited to providing educational information to the patient. 
+- Some, but not all, REMS programs require prescribers or pharmacists to complete training and enrollment steps before treating a patient with the drug.
+- Some REMS programs require labs or other diagnostics to be performed prior to or during treatment.
+- REMS programs require varying levels of coordination with the REMS Administrator on treatment activities.
 
-The scenario descriptions in this section include aspects that won't apply to all REMS programs or treatment situations. The corresponding FHIR approaches are intended to be applied if and when they fit a particular medication's program.
+In addition, real world treatment situations can differ due to other factors. For example: 
+- One prescriber may complete their training and enrollment for a REMS program through an offline process in advance of treating patients with the drug, versus another prescriber that learns of the enrollment requirement while prescribing the drug the first time
+- REMS requirements that apply when starting the patient's initial therapy may or may not be required during subsequent rounds of therapy.
 
-#### System Contexts
+As a result, the scenario descriptions in this section will include aspects that don't apply to all REMS programs or treatment situations. The [guide's FHIR approaches](architecture.html) are intended to be applied if and when they fit a particular medication's program and applicable workflow conditions.
+
+#### Provider System Contexts - Within the Provider System vs Standalone App
 The scenarios below may be encountered in two different system contexts, where the provider is either:
 - performing a patient care activity using their EHR, during which the EHR connects with the REMS Administrator system to notify it of the care event, provide patient information and/or request program information
 - visiting the REMS Administrator's external web application directly--outside of their EHR--and the application retrieves information from the EHR to support its workflow.
@@ -18,88 +28,121 @@ This guide recommends initiating exchanges with the REMS Administrator from with
 
 However, there are situations where the ordering of a REMS drug may involve steps prior to the provider entering the EHR's order flow or where initiating a REMS interaction may not be able to be initiated based on EHR activities. In these cases, the interaction between the REMS Administrator system and the EHR may be initiated from outside the EHR (using standalone SMART launch).
 
-### Prescriber Focused System Scenarios
-As introduced in [Participants and Roles](roles.html), prescribers need a way to more easily interact with the REMS Administrator during treatment. The following scenarios illustrate how those needs fit into patient care events.
+<p></p>
+
+### Scenario One: Prescriber and REMS Administrator interact from within the provider system workflow
+When seeing a patient, the prescriber decides to prescribe a medication that has a REMS program. At an appropriate point in the workflow (e.g., when the prescriber starts creating the medication order, at the start of a related encounter, etc.), the provider system connects with the REMS Administrator system and enables the prescriber to interact with it. 
+
+At the start of this interaction, the provider system supplies patient, provider and medication information to the REMS Administrator. 
+- This step is accomplished using a CDS Hooks call triggered by an appropriate "hook" event in the provider workflow such as "order-select". 
+- "Prefetch" data containing Practitioner, Patient and MedicationRequest FHIR resources is included in the request.
+
+<p></p>
+
+Depending on the drug and other variables described in the previous section, the REMS Administrator system may respond in a variety of ways, including but not limited to the following (using CDS response "cards" or "system actions").
+
+<p></p>
+
+Following the REMS Administrator's response, the provider system presents returned alerts to the prescriber and enables them to follow links to external information or to launch a returned SMART app to complete a step such as patient enrollment.
+
+If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the EHR where available in the patient's or prescriber's records as applicable. The prescriber reviews the pre-filled data, makes any adjustments required as well as filling in any additional required information and completes the app's steps.
+
+Below are possible response variations. 
+
+<p></p>
+
+#### Notify the prescriber they must complete REMS program training or enrollment before prescribing the medication
+And optionally...
+
+  - provide a URL to an external enrollment portal or training material
+  - provide a SMART app in which the prescriber enrolls (presented within their provider system's workflow)
+    
+#### Indicate that the patient is not eligible for the proposed therapy
+In addition, the response may include a URL link to additional related information
+
+####  Alert the provider of patient requirements, which may include education or enrollment into the REMS program
+Optionally include...
+  - a URL where education or other info can be found
+  - a SMART app in which to complete the patient's enrollment
+
+#### Request additional information to satisfy a REMS requirement, such as a lab result
+Optionally:
+  - Request a lab or diagnostic order using a "recommendation" card
+  - Request additional info using a SMART app
+
+#### Supply patient REMS program information
+The REMS Administrator may return information about the patient's participation in the REMS program to be saved to the patient's record in the provider system. This can be accomplished using a CDS "system action" that saves a note containing the information in the form of a FHIR DocumentReference.
+
+#### Return a "silent" response
+If the REMS Administrator does not wish to present any information or requests to the prescriber, it may return an empty response. In this scenario, the provider system will not interrupt the provider's workflow with REMS-related information.
+
+#### Return other alerts or information as needed
+This implementation guide does not constrain information or requests that a REMS Administrator may return in its CDS Hooks response. Other alerts, resources or information gathering steps may be implemented, as needed.
+
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow - Examples</strong></figcaption>
+  <p>
+  <img src="ehr-launch-sequence.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
+
+<p></p>
+
+### Scenario Two: Provider using an external REMS Administrator application
+In this variation, the provider accesses an external REMS Administrator application from outside the EHR. In a process facilitated by the provider, the external application retrieves patient, provider and medication information from the EHR using standalone SMART launch.
+
+During that application's workflow: 
+- The provider selects the EHR used in the facility where the provider sees the patient
+- The external REMS Administrator system initiates the "standalone SMART app launch" process with the selected provider system
+- The provider interacts with the provider system during launch, signing in and optionally, locating the patient 
+- The provider system grants the external system access to appropriate patient data
+- The external system retrieves patient, provider, medication and other clinical information as needed to support the associated REMS program.
+ - Using the retrieved information, the external REMS Administrator system may:
+   - determine the patient's eligibility for treatment using the drug
+   - update its existing patient enrollment or initiate a new enrollment
+   - determine if additional REMS steps or information is needed from the provider
+   - share current patient REMS IDs, authorizations, status or other information with the provider system.
+
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow - Examples</strong></figcaption>
+  <p>
+  <img src="standalone-launch-sequence.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
 
 
-#### Scenario: Prescriber EHR initiates patient enrollment during patient care
-During the course of evaluating a patient, the prescriber decides to prescribe a medication that has a REMS program. At an appropriate point in the process (e.g., when the prescriber starts creating the medication request within their EHR, at the start of a related encounter, etc.), the EHR contacts the REMS Administration system using a CDS Hooks call. 
-- During this interaction, the EHR supplies patient, provider and medication information to the REMS Administrator.
+### Scenarios not covered in this guide
+Support for the following scenarios is not included in this version of the implementation guide. They may be covered in future versions.
 
-The REMS Administrator responds in one or more of the following ways:
-- No further program information or requirements need to be shared
-- The prescriber must complete REMS program certification before prescribing the medication
-- The patient must enroll in a REMS program before starting on the medication
-- Additional program information is available
-- No REMS program applies to the event
-
-#### Alternative Scenario: Provider begins patient enrollment from an external REMS Administrator application
-In this variation, the provider accesses an external REMS Administrator application from outside the EHR. During that application's workflow, it retrieves patient, provider and medication information from the EHR using standalone SMART launch.
-
-#### Alternative Follow-On Flows
-##### Prescriber Certification Required
-If the REMS Administrator determines that the prescriber is not currently registered for the REMS program, its CDS Hooks response contains a notification and links to training material and a SMART on FHIR application or other means by which certification can be completed. 
-
-The EHR presents the alert notifying the provider that they will need to certify in the REMS program before the order can be dispensed, along with the supplied information and app links.
-
-If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the EHR where available in the prescriber's record. The prescriber reviews the pre-filled data, makes any adjustments required as well as filling in any gaps in the forms and submits the certification information to the REMS Administrator.
-
-
-##### Patient Enrollment
-If the REMS Administrator determines that the patient must enroll in the REMS program, its CDS Hooks response contains a notification and links to patient material and a SMART on FHIR application or other means by which enrollment can be completed. 
-
-The EHR presents the alert notifying the provider that the patient must enroll in the REMS program before they can start the medication, along with the supplied information and app links.
-
-If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the EHR where available in the patient's record. The patient reviews the pre-filled data, makes any adjustments required as well as filling in any gaps in the forms and submits the data back to the REMS Administrator to enroll on the REMS program.
-
-##### Additional Program Information Is Available
-The REMS Administrator includes links to any additional prescriber or patient-focused materials in its CDS Hooks response, which the EHR presents to the prescriber.
-
-##### REMS Doesn't Apply or No Information Needed
-If the REMS Administrator determines that the medication being considered does not have a REMS program, or if all program requirements have been satisfied by the prescriber and patient, it returns a CDS Hooks response indicating that. 
-
-In response, the EHR does not present any alerts or information to the prescriber.
-
-<br/><br/>
-
-#### Scenario Two: Share Information During Patient Treatment  
-Upon care events in the patient's treatment, for example when scheduling a follow-up appointment, at the start of an encounter, or at a periodic monitoring interval, the EHR notes that the patient is on a REMS medication and calls the REMS administration system.
-
-The REMS Administrator evaluates the particular event or timing for periodic patient updates and determines whether there is a need for the patient's data to be re-evaluated and responds in one or more of the following ways:
- 
-- Additional or updated patient clinical information is required, or the prescriber must provide a clinical assessment or status statement
-- No additional information is needed
-
-##### Additional Clinical or Status Information is Required
-If the REMS Administrator requires patient clinical information or other assessments from the provider, the EHR presents the alert notifying the provider of the needed information.
-
-If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the EHR where available in the patient's record. The prescriber reviews, adds any additional information and submits the data back to the REMS Administrator.
-
-
-##### REMS Doesn't Apply or No Information Needed
-If the REMS Administrator determines that the medication being considered does not have a REMS program, or if all program requirements have been satisfied by the prescriber and patient, it returns a CDS Hooks response indicating that. 
-
-In response, the EHR does not present any alerts or information to the prescriber.
-
-<br/><br/>
-
-#### Other Patient-Focused Scenarios
-###### Patient Enrollment Via EHR Portal
+##### Patient Enrollment Via EHR Portal
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
 
 The patient logs into their providers patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
 
-<br/><br/> 
+<p></p>
 
 #### HCS/Healthcare institutions
 ##### Validate Pharmacy is Registered 
 A provider prescribes a medication that has a REMS to a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the ERM queries the REMS Administration systems to determine if the pharmacy is enrolled on the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the uI of the EMR if the pharmacy is incapable of dispensing the medication. 
 
-<br/><br/>
+<p></p>
+<p></p>
 
-_[Frank left off here on Aug 11]_
+<hr>
 
-<br/><br/>
+### Additional content to be incorporated
+_The material below is yet to be incorporated into this page._
+
 
 #### Provider/Patient Workflow
 
