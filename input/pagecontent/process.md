@@ -1,11 +1,27 @@
-### REMS Process Steps and Timeframes
+### Process Steps and Timeframes
 REMS program requirements vary widely for different medications. Some programs focus on making providers and patients aware of potential risks, while others require additional steps, authorizations, reporting or other actions at the start of treatment or during ongoing therapy.
 
-This IG uses the following set of timeframes and steps to provide context to its guidance. The aim is to provide enough detail to give direction and make necessary distinctions--but generalize enough so that references to a step or timeframe can cover the range of specific actions that participants might take for different REMS programs.
+This IG uses the following generalized set of timeframes and steps to provide context to its guidance. The aim is to provide enough detail to give direction and make necessary distinctions--but generalize enough so that references to a step or timeframe can cover the range of specific actions that participants might take for different REMS programs.
 
 <div>
 <figure class="figure">
-<figcaption class="figure-caption"><strong>Figure: REMS Program Steps and Timeframes</strong></figcaption>
+<figcaption class="figure-caption"><strong>Figure: Generalized REMS Process Flow</strong></figcaption>
+  <br />
+  <p>
+  <img src="flow.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
+
+<p></p>
+Additional details and possible variations for each step in the process flow are shown below.
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Process Activities</strong></figcaption>
+  <br />
   <p>
   <img src="steps.png" style="float:none">  
   </p>
@@ -13,9 +29,8 @@ This IG uses the following set of timeframes and steps to provide context to its
 </div>
 <p></p>
 
-<p></p>
 
-### Guide Focus Areas
+### Process Focus Areas
 
 **Reusable Patterns.** This guide establishes information sharing patterns that can be applied at multiple points in the REMS process outlined above. These patterns enable a REMS participant to implement a standard "interface" that can be called multiple times during a patient's therapy--using the same basic methods but with varying inputs and response content depending on the situation.
 - see [Architectural Approach](architecture.html) for more about the guide's approach.
