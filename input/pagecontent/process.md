@@ -13,12 +13,35 @@ This IG uses the following set of timeframes and steps to provide context to its
 </div>
 <p></p>
 
+<p></p>
+
+### Guide Focus Areas
+
+**Reusable Patterns.** This guide establishes information sharing patterns that can be applied at multiple points in the REMS process outlined above. These patterns enable a REMS participant to implement a standard "interface" that can be called multiple times during a patient's therapy--using the same basic methods but with varying inputs and response content depending on the situation.
+- see [Architectural Approach](architecture.html) for more about the guide's approach.
+
+**Prescriber Focus.** The primary focus of this implementation guide is improving information exchange and minimizing manual steps for the prescriber. The exchange patterns defined in the guide can be used at the start of therapy and at later encounters during the patient's treatment. 
+ 
+**Potential to Support Other Participants' Needs**. It is possible that the patterns described in this guide might be adaptable to interactions between REMS Administrators and other parties involved in fulfilling a REMS prescription, such as pharmacists or distributors. While the guidance contained here was not tested for use by participants other than prescriber systems and REMS Administrators, other REMS stakeholders are free to adapt it to their needs where possible.
+
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: Implementation Guide Focus Areas</strong></figcaption>
+  <p>
+  <img src="focus-areas.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
+
+
+
 ### Terms Used in This Guide
 Below are terms and wording conventions used throughout this implementation guide.
 
 - "REMS" and "REMS program" are used interchangeably to refer to a Risk Evaluation and Mitigation Strategy (REMS)--a drug safety program that the United States Food and Drug Administration (FDA) requires for medications with serious safety concerns.
 - The terms “medication” and “drug” refer to prescription drugs and prescription biologics.
-_- [DISCUSS] IG conventions for use of "medication" vs "drug"_
 - The guide uses “prescriber” throughout to represent the health care provider or other authorized party acting on their behalf that prescribes or orders the REMS drug.
 - The guide uses “pharmacist” throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization
 <p></p>

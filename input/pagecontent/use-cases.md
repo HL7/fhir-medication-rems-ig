@@ -1,4 +1,4 @@
-_See [Participants and Roles](roles.html) for descriptions of the actors and systems referenced in the use cases below_
+_See [Participant Roles and Needs](roles.html) for descriptions of the actors and systems referenced in the use cases below_
 
 <p></p>
 
@@ -102,16 +102,6 @@ _[Frank left off here on Aug 11]_
 <br/><br/>
 
 #### Provider/Patient Workflow
-The high-level workflow for CRD is envisioned to work as follows:
-
-{::options parse_block_html="false" /}
-<figure>
-  <img height="300px" src="overview.png" alt="CRD Workflow diagram"/>
-  <figcaption><b>    Figure 1: CRD Workflow</b></figcaption>
-  <p></p>
-</figure>
-{::options parse_block_html="true" /}
-
 
 **1. Clinical action (potentially) needed**<br/>
 A healthcare provider decides that a clinical action is needed or wants to explore the coverage ramifications of taking a clinical action.  Possible clinical actions include:

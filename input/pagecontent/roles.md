@@ -43,6 +43,8 @@ Below is an outline of those who play a role in the parts of the REMS process cu
 
   _Note: While the workflows and needs of these parties have not been considered and addressed fully in this implementation guide, their roles may benefit from some of its features, such as the method for checking the status of REMS drug prescriptions that they are helping fulfill._
 
+<p></p>
+
 #### System Roles
 - The **REMS Administrator System** may: 
   - transmit program guidance and requirements to provider systems
@@ -61,12 +63,18 @@ Below is an outline of those who play a role in the parts of the REMS process cu
     - receiving a REMS drug prescription for an initial dispense or refill
     - receiving a request for some other fulfillment-related action.
 
-_TBD - Where to include references to an intermediary system:_
-- A data exchange **intermediary** may participate in the process on behalf of one or more REMS Administrators. The intermediary may:
-  - act as a CDS Server fielding CDS requests related to one or more REMS drugs
-  - host a SMART app supporting one or more REMS drugs
-  -	route REMS requests to the correct REMS Administrator
-  - perform additional services outside the scope of this guide.
+<p></p>
+
+#### Intermediary Role
+A data exchange intermediary may participate in the process on behalf of one or more REMS Administrators...
+  - acting as a CDS Server fielding CDS requests related to one or more REMS drugs
+  - hosting SMART apps supporting one or more REMS drugs.
+
+An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the provider system--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs.
+
+This guide does not provide direction for implementing an intermediary role serving these REMS interactions. A future version may add guidance in this area.
+
+<p></p>
 
 ### REMS Participant Needs
 This guide supports a set of scenarios involving interaction between prescribers, patients, pharmacists, and REMS Administrators. The list below outlines participants' needs, and the [Use Cases section](use-cases.html) further details the related process scenarios.
