@@ -25,12 +25,12 @@ The implementation guide is organized into the following sections:
 * [Participant Roles and Needs](roles.html) identifies the REMS program participants, the systems they use, and their needs addressed by this implementation guide
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
 * [REMS Within E-Prescribing Flows](eprescribing.html) describes how REMS steps fit within e-prescribing workflows and provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
-* [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the EHR and REMS Administrator at appropriate points in the patient's care
+* [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the provider system (e.g., an EHR) and REMS Administrator system at appropriate points in the patient's care
 * [Sharing Data in CDS Hook Events](cds.html) discusses this IG's use of CDS Hooks conventions for triggering exchanges and exchanging information in different scenarios
 * [SMART App Launch Usage](smart.html) gives guidance related to the SMART on FHIR app launch process and associated workflows
 * [Architectural Approach](architecture.html) provides background and rationale for key aspects of the IG's approach
 * [Areas Out of Scope](out-of-scope.html) provides additional background about REMS flows and content that are not covered in this version of the IG
-* [Use of Questionnaires Within SMART Apps](questionnaires.html) discusses the option of using FHIR Questionnaires in the REMS process for gathering information from EHR users and system records
+* [Use of Questionnaires Within SMART Apps](questionnaires.html) discusses the option of using FHIR Questionnaires in the REMS process for gathering information from provider system users and system records
 * [Technical Background](technical-background.html) describes the specifications this implementation guide relies on and indicates what developers should read and understand prior to implementing this specification
 * [Formal Specification](specification.html) provides detailed implementation requirements and conformance expectations
 * [CDS Card Profiles](cds-cards.html) formally defines content for CDS cards and system actions returned in REMS flows

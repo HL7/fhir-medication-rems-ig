@@ -19,14 +19,15 @@ In addition, real world treatment situations can differ due to other factors. Fo
 
 As a result, the scenario descriptions in this section will include aspects that don't apply to all REMS programs or treatment situations. The [guide's FHIR approaches](architecture.html) are intended to be applied if and when they fit a particular medication's program and applicable workflow conditions.
 
-#### Provider System Contexts - Within the Provider System vs Standalone App
+#### Provider System Contexts - Within the Provider System Workflow vs Standalone REMS Administrator App
 The scenarios below may be encountered in two different system contexts, where the provider is either:
-- performing a patient care activity using their EHR, during which the EHR connects with the REMS Administrator system to notify it of the care event, provide patient information and/or request program information
-- visiting the REMS Administrator's external web application directly--outside of their EHR--and the application retrieves information from the EHR to support its workflow.
+- performing a patient care activity using their Provider System (e.g., their EHR), during which the Provider System connects with the REMS Administrator System to notify it of the care event, provide patient information and/or request program information
+- visiting the REMS Administrator's external web application directly--outside of their Provider System--and the application retrieves information from the Provider System to support its workflow.
 
-This guide recommends initiating exchanges with the REMS Administrator from within the EHR workflow wherever possible--to enable interactions to be triggered based on relevant treatment actions and to avoid the need for the provider to manually navigate to external applications, maintain separate login credentials, etc. 
+#### Recommendation: Interaction Within the Provider System Workflow
+This guide recommends initiating exchanges with the REMS Administrator System from within the Provider System workflow wherever possible--to enable interactions to be triggered based on relevant treatment actions and to avoid the need for the provider to manually navigate to external applications, maintain separate login credentials, etc. 
 
-However, there are situations where the ordering of a REMS drug may involve steps prior to the provider entering the EHR's order flow or where initiating a REMS interaction may not be able to be initiated based on EHR activities. In these cases, the interaction between the REMS Administrator system and the EHR may be initiated from outside the EHR (using standalone SMART launch).
+However, there are situations where starting therapy with a REMS drug may involve steps prior to the provider entering the Provider System's order flow or where it may otherwise not be possible to initiate exchange with the REMS Administrator System based on Provider System activities. In these cases, the interaction may be initiated from an external REMS Administrator App using standalone SMART app launch.
 
 <p></p>
 
@@ -45,7 +46,7 @@ Depending on the drug and other variables described in the previous section, the
 
 Following the REMS Administrator's response, the provider system presents returned alerts to the prescriber and enables them to follow links to external information or to launch a returned SMART app to complete a step such as patient enrollment.
 
-If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the EHR where available in the patient's or prescriber's records as applicable. The prescriber reviews the pre-filled data, makes any adjustments required as well as filling in any additional required information and completes the app's steps.
+If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the Provider System where available in the patient's or prescriber's records as applicable. The prescriber reviews the pre-filled data, makes any adjustments required as well as filling in any additional required information and completes the app's steps.
 
 Below are possible response variations. 
 
@@ -94,10 +95,10 @@ This implementation guide does not constrain information or requests that a REMS
 <p></p>
 
 ### Scenario Two: Provider using an external REMS Administrator application
-In this variation, the provider accesses an external REMS Administrator application from outside the EHR. In a process facilitated by the provider, the external application retrieves patient, provider and medication information from the EHR using standalone SMART launch.
+In this variation, the provider accesses an external REMS Administrator application from outside the Provider System. In a process facilitated by the provider, the external application retrieves patient, provider and medication information from the Provider System using [standalone SMART launch](https://hl7.org/fhir/smart-app-launch/STU2.1/app-launch.html#launch-app-standalone-launch).
 
 During that application's workflow: 
-- The provider selects the EHR used in the facility where the provider sees the patient
+- The provider selects the Provider System used in the facility where the provider sees the patient
 - The external REMS Administrator system initiates the "standalone SMART app launch" process with the selected provider system
 - The provider interacts with the provider system during launch, signing in and optionally, locating the patient 
 - The provider system grants the external system access to appropriate patient data
@@ -124,7 +125,7 @@ During that application's workflow:
 ### Scenarios not covered in this guide
 Support for the following scenarios is not included in this version of the implementation guide. They may be covered in future versions.
 
-##### Patient Enrollment Via EHR Portal
+##### Patient Enrollment Via Patient-Directed Portal
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
 
 The patient logs into their providers patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
