@@ -48,9 +48,9 @@ Below is an outline of those who play a role in the parts of the REMS process cu
 #### System Roles
 - The **REMS Administrator System** may: 
   - transmit program guidance and requirements to provider systems
-  - obtain patient and provider statements and other patient information from prescriber EHRs and using SMART on FHIR apps
+  - obtain patient and provider statements and other patient information from a Provider System (e.g., the prescriber's EHR) and using SMART on FHIR apps
   - interact with REMS participants in ways not currently covered by this guide, including through portals used by REMS participants to access information or enroll in a REMS
-- The prescriber's **EHR** (electronic health record) may:
+- The prescriber's **Provider System,** e.g., an EHR (electronic health record) may:
   - systematically notify the REMS Administrator and supply REMS-related information... 
     - when determining whether to start the patient on the REMS drug
     - at the start of therapy--during ordering

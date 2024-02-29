@@ -1,8 +1,8 @@
 The REMS Administrator will typically need some common information--regardless of the particular REMS program--at the time of a CDS Hooks request, such as patient demographics and prescriber info.
 
 - But individual programs may require sharing additional patient clinicals or other info with the REMS Administrator as part of the Hooks interaction so that it can determine whether it needs to respond, and if so, what it should include in its response
-- Stakeholders agree that it would benefit those configuring an EHR for this process to include a consistent set of FHIR resources in the CDS Hooks request--regardless of the particular medication
-- However, the EHR should enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
+- Stakeholders agree that it would benefit those configuring a provider system (e.g., an EHR) for this process to include a consistent set of FHIR resources in the CDS Hooks request--regardless of the particular medication
+- However, the provider system should enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
 
 <p></p>
 ### Prefetch
@@ -18,7 +18,7 @@ See [some detailed specification section] for specific content and examples
 <p></p>
 
 ### Query During CDS Hooks
-- In addition, the EHR is expected to provide sufficient authorization during the CDS Hooks exchange to enable the REMS Administrator to retrieve related patient information including...
+- In addition, the provider system is expected to provide sufficient authorization during the CDS Hooks exchange to enable the REMS Administrator to retrieve related patient information including...
   - Lab results
   - Vital signs
   - Conditions
