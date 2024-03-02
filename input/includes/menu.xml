@@ -17,22 +17,7 @@
         <a href="use-cases.html">Use Cases</a>
       </li>
      <li>
-        <a href="eprescribing.html">REMS Within E-Prescribing Flows</a>
-      </li>
-     <li>
         <a href="event-triggers.html">REMS Interaction Events and Triggers</a>
-      </li>
-     <li>
-        <a href="cds.html">Sharing Data in CDS Hook Events</a>
-      </li>
-     <li>
-        <a href="smart.html">SMART App Launch Usage</a>
-      </li>
-     <li>
-        <a href="architecture.html">Architectural Approach</a>
-      </li>
-     <li>
-        <a href="questionnaires.html">Use of Questionnaires Within SMART Apps</a>
       </li>
      <li>
         <a href="out-of-scope.html">Areas Out of Scope</a>
@@ -55,15 +40,6 @@
       </li>
      <li>
         <a href="cds-cards.html">CDS Card Profiles</a>
-      </li>
-     <li>
-        <a href="privacy-security.html">Privacy and Security</a>
-      </li>
-      <li>
-      	<a href="us-core.html">Applicable US Core Profiles</a>
-      </li>
-      <li>
-      	<a href="da-vinci-burden-reduction.html">Relationship to Da Vinci Burden Reduction IGs</a>
       </li>
 	</ul>
   </li>	  

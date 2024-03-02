@@ -21,22 +21,17 @@ The goal of this guide is to establish information exchange conventions that sup
 
 ### Content and organization
 The implementation guide is organized into the following sections:
-* [REMS Steps and Terminology](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance
+* [REMS Steps and Terminology](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance. It also describes how REMS steps fit within e-prescribing workflows and provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
 * [Participant Roles and Needs](roles.html) identifies the REMS program participants, the systems they use, and their needs addressed by this implementation guide
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
-* [REMS Within E-Prescribing Flows](eprescribing.html) describes how REMS steps fit within e-prescribing workflows and provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
 * [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the provider system (e.g., an EHR) and REMS Administrator system at appropriate points in the patient's care
-* [Sharing Data in CDS Hook Events](cds.html) discusses this IG's use of CDS Hooks conventions for triggering exchanges and exchanging information in different scenarios
-* [SMART App Launch Usage](smart.html) gives guidance related to the SMART on FHIR app launch process and associated workflows
-* [Architectural Approach](architecture.html) provides background and rationale for key aspects of the IG's approach
 * [Areas Out of Scope](out-of-scope.html) provides additional background about REMS flows and content that are not covered in this version of the IG
-* [Use of Questionnaires Within SMART Apps](questionnaires.html) discusses the option of using FHIR Questionnaires in the REMS process for gathering information from provider system users and system records
-* [Technical Background](technical-background.html) describes the specifications this implementation guide relies on and indicates what developers should read and understand prior to implementing this specification
-* [Formal Specification](specification.html) provides detailed implementation requirements and conformance expectations
+* [Technical Background](technical-background.html) describes the specifications this implementation guide relies on and indicates what developers should read and understand prior to implementing this specification, including US Core profiles used in this IG.. It also provides background and rationale for key aspects of the IG's approach, and describes how approaches used in this guide relate to those employed in the Da Vinci "Burden Reduction" guides
+* [Formal Specification](specification.html) provides detailed implementation requirements and conformance expectations related to:
+  *  this IG's use of CDS Hooks conventions for triggering exchanges and exchanging information in different scenarios
+  *  guidance related to the SMART on FHIR app launch process and associated workflows
+  *  REMS-specific and general FHIR requirements related to security and patient privacy
 * [CDS Card Profiles](cds-cards.html) formally defines content for CDS cards and system actions returned in REMS flows
-* [Privacy and Security](privacy-security.html) describes REMS-specific and general FHIR requirements related to security and patient privacy
-* [Applicable US Core Profiles](us-core.html) identifies US Core profiles used in this IG
-* [Relationship to Da Vinci Burden Reduction IGs](da-vinci-burden-reduction.html)  describes how approaches used in this guide relate to those employed in the Da Vinci "Burden Reduction" guides
 * [Artifacts](artifacts.html) introduces and provides links to the FHIR resource profiles and other FHIR artifacts defined in this implementation guide
 * [Downloads](downloads.html) allows download of this and other specifications as well as other useful files
 * [Credits](credits.html) identifies the individuals and organizations involved in developing this implementation guide
