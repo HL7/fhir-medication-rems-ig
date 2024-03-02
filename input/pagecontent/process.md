@@ -33,7 +33,7 @@ Additional details and possible variations for each step in the process flow are
 ### Process Focus Areas
 
 **Reusable Patterns.** This guide establishes information sharing patterns that can be applied at multiple points in the REMS process outlined above. These patterns enable a REMS participant to implement a standard "interface" that can be called multiple times during a patient's therapy--using the same basic methods but with varying inputs and response content depending on the situation.
-- see [Architectural Approach](architecture.html) for more about the guide's approach.
+- see [Technical Background](technical-background.html) for more about the guide's architectural approach.
 
 **Prescriber Focus.** The primary focus of this implementation guide is improving information exchange and minimizing manual steps for the prescriber. The exchange patterns defined in the guide can be used at the start of therapy and at later encounters during the patient's treatment. 
  

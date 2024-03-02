@@ -17,7 +17,7 @@ In addition, real world treatment situations can differ due to other factors. Fo
 - One prescriber may complete their training and enrollment for a REMS program through an offline process in advance of treating patients with the drug, versus another prescriber that learns of the enrollment requirement while prescribing the drug the first time
 - REMS requirements that apply when starting the patient's initial therapy may or may not be required during subsequent rounds of therapy.
 
-As a result, the scenario descriptions in this section will include aspects that don't apply to all REMS programs or treatment situations. The [guide's FHIR approaches](architecture.html) are intended to be applied if and when they fit a particular medication's program and applicable workflow conditions.
+As a result, the scenario descriptions in this section will include aspects that don't apply to all REMS programs or treatment situations. The guide's FHIR approaches are intended to be applied if and when they fit a particular medication's program and applicable workflow conditions.
 
 #### Provider System Contexts - Within the Provider System Workflow vs Standalone REMS Administrator App
 The scenarios below may be encountered in two different system contexts, where the provider is either:
