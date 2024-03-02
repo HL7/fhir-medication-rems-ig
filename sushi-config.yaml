@@ -66,18 +66,8 @@ pages:
     title: Participant Roles and Needs
   use-cases.md:
     title: Use Cases
-  eprescribing.md:
-    title: REMS Within E-Prescribing Flows
   event-triggers.md:
     title: REMS Interaction Events and Triggers
-  cds.md:
-    title: Sharing Data in CDS Hook Events
-  smart.md:
-    title: SMART App Launch Usage
-  architecture.md:
-    title: Architectural Approach
-  questionnaires.md:
-    title: Use of Questionnaires Within SMART Apps
   out-of-scope.md:
     title: Areas Out of Scope
   credits.md:
@@ -88,12 +78,6 @@ pages:
     title: Formal Specification
   cds-cards.md:
     title: CDS Card Profiles
-  privacy-security.md:
-    title: Privacy and Security
-  us-core.md:
-    title: Applicable US Core Profiles
-  da-vinci-burden-reduction.md:
-    title: Relationship to Da Vinci Burden Reduction IGs
   artifacts.md:
     title: Artifacts
   downloads.md:
