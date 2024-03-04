@@ -31,7 +31,7 @@ The implementation guide is organized into the following sections:
   *  this IG's use of CDS Hooks conventions for triggering exchanges and exchanging information in different scenarios
   *  guidance related to the SMART on FHIR app launch process and associated workflows
   *  REMS-specific and general FHIR requirements related to security and patient privacy
-* [CDS Card Profiles](cds-cards.html) formally defines content for CDS cards and system actions returned in REMS flows
+* [CDS Hooks Card Profiles](cds-cards.html) formally defines content for CDS Hooks cards and system actions returned in REMS flows
 * [Artifacts](artifacts.html) introduces and provides links to the FHIR resource profiles and other FHIR artifacts defined in this implementation guide
 * [Downloads](downloads.html) allows download of this and other specifications as well as other useful files
 * [Credits](credits.html) identifies the individuals and organizations involved in developing this implementation guide
