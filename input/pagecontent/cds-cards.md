@@ -1,10 +1,12 @@
 ### Profiles of CDS Response Cards and System Actions
 
-[Cards](https://cds-hooks.hl7.org/#cds-service-response) serve as the mechanisms that REMS Administrator Systems use to return information and requested actions (e.g., launching a SMART app) in response to a CDS Hooks request triggered during the prescriber's workflow. These cards reflect the REMS program associated with the prescribed drug, the status of REMS requirements at the time of the event, needed patient information, etc. This page gives guidelines for using these Cards in a REMS workflow. 
+CDS Hooks [Cards](https://cds-hooks.hl7.org/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
 
-In addition to following the [guidance provided in the CDS Hooks specification](https://cds-hooks.hl7.org/#card-attributes), this guide also aims to be as consistent as possible with applicable CDS Response guidance included in the Da Vinci Coverage Requirements Discovery IG, as described further [here](technical-background.html#use-of-cds-hooks).
+REMS Administrator Systems will populate these Cards according to the prescribed drug's REMS program, the status of required REMS steps at the time of the event, information needs driven by the patient's treatment, etc. This page gives guidelines for populating and using these Cards in a REMS workflow. 
 
-The following guidelines apply to Cards returned in response to a REMS-related CDS Hooks request:
+This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/#card-attributes), plus considerations specific to the REMS workflow. In addition, this guide also aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery IG, to the extent possible (as described further [here](technical-background.html#use-of-cds-hooks)).
+
+**The following guidelines apply to Cards returned in response to a REMS-related CDS Hooks request:**
 
 *  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of clinical importance and/or risk to the patient, versus importance to the associated REMS program. For example, while a REMS Administrator System might perceive a Provider not being registered for the a REMS Program as 'critical' from the perspective of being able to prescribe and dispense a drug, it would at most be a 'warning' to the user--from the perspective of clinical care.  The `indicator` value, 'critical', must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as 'info'.
 
