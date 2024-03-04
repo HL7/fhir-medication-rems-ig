@@ -58,7 +58,6 @@ When reasonable, an "External Reference" card **SHOULD** contain a summary of th
 
 For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/#cds-service-response) contains five [Links](https://cds-hooks.hl7.org/#link) - a link to an overview website, a link to a PDF containing a guide for the medication itself, a link to PDF that specifics the REMS program information, a link to a PDF that contains adverse event management and a link to a provider enrollment form.  
 
-<!-- TODO include Binary-CRDServiceResponse-links-json-html.xhtml -->
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
   "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.uuid">uuid</a>" : "urn:uuid:07bc9814-9d2a-11ee-8c90-0242ac120002",
@@ -112,7 +111,6 @@ Care should be taken not to overuse this return type with information that is no
 
 This example CDS Hook [Card](https://cds-hooks.hl7.org/#cds-service-response) just contains a message:
 
-<!-- TODO include Binary-CRDServiceResponse-info-json-html.xhtml -->
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
   "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.summary">summary</a>" : "Provider Mary Zhang must re-enroll in the DRUG-X REMS program by December 15",
@@ -135,7 +133,6 @@ Card population for this response type is similar to the [External Reference](#e
 
 For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.org/#link) to enroll the patient into the REMS program:
 
-<!-- TODO include Binary-CRDServiceResponse2-smart-json-html.xhtml -->
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
   "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.uuid">uuid</a>" : "urn:uuid:353cd963-2ecd-46f9-958b-ed7d2bbf6e01",
@@ -157,7 +154,9 @@ For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.or
 }</code></pre>
 {% endraw %}
 
-**App Registration.** To be made available to providers within a Provider System, SMART apps need to first be approved by the provider organization and, typically, also the associated software vendor.  
+<p></p>
+
+**Note regarding app registration.** To be made available to providers within a Provider System, SMART apps need to first be approved by the provider organization and, typically, also the associated software vendor.  
 
 <p></p>
 
