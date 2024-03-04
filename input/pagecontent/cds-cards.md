@@ -1,14 +1,30 @@
-### Profiles of CDS Response Cards and System Actions
+This page gives guidelines for populating and returning CDS Hooks response Cards in a REMS workflow. 
 
-CDS Hooks [Cards](https://cds-hooks.hl7.org/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
+[Cards](https://cds-hooks.hl7.org/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
 
-REMS Administrator Systems will populate these Cards according to the prescribed drug's REMS program, the status of required REMS steps at the time of the event, information needs driven by the patient's treatment, etc. This page gives guidelines for populating and using these Cards in a REMS workflow. 
+REMS Administrator Systems dynamically create these Cards for each CDS Hooks request based on conditions including:
+- the prescribed drug's REMS program
+- the status of required REMS steps at the time of the event
+- REMS information needs associated with the current point in the patient's treatment. 
 
-This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/#card-attributes), plus considerations specific to the REMS workflow. In addition, this guide also aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery IG, to the extent possible (as described further [here](technical-background.html#use-of-cds-hooks)).
+This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#use-of-cds-hooks)).
 
-**The following guidelines apply to Cards returned in response to a REMS-related CDS Hooks request:**
+<p></p>
 
-*  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of clinical importance and/or risk to the patient, versus importance to the associated REMS program. For example, while a REMS Administrator System might perceive a Provider not being registered for the a REMS Program as 'critical' from the perspective of being able to prescribe and dispense a drug, it would at most be a 'warning' to the user--from the perspective of clinical care.  The `indicator` value, 'critical', must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as 'info'.
+### General Card Population Guidance
+All Card types, including the Suggestion type containing a system Action as described in the [Deferred SMART Application Launch](#deferred-smart-application-launch) section  below, are presented to the provider within the workflow of their Provider System. They:
+- display information
+- offer links that the provider may follow to external information
+- give the provider the option to complete a task by launching a SMART app immediately 
+- or give the provider the option to place the SMART app step in their work queue to be completed in the future.
+
+In all cases, Cards interrupt the provider's workflow and will welcomed by the provider only when they are pertinent to the situation, when their benefit outweighs the disruption to the provider's thought process, and when their content can be quickly understood and acted upon.
+
+<p></p>
+
+**General guidelines for a REMS Administrator System returning Cards:**
+
+*  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for the a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
 
 *  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize. In general this would be based on the name of the medication being requested.  
 
@@ -28,10 +44,14 @@ This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.or
 
 * Provider Systems might not support all card capabilities; therefore card options **SHOULD** provide sufficient information for a user to take appropriate actions manually if automated support isn't available.
 
+<p></p>
 
 ### Potential REMS CDS Hooks Response Types
+Note: While the Card types and content described below are what REMS Administrators will typically return in a REMS workflow, implementers are not limited to these options.
 
-### External Reference
+<p></p>
+
+#### External Reference
 This response type presents a Card with one or more links to external web pages, PDFs, or other resources that provide relevant information with regards to the REMS program the CDS Hook was executed for. A link might provide information about the program, requirements for safe use,  printable forms, etc. Typically, these references would be links to information available from the REMS Administrator's website or other authoritative sources.  The card **SHALL** have at least one `Card.link`.  The `Link.type` **SHALL** have a type of "absolute".
 
 When reasonable, an "External Reference" card **SHOULD** contain a summary of the actionable information from the external reference.
@@ -81,8 +101,9 @@ For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/#cds-service-respon
 
 As much as technically possible, links provided **SHOULD** take the user to the specific place in the documentation relevant to the current hook context to minimize provider reading and navigation time.
 
+<p></p>
 
-### Instructions
+#### Instructions
 This response type presents a Card with textual guidance or instructions to display to the provider. The text might provide information related to updated REMS guidelines, notifying the user of an need to update a self assessment or even something as simple as "No REMS requirements currently require action". 
 
 Instructions **SHOULD** reflect the current status of the patient's and provider's participation in the REMS program--providing only applicable direction at the time of the request. The instruction text **SHOULD** be concise and simple for the provider to consume, omitting any general guidance that is not relevant to the situation. To accomplish this, the text returned might need to be generated uniquely each time a hook is fired.
@@ -105,14 +126,14 @@ This example CDS Hook [Card](https://cds-hooks.hl7.org/#cds-service-response) ju
 }</code></pre>
 {% endraw %}
 
-### Launch SMART application
-Unlike External References, SMART apps can be launched within the Provider System workflow and use data from the Provider System to support their features. They allow more sophisticated interaction between payers and providers than simple external links. They provide full control over user interface, workflow, etc. and can be authorized to access patient clinical data to help guide the interactive experience and minimize data entry.  Apps can provide a wide variety of functions in the REMS workflow, including patient enrollment, providing education, etc.
+<p></p>
 
-To be made available to providers within a Provider System, SMART apps need to first be approved by the provider organization and, typically, also the associated software vendor.  
+#### Launch SMART application
+Unlike External References, SMART apps can be launched within the Provider System workflow and use data from the Provider System to support their features. They allow interaction between the REMS Administrator and Provider System and can be authorized to access patient clinical data to help guide the interactive experience and minimize data entry. Apps can provide a wide variety of functions in the REMS workflow, including patient enrollment, providing education, collecting periodic clinical information required by the REMS, etc. 
 
-This response type is similar to the [External Reference](#external-reference) response type, except with the `Link.type` set to "smart" instead of "absolute". The `Link.appContext` will typically also be present, providing context information that is useful to the app, which will be included when the EHR launches it.
+Card population for this response type is similar to the [External Reference](#external-reference) response type, except with the `Link.type` set to "smart" instead of "absolute". The `Link.appContext` will typically also be present, providing context information that is useful to the app, which will be included when the EHR launches it.
 
-For example, this [Card](https://cds-hooks.hl7.org/#cds-service-response) contains a SMART App [Link](https://cds-hooks.hl7.org/#link) to enroll the patient into the REMS program:
+For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.org/#link) to enroll the patient into the REMS program:
 
 <!-- TODO include Binary-CRDServiceResponse2-smart-json-html.xhtml -->
 {% raw %}
@@ -130,17 +151,22 @@ For example, this [Card](https://cds-hooks.hl7.org/#cds-service-response) contai
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "DRUG-X REMS Patient Enrollment Application",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.url">url</a>" : "https://example.org/DRUG-X/smart-app",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "smart",
-      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.appContext">appContext</a>" : "{\&quot;providerSystemPatientId\&quot;:\&quot;205f471f-f408-45d4-9213-0eedf95f417f\&quot;}"
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.appContext">appContext</a>" : "{\"providerSystemPatientId\":\"123\"}"
     }
   ]
 }</code></pre>
 {% endraw %}
 
-### Deferred Launch SMART application
-This response type can be used to present a Card that indicates there is a SMART Application that can be launched at a future time to achieve some goal.  In general for the REMS workflows, this card type will be used to defer launching of a SMART application for the purpose of enrolling the provider or patient in a REMS program or for the collection of periodic clinical information to ensure the safe use of a medication as may be required by the REMS. 
+**App Registration.** To be made available to providers within a Provider System, SMART apps need to first be approved by the provider organization and, typically, also the associated software vendor.  
+
+<p></p>
+
+#### Deferred SMART Application Launch
+This response type can be used to present a Card that indicates there is a SMART application that can be launched at a future time to satisfy a REMS step.  A recommended use within the REMS workflow is to defer launching of a SMART app for enrolling the provider or patient into the REMS program.
 
 This suggestion will always include a "create" action for a Task resource. The Task will be either a `task-ehr-launch` or a `task-standalone-launch` as defined by the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/task-launch.html).  The Task will point to the SMART application to launch using a Task.input element with a Task.input.type.coding.code of "smartonfhir-application". The Task will include an additional Task.input element with a Task.input.type.coding.code of "smartonfhir-appcontext" which will hold the application context to use to launch the SMART application with. 
 
+<!-- TODO: Determine if we need this... I think it's a vestige from CRD:
 <table class="grid">
   <thead>
     <tr>
@@ -153,6 +179,7 @@ This suggestion will always include a "create" action for a Task resource. The T
     <td/>
   </tr>
 </table>
+-->
 
 The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#suggestion), with the specified SMART application.  This [Action](https://cds-hooks.hl7.org/#action) only contains the FHIR [Task]({{site.data.fhir.path}}task.html) resource.  
 
@@ -205,7 +232,7 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#sug
                  }
                ]
              },
-             "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{\"field\":\"value\"}"
+             "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{\"providerSystemPatientId\":\"123\"}"
           }
         ]
       }
@@ -214,4 +241,5 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#sug
 }</code></pre>
 {% endraw %}
 
+<p></p>
 <p></p>
