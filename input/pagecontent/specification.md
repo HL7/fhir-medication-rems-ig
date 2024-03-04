@@ -1,91 +1,173 @@
-### ** Reorganization of this page in process **
-
-_Placeholder content_
-
 ### Pre-reading
-Before reading this formal specification, implementers are encouraged to first familiarize themselves with two other key portions of this implementation guide:
+Before reading this formal specification, implementers are encouraged to first familiarize themselves with other key portions of this implementation guide:
 
-* The [Use Cases & Overview](use-cases.html) page, which provides context for what this formal specification is trying to accomplish and will give a sense of both the business context and general process flow enabled by the formal specification below.
+* The [Participant Roles and Needs](roles.html) section overviews the real world people and organizations who participate in REMS programs and defines the system roles referenced in the specification below.
 
-* The [Technical Background](technical-background.html) page, which provides information about the underlying specifications and recommends portions that must be read and understood to have necessary foundation to understand the constraints and usage guidance described here.
+* The [REMS Steps and Terminology](process.html) and [Use Cases](use-cases.html) sections describe the process context and goals behind the interactions defined below
+
+* The [Technical Background](technical-background.html) page identifies related specifications that this guide depends on. 
 
 
-### Conventions
-This implementation guide uses specific terminology to flag statements that have relevance for the evaluation of conformance with the guide:
+### Conformance Conventions
+This implementation guide uses the following terms to set expectations for implementers to conform to specific behaviors and information content it defines:
 
 * **SHALL** indicates requirements that must be met to be conformant with the specification.
 
-* **SHOULD** indicates behaviors that are strongly recommended (and which could result in interoperability issues or sub-optimal behavior if not adhered to), but which do not, for this version of the specification, affect the determination of specification conformance.
+* **SHOULD** indicates behaviors that are strongly recommended (and which could result in interoperability issues or sub-optimal behavior if not adhered to), but which are not strictly required for an implementation to be considered conformant to this version of the guide.
 
 * **MAY** describes optional behaviors that implementers are free to consider but where there is no recommendation for or against adoption.
 
 <p></p>
 
-### CDS-related
+### Provider System and REMS Administrator System Interactions
+
+This implementation guide establishes two basic interaction patterns between a Provider System and REMS Administrator System that can be applied at multiple points in treating a patient with a REMS drug:
+- interaction initiated by the Provider System during the provider's workflow
+- a provider using an external REMS Administrator application that accesses patient data in the Provider System using standalone SMART app launch--to provide a transitional bridge for REMS provider portals that exist today, and for circumstances where interaction with the REMS Administrator may more naturally occur within its external system.
+
+#### Interaction initiated by the Provider System during the provider's workflow
+This interaction is initiated by the Provider System during the provider's workflow, using CDS Hooks and, optionally, EHR-based SMART App Launch. REMS Administrators and Provider Systems **SHOULD** support this interaction approach because it offers the greatest opportunity to raise and address REMS requirements when related care activities occur.
+
 <p></p>
 
-The REMS Administrator will typically need some common information--regardless of the particular REMS program--at the time of a CDS Hooks request, such as patient demographics and prescriber info.
-
-- But individual programs may require sharing additional patient clinicals or other info with the REMS Administrator as part of the Hooks interaction so that it can determine whether it needs to respond, and if so, what it should include in its response
-- Stakeholders agree that it would benefit those configuring a provider system (e.g., an EHR) for this process to include a consistent set of FHIR resources in the CDS Hooks request--regardless of the particular medication
-- However, the provider system should enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow</strong></figcaption>
+  <p>
+  <img src="ehr-launch-sequence.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
 
 <p></p>
-### Prefetch
-- The content expected to be included in the CDS Hooks request as 'prefetch' data is:
-  - Practitioner / PractitionerRole (?) identification of the provider in the triggering event
-  - Full Practitioner / PractitionerRole resources for the prescribing physician (?)
-  - Patient resource
-  - Draft MedicationRequest for the medication being considered
-  - ..._ to be determined_
 
-See [some detailed specification section] for specific content and examples
+#### Interaction between an external REMS Administrator application and the Provider System
+In this interaction, a provider uses an external REMS Administrator application that accesses patient data in a Provider System using standalone SMART app launch. REMS Administrators and Provider Systems **MAY** support this interaction approach to provide a transitional bridge from REMS Administrator portals that exist today or for circumstances where interaction with the REMS Administrator may more naturally occur within its external system. 
+
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow - Examples</strong></figcaption>
+  <p>
+  <img src="standalone-launch-sequence.png" style="float:none">  
+  </p>
+</figure>
+</div>
+<p></p>
+
+<p></p>
+
+#### CDS Hooks and SMART App Launch patterns may be applied at multiple points in a patient's care
+
+The guide does not strictly require that either of these patterns be implemented at particular workflow events. Implementers are free to choose when and how they apply these interactions. However, implementers **SHOULD** support these interactions whenever possible to:
+
+- notify the provider that a REMS program exists for a drug being considered or ordered
+- alert the provider of unmet REMS requirements 
+- provide information to educate the provider or patient, or assist with their REMS responsibilities 
+- enroll the patient into the REMS program at the earliest opportunity
+- make the provider aware of REMS requirements or information needs during the course of treatment
+- supply the REMS Administrator with needed patient, provider or treatment information electronically from the Provider System--without human intervention--where possible, to reduce the burden on participants and prevent care delays
+- and save REMS Administrator-supplied information about the patient's participation in the REMS program to the patient's record in the provider system.
+
+In particular, this guide strongly recommends leveraging the CDS Hooks and SMART app launch workflow at the start of the patient's therapy to raise patient enrollment requirements and enable them to be completed quickly--minimizing manual data entry and preventing a possible delay in treatment. 
+
+<p></p>
+
+#### Support for immediate provider actions in response to a REMS Interaction
+
+Many EHRs support a subset of CDS Hooks and SMART launch features today to bring alerts and information into the prescriber's workflow at appropriate times--to be acted upon immediately. 
+
+The guide makes use of these features to notify the prescriber of pertinent REMS information, for example that there's a REMS program for a drug being considered or that the prescriber's REMS enrollment has lapsed. The provider's response in these situations may be to simply acknowledge the information before continuing with their workflow.
+
+A provider may also take the opportunity to complete a REMS requirement returned in a CDS Hooks response immediately through use of a SMART app. Use of the guide's patterns can minimize the time needed from the provider in such a circumstance--to complete a patient enrollment form, for example--by the REMS Administrator prefilling or hiding questions that were satisfied by data provided in the preceding CDS Hooks interaction. 
+
+Provider Systems **SHALL** support immediate provider responses to Cards returned .
+
+<p></p>
+
+#### Support for deferred SMART app launch
+
+In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach defined in the [SMART App Launch specification](https://hl7.org/fhir/smart-app-launch/task-launch.html) where the REMS Administrator's CDS Hooks response includes a Task resource and system action enabling the provider to launch the indicated SMART app later.
+
+Provider Systems **SHOULD** support `recommendation` cards with associated `actions` to defer the launch of SMART application.
+
+<p></p>
+
+#### Support for saving REMS information to the patient's record
+
+The REMS Administrator may be able to supply information about the patient's participation in the REMS program that would be useful to maintain in the Provider System's patient record. 
+
+This can be accomplished when the REMS Administrator returns a CDS Hooks Card containing a `systemAction` of the type, `create`, with the information in the form of a FHIR DocumentReference. The DocumentReference is, in turn, created within the Provider System.
+
+Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
+
+<p></p>
+
+### Data Exchange During CDS Hooks Interactions
+<p></p>
+
+The REMS Administrator will typically need information about the patient, provider and medication to support a REMS interaction, regardless of the REMS program or point in the patient's care.
+
+But individual programs may require sharing additional patient clinicals or other info with the REMS Administrator as part of the Hooks interaction so that it can determine how best to respond.
+
+<p></p>
+
+#### Prefetch
+
+Supplying a consistent set of FHIR resources in the CDS Hooks request is needed to provide sufficient context to enable the REMS Administrator to respond--regardless of the medication or situation.
+
+Provider Systems and REMS Administrators **SHALL** support exchange of the following FHIR resources in CDS Hooks requests:
+  - **Practitioner**, to identify the provider participating in the triggering event
+  - **Patient** 
+  - **MedicationRequest** (draft or completed) for the REMS drug being considered or ordered
+
+_To do: Add prefetch definition JSON_
 
 <p></p>
 
 ### Query During CDS Hooks
 - In addition, the provider system is expected to provide sufficient authorization during the CDS Hooks exchange to enable the REMS Administrator to retrieve related patient information including...
-  - Lab results
-  - Vital signs
-  - Conditions
-  - Concurrent and past medications
-  - Procedures
-  - _... to be determined_
-##### Search guidance / examples for retrieving data using CDS Hooks context elements
-  
+  - lab results
+  - vital signs
+  - conditions
+  - concurrent and past medications
+  - procedures
+  - etc. 
 
-#### Required / optional CDS Hooks specifics (hooks, prefetch, ...)
-#### Required / optional actions / content to be exchanged at enrollment or other events
+Provider Systems **SHALL** enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
 
 <p></p>
 
-### SMART-related
+##### Search guidance / examples for retrieving data using CDS Hooks context elements
+
+_To be added_  
+
+<p></p>
+
+### Other SMART-Related Guidance
 #### Required / optional SMART launch specifics (scopes, deferring, ...)
 
-  <p></p>
-  
-#### Deferred SMART launch using system action and Task
-#### Ability to launch a REMS Administrator SMART app manually (not in conjunction with CDS Hooks)
-
-  <p></p>
-  
-### REMS Privacy and Security
-[specifics about security and privacy related to REMS interactions]
-
+_To be added_
+ 
 <p></p>
+  
+### Security and Privacy
 
 #### FHIR Privacy and Security Guidance
-In addition, implementers are expected to...
+Implementers are expected to...
 - follow core [FHIR security principles](https://www.hl7.org/fhir/security.html).
  
 - protect patient privacy as described in [FHIR Security and Privacy Considerations](https://www.hl7.org/fhir/secpriv-module.html).
 
 <p></p>
+  
+### REMS-Specific Privacy and Security
 
- 
+_To be added_
 
-_To be built out_
-
+<p></p>
 <p></p>
 
 

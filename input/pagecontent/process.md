@@ -70,18 +70,30 @@ This section:
 - describes where REMS steps fit in
 - provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
 
+<p></p>
 
 ### REMS Within the Context of E-Prescribing
+_Draft content. To be completed_
+
+This IG does not redefine the means for transmitting a drug request from the provider to a pharmacy. This activity is currently handled by existing standards and functionality. 
+
+However, this guide does provide guidance for enhancing the use of existing e-prescribing standards through population of REMS-related data elements in the prescription and workflow steps to reduce dispensing obstacles for the pharmacist. 
+
+<p></p>
 
 #### Populating REMS IDs / etc. in the SCRIPT prescription
 
+
+<p></p>
+
 #### Populating FHIR based on SCRIPT prescription data 
 (e.g., for submission in a CDS request)
+
+
+<p></p>
 
 #### Other Supporting SCRIPT Messages
 e.g., pharmacy-to-prescriber request to complete unmet REMS requirements (RxChangeRequest)
 
 <p></p>
-
-_To be completed_
 <p></p>
