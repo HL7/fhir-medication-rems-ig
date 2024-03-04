@@ -109,7 +109,18 @@ This guide supports a set of scenarios involving interaction between prescribers
 
 This implementation guide defines FHIR-based approaches that participants in the REMS based workflows described above can use to interact with each other to streamline REMS process.  
 
-### Note regarding existing prescription processes and standards
-This IG does not redefine the means for transmitting a drug request from the provider to a pharmacy. This activity is currently handled by existing standards and functionality. 
+<p></p>
 
-However, this guide does provide guidance for enhancing the use of existing e-prescribing standards through population of REMS-related data elements in the prescription and workflow steps to reduce dispensing obstacles for the pharmacist. 
+#### Prescriber focus versus other roles and systems
+
+This initial release of the guide primarily serves the responsibilities of the prescriber of a REMS drug, or another provider acting as an agent of the prescriber. Because of that, the Provider System in the guide's workflows will typically be an EHR, and interactions will most frequently occur in patient encounters when the prescriber is determining whether to treat the patient with the REMS drug, ordering a prescription, or later monitoring the patient's treatment. 
+
+Many EHRs support a subset of CDS Hooks and SMART launch features today, which supports this guide's aim to adopt FHIR features that stakeholders can begin using immediately.
+
+While the prescriber may participate directly in the system flows described in this guide, others may be authorized to perform aspects of the prescriber role on their behalf. A prescriber's agent typically will use the same Provider System as the prescriber, though potentially might interact in the guide's workflows using a different system.
+
+While the IG's initial focus is on the prescriber role, its contributors believe that its guidance may be adaptable to the needs of other REMS stakeholders involved in fulfilling or administering the REMS prescription or otherwise supporting the patient's treatment.
+
+Nothing stated in this guide is intended to preclude other REMS stakeholders from implementing its guidance, and the term, Provider System, used throughout the guide is not limited to representing a prescriber's EHR.
+
+<p></p>
