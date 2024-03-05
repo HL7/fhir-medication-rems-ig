@@ -89,7 +89,7 @@ Provider Systems **SHALL** support immediate provider responses to Cards returne
 
 #### Support for deferred SMART app launch
 
-In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach defined in the [SMART App Launch specification](https://hl7.org/fhir/smart-app-launch/task-launch.html) where the REMS Administrator's CDS Hooks response includes a Task resource and system action enabling the provider to launch the indicated SMART app later.
+In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach where the REMS Administrator's CDS Hooks response includes a `recommendation` Card containing a Task resource enabling the provider to launch the indicated SMART app later, as described in the [CDS Hooks Card Profiles section](cds-cards.html#deferred-smart-application-launch).
 
 Provider Systems **SHOULD** support `recommendation` cards with associated `actions` to defer the launch of SMART application.
 
