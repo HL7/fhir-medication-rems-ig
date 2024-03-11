@@ -1,13 +1,13 @@
 This page gives guidelines for populating and returning CDS Hooks response Cards in a REMS workflow. 
 
-[Cards](https://cds-hooks.hl7.org/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
+[Cards](https://cds-hooks.hl7.org/2.0/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
 
 REMS Administrator Systems dynamically create these Cards for each CDS Hooks request based on conditions including:
 - the prescribed drug's REMS program
 - the status of required REMS steps at the time of the event
 - REMS information needs associated with the current point in the patient's treatment. 
 
-This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#consistency-with-the-da-vinci-burden-reduction-igs)).
+This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/2.0/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#consistency-with-the-da-vinci-burden-reduction-igs)).
 
 <p></p>
 
@@ -56,7 +56,7 @@ This response type presents a Card with one or more links to external web pages,
 
 When reasonable, an "External Reference" card **SHOULD** contain a summary of the actionable information from the external reference.
 
-For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/#cds-service-response) contains five [Links](https://cds-hooks.hl7.org/#link) - a link to an overview website, a link to a PDF containing a guide for the medication itself, a link to PDF that specifics the REMS program information, a link to a PDF that contains adverse event management and a link to a provider enrollment form.  
+For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/2.0/#cds-service-response) contains five [Links](https://cds-hooks.hl7.org/2.0/#link) - a link to an overview website, a link to a PDF containing a guide for the medication itself, a link to PDF that specifics the REMS program information, a link to a PDF that contains adverse event management and a link to a provider enrollment form.  
 
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
@@ -109,7 +109,7 @@ Instructions **SHOULD** reflect the current status of the patient's and provider
 
 Care should be taken not to overuse this return type with information that is not truly relevant. 
 
-This example CDS Hook [Card](https://cds-hooks.hl7.org/#cds-service-response) just contains a message:
+This example CDS Hook [Card](https://cds-hooks.hl7.org/2.0/#cds-service-response) just contains a message:
 
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
@@ -131,7 +131,7 @@ Unlike External References, SMART apps can be launched within the Provider Syste
 
 Card population for this response type is similar to the [External Reference](#external-reference) response type, except with the `Link.type` set to "smart" instead of "absolute". The `Link.appContext` will typically also be present, providing context information that is useful to the app, which will be included when the EHR launches it.
 
-For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.org/#link) to enroll the patient into the REMS program:
+For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.org/2.0/#link) to enroll the patient into the REMS program:
 
 {% raw %}
 <pre class="json" style="white-space: pre;"><code class="language-json">{
@@ -165,31 +165,19 @@ This response type can be used to present a Card that indicates there is a SMART
 
 This suggestion will always include a "create" action for a Task resource. The Task will be either a `task-ehr-launch` or a `task-standalone-launch` as defined by the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/task-launch.html).  The Task will point to the SMART application to launch using a Task.input element with a Task.input.type.coding.code of "smartonfhir-application". The Task will include an additional Task.input element with a Task.input.type.coding.code of "smartonfhir-appcontext" which will hold the application context to use to launch the SMART application with. 
 
-<!-- TODO: Determine if we need this... I think it's a vestige from CRD:
-<table class="grid">
-  <thead>
-    <tr>
-      <th>SMART Task Profiles</th>
-      <th>US Core Profiles</th>
-    </tr>
-  </thead>
-  <tr>
-    <td><a href="https://hl7.org/fhir/smart-app-launch/task-launch.html">task launch</a></td>
-    <td/>
-  </tr>
-</table>
--->
-
-The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#suggestion), with the specified SMART application.  This [Action](https://cds-hooks.hl7.org/#action) only contains the FHIR [Task]({{site.data.fhir.path}}task.html) resource.  
+This guide defines a [Task profile which further tailors the resource for use in the REMS workflow](StructureDefinition-medication-rems-task-smart-launch.html).
+ 
+The example below shows a CDS Hook [Suggestion](https://cds-hooks.hl7.org/2.0/#suggestion) containing a SMART application launch Task as the Card's [Action](https://cds-hooks.hl7.org/2.0/#action).  
 
 <!-- TODO include Binary-CRDServiceResponse2-form-json-html.xhtml -->
 {% raw %}
-<pre class="json" style="white-space: pre;"><code class="language-json">{
-  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.label">label</a>" : "Add deferred SMART Launch for DRUG-X to the task list (possibly for reassignment)",
+<pre class="json" style="white-space: pre;"><code class="language-json">
+{
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.label">label</a>" : "Defer patient enrollment until later (will put the DRUG-X enrollment app in your work queue",
   "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions">actions</a>" : [
     {
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.type">type</a>" : "create",
-      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.description">description</a>" : "Add deferred SMART Launch for DRUG-X to the task list",
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.description">description</a>" : "Add deferred SMART Launch for DRUG-X to the work queue",
       "<a href="http://hl7.org/fhir/R4/task.html#Task">resource</a>" : {
         "<a href="http://hl7.org/fhir/R4/task.html">resourceType</a>" : "Task",
         "<a href="http://hl7.org/fhir/R4/task.html#Task.status">status</a>" : "requested",
@@ -198,16 +186,20 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#sug
           "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
             {
               "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-ehr-app",
+              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-app-ehr",
                "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Launch application using the SMART EHR launch"
             }
           ]
         },
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.description">description</a>" : "Complete DRUG-X REMS Registration",
+        "<a href="http://hl7.org/fhir/R4/task.html#Task.description">description</a>" : "Complete DRUG-X REMS enrollment",
         "<a href="http://hl7.org/fhir/R4/task.html#Task.for">for</a>" : {
           "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Patient/123"
         },
         "<a href="http://hl7.org/fhir/R4/task.html#Task.authoredOn">authoredOn</a>" : "2024-02-13",
+        "<a href="http://hl7.org/fhir/R4/task.html#Task.for">requester</a>" : {
+          "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Organization/rems-administrator/100",
+          "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">display</a>" : "DRUG-X REMS Administrator"        
+        },
         "<a href="http://hl7.org/fhir/R4/task.html#Task.input">input</a>" : [
           {
             "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
@@ -215,7 +207,7 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#sug
                 {
                   "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
                   "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-application",
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "SMART on FHIR application URL"
+                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "SMART on FHIR application URL."
                 }
               ]
             },
@@ -237,7 +229,8 @@ The following is an example CDS Hook [Suggestion](https://cds-hooks.hl7.org/#sug
       }
     }
   ]
-}</code></pre>
+}
+</code></pre>
 {% endraw %}
 
 <p></p>
