@@ -1,48 +1,25 @@
 <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
   <li><a href="index.html">Home</a></li>
   <li><a href="toc.html">Table of Contents</a></li>
-
   <li class="dropdown">
-    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Guidance<b class="caret">
-      </b>
-    </a>
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Guidance<b class="caret"></b></a>
     <ul class="dropdown-menu">
-     <li>
-       <a href="process.html">REMS Steps and Terminology</a>
-     </li>
-     <li>
-       <a href="roles.html">Participant Roles and Needs</a>
-     </li>
-     <li>
-        <a href="use-cases.html">Use Cases</a>
-      </li>
-     <li>
-        <a href="event-triggers.html">REMS Interaction Events and Triggers</a>
-      </li>
-     <li>
-        <a href="out-of-scope.html">Areas Out of Scope</a>
-      </li>
-	  <li>
-        <a href="credits.html">Credits</a>
-      </li>
+     <li><a href="process.html">REMS Steps and Terminology</a></li>
+     <li><a href="roles.html">Participant Roles and Needs</a></li>
+     <li><a href="use-cases.html">Use Cases</a></li>
+     <li><a href="event-triggers.html">REMS Interaction Events and Triggers</a></li>
+     <li><a href="out-of-scope.html">Areas Out of Scope</a></li>
+	  <li><a href="credits.html">Credits</a></li>
 	</ul>
   </li>
   <li class="dropdown">
-	<a data-toggle="dropdown" href="#" class="dropdown-toggle">Specification<b class="caret">
-	  </b>
-	</a>
+	<a data-toggle="dropdown" href="#" class="dropdown-toggle">Specification<b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li>
-        <a href="technical-background.html">Technical Background</a>
-      </li>
-      <li>
-      	<a href="specification.html">Formal Specification</a>
-      </li>
-     <li>
-        <a href="cds-cards.html">CDS Hooks Card Profiles</a>
-      </li>
+      <li><a href="technical-background.html">Technical Background</a></li>
+      <li><a href="specification.html">Formal Specification</a></li>
+      <li><a href="cds-cards.html">CDS Hooks Card Profiles</a></li>
+      <li><a href="artifacts.html">FHIR Artifacts</a></li>
 	</ul>
   </li>	  
-  <li><a href="artifacts.html">Artifacts</a></li>
   <li><a href="downloads.html">Downloads</a></li>
-</ul>      
+</ul>
