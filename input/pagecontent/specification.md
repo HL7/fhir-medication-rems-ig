@@ -103,6 +103,12 @@ This can be accomplished when the REMS Administrator returns a CDS Hooks Card co
 
 Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
 
+REMS Administrators SHOULD follow [US Core DocumentReference guidance](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) when creating this resource. 
+
+In addition to the US Core requirements, this guide recommends populating DocumentReference.type with the LOINC value `51851-4` (Administrative note).
+
+See an [example note](DocumentReference-example-rems-docref-1.html).
+
 <p></p>
 
 ### Data Exchange During CDS Hooks Interactions

@@ -61,39 +61,64 @@ Below are terms and wording conventions used throughout this implementation guid
 - The guide uses “pharmacist” throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization
 <p></p>
 
-
 ### REMS Within the E-Prescribing Process
-Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and other related medication management interactions are conducted using a set of federal standards and other conventions that enable consistent, nationwide exchange.
+Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and related medication management interactions are conducted using a set of federally-named standards and other conventions that enable consistent, nationwide exchange.
 
-This section: 
-- overviews these e-prescribing interactions
-- describes where REMS steps fit in
-- provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
-
-<p></p>
-
-### REMS Within the Context of E-Prescribing
-_Draft content. To be completed_
-
-This IG does not redefine the means for transmitting a drug request from the provider to a pharmacy. This activity is currently handled by existing standards and functionality. 
-
-However, this guide does provide guidance for enhancing the use of existing e-prescribing standards through population of REMS-related data elements in the prescription and workflow steps to reduce dispensing obstacles for the pharmacist. 
-
-<p></p>
-
-#### Populating REMS IDs / etc. in the SCRIPT prescription
+This guide does not redefine the means for transmitting a drug request from the provider to a pharmacy. However, when the prescriber's system populates REMS-related data elements in the electronic prescription, it can improve the receiving pharmacist's workflow and reduce dispensing obstacles. 
 
 
 <p></p>
 
-#### Populating FHIR based on SCRIPT prescription data 
-(e.g., for submission in a CDS request)
-
+#### Conveying REMS information in the electronic prescription
 
 <p></p>
 
-#### Other Supporting SCRIPT Messages
-e.g., pharmacy-to-prescriber request to complete unmet REMS requirements (RxChangeRequest)
+<table class="grid">
+<thead>
+<tr>
+<th style="min-width:300px">REMS Information</th>
+<th style="min-width:400px">NCPDP SCRIPT NewRx Element</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Patient ID</td>
+<td>REMSPatientID</td>
+</tr>
+<tr>
+<td>Prescriber ID</td>
+<td>REMSHealthcareProviderEnrollmentID</td>
+</tr>
+<tr>
+<td>Facility ID</td>
+<td>REMSHealthcareSettingEnrollmentID</td>
+</tr>
+<tr>
+<td>Dispense authorization</td>
+<td>REMSAuthorizationNumber</td>
+</tr>
+<tr>
+<td>Patient Risk Category</td>
+<td>REMSPatientRiskCategory</td>
+</tr>
+<tr>
+<td>Indication that prescriber REMS requirements are met</td>
+<td>PrescriberCheckedREMS <br />(value: "A" - Prescriber has checked REMS and the provider&rsquo;s actions have been completed)</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+
+<p></p>
+
+#### Future opportunities for greater integration in e-prescribing
+The current focus of this guide does not extend into exchanges between the prescriber's system and the pharmacy or other parties involved in fulfilling a REMS prescription. 
+
+Potential future areas of investigation may include: 
+- capturing discrete REMS information elements in the provider system in a way that enables them to be systematically populated into the e-prescription
+- establish standard mappings between NCPDP and FHIR prescription information models
+- further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the provider system
+- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
 
 <p></p>
 <p></p>
