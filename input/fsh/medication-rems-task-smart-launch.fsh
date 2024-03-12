@@ -63,7 +63,7 @@ Usage: #example
 * intent = #proposal
 * code = $smart-codes#launch-app-ehr "Launch application using the SMART EHR launch"
 * description = "Complete patient enrollment using the DRUG-X REMS SMART app"
-* for = Reference(Patient/example-patient-123)
+* for = Reference(Patient/example-patient-123) "August Samuels"
 * authoredOn = "2024-02-13"
 * input[0].type = $smart-codes#smartonfhir-application "SMART on FHIR application URL."
 * input[=].valueUrl = "https://example.org/DRUG-X/smart-application"
