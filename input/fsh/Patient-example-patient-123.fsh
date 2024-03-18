@@ -1,5 +1,3 @@
-Alias: $us-core-patient = http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient
-
 Instance: example-patient-123
 InstanceOf: $us-core-patient
 Usage: #example

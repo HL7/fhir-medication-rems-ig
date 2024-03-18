@@ -14,14 +14,14 @@ Below is an outline of those who play a role in the parts of the REMS process cu
   - obtain patient status information and other clinical information demonstrating that participants are meeting REMS requirements
   - report REMS participation and outcomes to the FDA.
 
-- The **prescriber** (or another healthcare provider that acts as the prescriber's agent) may perform a variety of functions at the start of therapy or at later points in the patient's treatment, such the following: 
+- The **prescriber** (including another provider or staff that acts as the prescriber's agent) may perform a variety of functions at the start of therapy or at later points in the patient's treatment, such the following: 
   - receive information about the REMS drug risks and the REMS requirements from the manufacturer or REMS administrator
   - complete training and other certification steps with the REMS Administrator to be authorized to prescribe the REMS drug
-  - counsel patients and facilitate enrollment of the patient into the REMS prior to the start of therapy
+  - counsel patients and facilitate enrollment of the patient into the REMS prior to the start of therapy (such as staff completing a patient enrollment form)
   - provide information to the REMS Administrator on the patient status and other clinical information 
   - perform specified clinical assessments at the start of therapy or at later points in the patient’s treatment.
   
-  _Note: The guide uses “prescriber” throughout to represent the health care provider or other authorized party acting on their behalf that prescribes or orders the REMS drug._
+  _Note: The guide uses “prescriber” throughout to represent the health care provider that orders the REMS drug , their staff, or another authorized party acting on their behalf to perform REMS-related activities._
   
 - The **patient's** participation in the REMS program may include:  
   - receiving information or counseling about the risks associated with the REMS drug, actions they need to take to use the REMS drug safely (e.g., obtain lab tests),  symptoms to watch for and report to their provider and actions they need to take to mitigate those risks (e.g., decrease dose or stop medication)

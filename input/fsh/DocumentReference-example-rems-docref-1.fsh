@@ -1,8 +1,3 @@
-Alias: $us-core-documentreference = http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference
-Alias: $loinc = http://loinc.org
-Alias: $us-core-documentreference-category = http://hl7.org/fhir/us/core/CodeSystem/us-core-documentreference-category
-Alias: $formatcode = http://ihe.net/fhir/ihe.formatcode.fhir/CodeSystem/formatcode
-
 Instance: example-rems-docref-1
 InstanceOf: $us-core-documentreference
 Usage: #example
