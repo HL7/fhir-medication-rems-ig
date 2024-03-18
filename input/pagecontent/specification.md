@@ -26,7 +26,10 @@ This implementation guide establishes two basic interaction patterns between a P
 - a provider using an external REMS Administrator application that accesses patient data in the Provider System using standalone SMART app launch--to provide a transitional bridge for REMS provider portals that exist today, and for circumstances where interaction with the REMS Administrator may more naturally occur within its external system.
 
 #### Interaction initiated by the Provider System during the provider's workflow
-This interaction is initiated by the Provider System during the provider's workflow, using CDS Hooks and, optionally, EHR-based SMART App Launch. REMS Administrators and Provider Systems **SHOULD** support this interaction approach because it offers the greatest opportunity to raise and address REMS requirements when related care activities occur.
+This interaction is initiated by the Provider System during the provider's workflow, using CDS Hooks and, optionally, EHR-based SMART App Launch. 
+
+- Provider Systems **SHALL** support this interaction approach because it offers the greatest opportunity to raise and address REMS requirements when related care activities occur. 
+- REMS Administrators **SHOULD** implement this interaction approach.
 
 <p></p>
 
@@ -43,13 +46,16 @@ This interaction is initiated by the Provider System during the provider's workf
 <p></p>
 
 #### Interaction between an external REMS Administrator application and the Provider System
-In this interaction, a provider uses an external REMS Administrator application that accesses patient data in a Provider System using standalone SMART app launch. REMS Administrators and Provider Systems **MAY** support this interaction approach to provide a transitional bridge from REMS Administrator portals that exist today or for circumstances where interaction with the REMS Administrator may more naturally occur within its external system. 
+In this interaction, a provider uses an external REMS Administrator application that accesses patient data in a Provider System using standalone SMART app launch. 
+
+- Provider Systems **SHALL** support this interaction approach to provide a transitional bridge from REMS Administrator portals that exist today or for circumstances where interaction with the REMS Administrator may more naturally occur within its external system. 
+- REMS Administrators **MAY** support this interaction approach.
 
 <p></p>
 
 <div>
 <figure class="figure">
-<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow - Examples</strong></figcaption>
+<figcaption class="figure-caption"><strong>Figure: REMS Interactions with a Standalone SMART App - Examples</strong></figcaption>
   <p>
   <img src="standalone-launch-sequence.png" style="float:none">  
   </p>
@@ -95,19 +101,45 @@ Provider Systems **SHOULD** support `recommendation` cards with associated `acti
 
 <p></p>
 
+#### Enabling the provider system user to manually launch the SMART app
+
+In some situations, it may be helpful for the prescriber or other provider assisting in the care of a REMS patient to manually launch the associated REMS Administrator SMART app, independent of a CDS Hooks interaction. 
+
+Provider Systems and REMS Administrators **MAY** support manual launch of the REMS Administrator SMART application.
+
+When a Provider System provides this support, it **SHALL** provide patient context during launch.
+
+<p></p>
+
 #### Support for saving REMS information to the patient's record
 
-The REMS Administrator may be able to supply information about the patient's participation in the REMS program that would be useful to maintain in the Provider System's patient record. 
+The REMS Administrator **MAY** save information about the patient's REMS participation to the Provider System's patient record. 
 
-This can be accomplished when the REMS Administrator returns a CDS Hooks Card containing a `systemAction` of the type, `create`, with the information in the form of a FHIR DocumentReference. The DocumentReference is, in turn, created within the Provider System.
+Provider Systems can enable the REMS Administrator to save patient-related REMS information to the patient's record as a FHIR DocumentReference using two approaches included in the patterns described in this guide:
+- the REMS Administrator writes the information to the patient's record during the provider's use of its SMART app
+- The REMS Administrator's CDS Service returns a card and system action which saves the information in response to a CDS Hooks call.
 
-Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
-
-REMS Administrators SHOULD follow [US Core DocumentReference guidance](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) when creating this resource. 
+In either approach, the REMS Administrators **SHOULD** follow [US Core DocumentReference guidance](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) when creating this resource. 
 
 In addition to the US Core requirements, this guide recommends populating DocumentReference.type with the LOINC value `51851-4` (Administrative note).
 
-See an [example note](DocumentReference-example-rems-docref-1.html).
+See an [example DocumentReference](DocumentReference-example-rems-docref-1.html) that illustrates this guidance.
+
+<p></p>
+
+**REMS Administrator's SMART app saving information to the patient's record** 
+
+Saving of REMS information is typically most effective during the provider’s interaction with a SMART app because it can be timed to occur after activities that might change the patient's status or information--for example by completing patient enrollment. 
+
+To enable this to occur, the Provider System **SHOULD** authorize a REMS Administrator's SMART app with sufficient OAuth scopes to enable the app to create a DocumentReference resource associated to the patient. [This guidance in the SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/scopes-and-launch-context.html) provides details for assigning scopes during app launch.
+
+<p></p>
+
+**Saving patient status using CDS Hooks.** Information could also potentially be saved to the provider system during a CDS Hooks interaction, with the REMS Administrator returning a CDS Hooks Card containing a `systemAction` of the type, `create`, with the information in the form of a FHIR DocumentReference. The DocumentReference would, in turn, be created within the Provider System.
+
+However, it may be premature to save information at this point in the workflow if the provider's subsequent actions in a SMART app could change the status of REMS activities, for example if the provider is able to enroll the patient or satisfy another REMS requirement using the app .
+
+Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
 
 <p></p>
 
@@ -145,19 +177,6 @@ _To do: Add prefetch definition JSON_
 Provider Systems **SHALL** enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
 
 <p></p>
-
-##### Search guidance / examples for retrieving data using CDS Hooks context elements
-
-_To be added_  
-
-<p></p>
-
-### Other SMART-Related Guidance
-#### Required / optional SMART launch specifics (scopes, deferring, ...)
-
-_To be added_
- 
-<p></p>
   
 ### Security and Privacy
 
@@ -169,10 +188,12 @@ Implementers are expected to...
 
 <p></p>
   
-### REMS-Specific Privacy and Security
+### REMS Workflow-Related Privacy and Security
 
-_To be added_
-
+Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
+- the CDS Hooks [Security and Safety](https://cds-hooks.hl7.org/2.0/#security-and-safety) section
+- SMART App Launch authentication using either [asymmetric (public key)](https://hl7.org/fhir/smart-app-launch/client-confidential-asymmetric.html) or [symmetric (shared secret)](https://hl7.org/fhir/smart-app-launch/client-confidential-symmetric.html) methods.
+- 
 <p></p>
 <p></p>
 

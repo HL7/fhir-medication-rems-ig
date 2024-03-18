@@ -57,19 +57,18 @@ Below are terms and wording conventions used throughout this implementation guid
 
 - "REMS" and "REMS program" are used interchangeably to refer to a Risk Evaluation and Mitigation Strategy (REMS)--a drug safety program that the United States Food and Drug Administration (FDA) requires for medications with serious safety concerns.
 - The terms “medication” and “drug” refer to prescription drugs and prescription biologics.
-- The guide uses “prescriber” throughout to represent the health care provider or other authorized party acting on their behalf that prescribes or orders the REMS drug.
+- The guide uses “prescriber” throughout to represent the health care provider that orders the REMS drug , their staff, or another authorized party acting on their behalf to perform REMS-related activities.
 - The guide uses “pharmacist” throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization
 <p></p>
 
 ### REMS Within the E-Prescribing Process
-Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and related medication management interactions are conducted using a set of federally-named standards and other conventions that enable consistent, nationwide exchange.
-
-This guide does not redefine the means for transmitting a drug request from the provider to a pharmacy. However, when the prescriber's system populates REMS-related data elements in the electronic prescription, it can improve the receiving pharmacist's workflow and reduce dispensing obstacles. 
-
+Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and related medication management interactions are conducted using a set of federally-named standards and other conventions that enable consistent, nationwide exchange.This guide does not redefine the means for transmitting a drug request from the provider to a pharmacy. 
 
 <p></p>
 
 #### Conveying REMS information in the electronic prescription
+
+By populating REMS-related data elements in the electronic prescription, the prescriber's system can improve the receiving pharmacist's workflow and reduce dispensing obstacles. The REMS-related elements below are supported in the currently-adopted NCPDP SCRIPT NewRx prescription specification (v2017071).
 
 <p></p>
 
@@ -111,14 +110,18 @@ This guide does not redefine the means for transmitting a drug request from the 
 
 <p></p>
 
-#### Future opportunities for greater integration in e-prescribing
+#### Transmitting the prescription after the prescriber's REMS steps are satisfied
+
+If a prescription for a REMS drug is transmitted before the required REMS steps have been met, the receiving pharmacy will not be allowed to dispense it until steps are taken to satisfy the unmet requirements. Resolving the situation typically involves manual activities such as phone calls or faxes between the pharmacy and clinic, and frustration for the patient as they wait to pick up their medication.
+
+In order to prevent delays for the patient and additional work for the pharmacist, the prescriber system should not transmit the prescription to the pharmacy until all prescribing-time REMS requirements have been met. 
+
+<p></p>
+
+#### Opportunities for integration in e-prescribing
 The current focus of this guide does not extend into exchanges between the prescriber's system and the pharmacy or other parties involved in fulfilling a REMS prescription. 
 
-Potential future areas of investigation may include: 
-- capturing discrete REMS information elements in the provider system in a way that enables them to be systematically populated into the e-prescription
-- establish standard mappings between NCPDP and FHIR prescription information models
-- further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the provider system
-- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
+See [Future Directions](future-directions.html) for additional areas that may be pursued in later versions of this implementation guide.
 
 <p></p>
 <p></p>

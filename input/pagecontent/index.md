@@ -1,5 +1,5 @@
 ### Overview
-A Risk Evaluation and Mitigation Strategy (REMS) is a drug safety program that the United States Food and Drug Administration (FDA) requires for medications with serious safety concerns. REMS are designed to reinforce medication use behaviors and actions that support the safe use of the medication. While all medications have labeling that informs health care stakeholders about medication risks, only a small number of medications require REMS programs.
+A Risk Evaluation and Mitigation Strategy (REMS) is a drug safety program that the United States Food and Drug Administration (FDA) requires for medications with serious safety concerns. REMS are designed to reinforce medication use behaviors and actions that support the safe use of the medication. While all medications have labeling that informs health care stakeholders about medication risks, only [a small number of medications require REMS programs](https://www.accessdata.fda.gov/scripts/cder/rems/index.cfm).
 
 This implementation guide focuses on provider workflows during the ordering of REMS medications and associated patient encounters. It defines information exchanges to support those events, including interactions between... 
 - the provider and the REMS Administrator that manages the associated program
@@ -25,7 +25,7 @@ The implementation guide is organized into the following sections:
 * [Participant Roles and Needs](roles.html) identifies the REMS program participants, the systems they use, and their needs addressed by this implementation guide
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
 * [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the provider system (e.g., an EHR) and REMS Administrator system at appropriate points in the patient's care
-* [Areas Out of Scope](out-of-scope.html) provides additional background about REMS flows and content that are not covered in this version of the IG
+* [Future Directions](future-directions.html) discusses REMS flows and features that are not covered in this version of the IG, but are the focus of continued efforts
 * [Technical Background](technical-background.html) describes the specifications this implementation guide relies on and indicates what developers should read and understand prior to implementing this specification, including US Core profiles used in this IG.. It also provides background and rationale for key aspects of the IG's approach, and describes how approaches used in this guide relate to those employed in the Da Vinci "Burden Reduction" guides
 * [Formal Specification](specification.html) provides detailed implementation requirements and conformance expectations related to:
   *  this IG's use of CDS Hooks conventions for triggering exchanges and exchanging information in different scenarios
@@ -42,15 +42,9 @@ The implementation guide is organized into the following sections:
 This implementation guide relies on the following other specifications: 
 
 * [CDS Hooks 2.0](https://cds-hooks.hl7.org/2.0/) - The official standard for trial use publication of CDS Hooks that defines the CDS Hooks protocol and interfaces used by this implementation guide
-* [CDS Hooks CI Build](https://cds-hooks.org/specification/current/) - The most recent draft release that defines additional event hooks beyond those in CDS Hooks 2.0
-* [SMART on FHIR](http://hl7.org/fhir/smart-app-launch) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
+* [SMART on FHIR 2.1](https://hl7.org/fhir/smart-app-launch/STU2.1) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
 * [FHIR R4](http://hl7.org/fhir/R4/) - The current official version of FHIR as of the time this implementation guide was published
 * [US Core](http://hl7.org/fhir/us/core) - The current published version of US Core profiles based on FHIR R4
-* _Use of the following specifications within this IG is to be determined:_
-  * [Da Vinci CRD](https://build.fhir.org/ig/HL7/davinci-crd/)
-  * [Da Vinci DTR](https://build.fhir.org/ig/HL7/davinci-dtr/)
-  * [Structured Product Labling IG](https://build.fhir.org/ig/HL7/fhir-spl/branches/main/index.html)
-  * [Specialty Medication Enrollment IG](https://build.fhir.org/ig/HL7/fhir-specialty-rx/artifacts.html)
 
 <p></p>
 
@@ -76,11 +70,14 @@ This implementation guide relies on the following other specifications:
 		<td>Frank McKinney</td>
 		<td><a href="mailto:fm@frankmckinney.com">fm@frankmckinney.com</a></td>
 	  </tr>
+	  <tr>
+		<td>Robert Dingwell</td>
+		<td><a href="mailto:bobd@mitre.com">bobd@mitre.com</a></td>
+	  </tr>
 	</tbody>
   </table>
 
 <p></p>
-
 
 ### Dependencies
 {% include dependency-table.xhtml %}

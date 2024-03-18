@@ -1,9 +1,3 @@
-Alias: $smart-launch-task = http://hl7.org/fhir/smart-app-launch/StructureDefinition/task-ehr-launch
-Alias: $smart-codes = http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes
-Alias: $us-core-patient = http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient
-Alias: $smart-launch-types = http://hl7.org/fhir/smart-app-launch/ValueSet/smart-launch-types
-Alias: $smart-launch-info = http://hl7.org/fhir/smart-app-launch/ValueSet/smart-launch-info
-
 Profile: MedicationRemsTaskSmartLaunch
 Parent: $smart-launch-task
 Id: medication-rems-task-smart-launch
@@ -52,9 +46,6 @@ Description: "This profile defines a Task to be returned in a REMS Administrator
 * reasonReference.reference ^label = "MedicationRequest reference"
 * reasonReference.reference ^short = "MedicationRequest reference"
 * reasonReference.reference ^definition = "Reference to the related MedicationRequest resource"
-
-
-Alias: $smart-codes = http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes
 
 Instance: medication-rems-task-smart-launch-1
 InstanceOf: medication-rems-task-smart-launch
