@@ -6,10 +6,10 @@ name: REMS
 title: US Medication Risk Evaluation and Mitigation Strategies (REMS) FHIR IG
 description: FHIR implementation options and guidance for medication REMS participants
 status: draft # draft | active | retired | unknown
-version: 0.1.0
+version: 1.0.0-ballot
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2023+
-releaseLabel: ci-build # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+releaseLabel: STU1 # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 
 jurisdiction: urn:iso:std:iso:3166#US "United States of America"
 publisher:
@@ -40,8 +40,8 @@ dependencies:
 #    title: Use Cases
 #  event-triggers.md:
 #    title: REMS Interaction Events and Triggers
-#  out-of-scope.md:
-#    title: Areas Out of Scope
+#  future-directions.md:
+#    title: Future Directions
 #  credits.md:
 #    title: Credits
 #  technical-background.md:
