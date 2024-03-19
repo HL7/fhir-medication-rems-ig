@@ -113,33 +113,15 @@ When a Provider System provides this support, it **SHALL** provide patient conte
 
 #### Support for saving REMS information to the patient's record
 
-The REMS Administrator **MAY** save information about the patient's REMS participation to the Provider System's patient record. 
+The REMS Administrator SMART app **MAY** save information about the patient's REMS participation to the Provider System's patient record. Saving of REMS information is typically most effective during the provider’s interaction with a SMART app because it can be timed to occur after activities that might change the patient's status or information--for example by completing patient enrollment. 
 
-Provider Systems **SHOULD** enable the REMS Administrator to save patient-related REMS information to the patient's record as a FHIR DocumentReference using two approaches included in the patterns described in this guide:
-- the REMS Administrator writes the information to the patient's record during the provider's use of its SMART app
-- The REMS Administrator's CDS Service returns a card and system action which saves the information in response to a CDS Hooks call.
+To enable this to occur, the Provider System **SHOULD** authorize a REMS Administrator's SMART app with sufficient OAuth scopes to enable the app to create a DocumentReference resource associated to the patient. [This guidance in the SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/scopes-and-launch-context.html) provides details for assigning scopes during app launch.
 
-In either approach, the REMS Administrators **SHOULD** follow [US Core DocumentReference guidance](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) when creating this resource. 
+If using this capability, the REMS Administrators **SHOULD** follow [US Core DocumentReference guidance](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) when creating this resource. 
 
 In addition to the US Core requirements, this guide recommends populating DocumentReference.type with the LOINC value `51851-4` (Administrative note).
 
 See an [example DocumentReference](DocumentReference-example-rems-docref-1.html) that illustrates this guidance.
-
-<p></p>
-
-**REMS Administrator's SMART app saving information to the patient's record** 
-
-Saving of REMS information is typically most effective during the provider’s interaction with a SMART app because it can be timed to occur after activities that might change the patient's status or information--for example by completing patient enrollment. 
-
-To enable this to occur, the Provider System **SHOULD** authorize a REMS Administrator's SMART app with sufficient OAuth scopes to enable the app to create a DocumentReference resource associated to the patient. [This guidance in the SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/scopes-and-launch-context.html) provides details for assigning scopes during app launch.
-
-<p></p>
-
-**Saving patient status using CDS Hooks.** Information could also potentially be saved to the provider system during a CDS Hooks interaction, with the REMS Administrator returning a CDS Hooks Card containing a `systemAction` of the type, `create`, with the information in the form of a FHIR DocumentReference. The DocumentReference would, in turn, be created within the Provider System.
-
-However, it may be premature to save information at this point in the workflow if the provider's subsequent actions in a SMART app could change the status of REMS activities, for example if the provider is able to enroll the patient or satisfy another REMS requirement using the app .
-
-Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
 
 <p></p>
 
@@ -193,7 +175,7 @@ Implementers are expected to...
 Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 - the CDS Hooks [Security and Safety](https://cds-hooks.hl7.org/2.0/#security-and-safety) section
 - SMART App Launch authentication using either [asymmetric (public key)](https://hl7.org/fhir/smart-app-launch/client-confidential-asymmetric.html) or [symmetric (shared secret)](https://hl7.org/fhir/smart-app-launch/client-confidential-symmetric.html) methods.
-- 
+ 
 <p></p>
 <p></p>
 
