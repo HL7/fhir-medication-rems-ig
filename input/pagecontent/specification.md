@@ -22,8 +22,8 @@ This implementation guide uses the following terms to set expectations for imple
 ### Provider System and REMS Administrator System Interactions
 
 This implementation guide establishes two basic interaction patterns between a Provider System and REMS Administrator System that can be applied at multiple points in treating a patient with a REMS drug:
-- interaction initiated by the Provider System during the provider's workflow
-- a provider using an external REMS Administrator application that accesses patient data in the Provider System using standalone SMART app launch--to provide a transitional bridge for REMS provider portals that exist today, and for circumstances where interaction with the REMS Administrator may more naturally occur within its external system.
+- **Preferred approach:** Interaction initiated by the Provider System during the provider's workflow
+- **Additional / transitional approach**: Provider uses an external REMS Administrator application that accesses patient data in the Provider System using standalone SMART app launch. This provides a transitional bridge for REMS provider portals that exist today, and for circumstances where interaction with the REMS Administrator may more naturally occur within its external system.
 
 #### Interaction initiated by the Provider System during the provider's workflow
 This interaction is initiated by the Provider System during the provider's workflow, using CDS Hooks and, optionally, EHR-based SMART App Launch. 
@@ -77,7 +77,7 @@ The guide does not strictly require that either of these patterns be implemented
 - supply the REMS Administrator with needed patient, provider or treatment information electronically from the Provider System--without human intervention--where possible, to reduce the burden on participants and prevent care delays
 - and save REMS Administrator-supplied information about the patient's participation in the REMS program to the patient's record in the provider system.
 
-In particular, this guide strongly recommends leveraging the CDS Hooks and SMART app launch workflow at the start of the patient's therapy to raise patient enrollment requirements and enable them to be completed quickly--minimizing manual data entry and preventing a possible delay in treatment. 
+In particular, this guide strongly recommends leveraging the CDS Hooks and SMART app launch workflow at the start of the patient's therapy to raise patient enrollment requirements and enable them to be completed quickly, minimizing manual data entry and preventing a possible delay in treatment. 
 
 <p></p>
 
@@ -95,9 +95,9 @@ Provider Systems **SHALL** support immediate provider responses to Cards returne
 
 #### Support for deferred SMART app launch
 
-In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach where the REMS Administrator's CDS Hooks response includes a `recommendation` Card containing a Task resource enabling the provider to launch the indicated SMART app later, as described in the [CDS Hooks Card Profiles section](cds-cards.html#deferred-smart-application-launch).
+In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach where the REMS Administrator's CDS Hooks response includes a `suggestion` Card containing a Task resource enabling the provider to launch the indicated SMART app later, as described in the [CDS Hooks Card Profiles section](cds-cards.html#deferred-smart-application-launch).
 
-Provider Systems **SHOULD** support `recommendation` cards with associated `actions` to defer the launch of SMART application.
+Provider Systems **SHOULD** support `suggestion` cards with associated `actions` to defer the launch of SMART application.
 
 <p></p>
 
@@ -115,7 +115,7 @@ When a Provider System provides this support, it **SHALL** provide patient conte
 
 The REMS Administrator **MAY** save information about the patient's REMS participation to the Provider System's patient record. 
 
-Provider Systems can enable the REMS Administrator to save patient-related REMS information to the patient's record as a FHIR DocumentReference using two approaches included in the patterns described in this guide:
+Provider Systems **SHOULD** enable the REMS Administrator to save patient-related REMS information to the patient's record as a FHIR DocumentReference using two approaches included in the patterns described in this guide:
 - the REMS Administrator writes the information to the patient's record during the provider's use of its SMART app
 - The REMS Administrator's CDS Service returns a card and system action which saves the information in response to a CDS Hooks call.
 
@@ -146,7 +146,7 @@ Provider Systems **MAY** support this use of a CDS Hooks `systemAction`.
 ### Data Exchange During CDS Hooks Interactions
 <p></p>
 
-The REMS Administrator will typically need information about the patient, provider and medication to support a REMS interaction, regardless of the REMS program or point in the patient's care.
+The REMS Administrator will typically need information about the patient, provider and drug to support a REMS interaction, regardless of the REMS program or point in the patient's care.
 
 But individual programs may require sharing additional patient clinicals or other info with the REMS Administrator as part of the Hooks interaction so that it can determine how best to respond.
 
@@ -158,7 +158,7 @@ Supplying a consistent set of FHIR resources in the CDS Hooks request is needed 
 
 Provider Systems and REMS Administrators **SHALL** support exchange of the following FHIR resources in CDS Hooks requests:
   - **Practitioner**, to identify the provider participating in the triggering event
-  - **Patient** 
+  - **Patient**, to identify the patient being treated
   - **MedicationRequest** (draft or completed) for the REMS drug being considered or ordered
 
 _To do: Add prefetch definition JSON_

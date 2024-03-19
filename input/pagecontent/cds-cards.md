@@ -1,6 +1,6 @@
 This page gives guidelines for populating and returning CDS Hooks response Cards in a REMS workflow. 
 
-[Cards](https://cds-hooks.hl7.org/2.0/#cds-service-response) are the means by which REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
+[Cards](https://cds-hooks.hl7.org/2.0/#cds-service-response) are how REMS Administrator Systems return information and requested actions (e.g., launching a SMART app) to the provider in response to requests triggered during the prescriber's workflow. 
 
 REMS Administrator Systems dynamically create these Cards for each CDS Hooks request based on conditions including:
 - the prescribed drug's REMS program
@@ -18,27 +18,27 @@ All Card types, including the Suggestion type containing a system Action as desc
 - give the provider the option to complete a task by launching a SMART app immediately 
 - or give the provider the option to place the SMART app step in their work queue to be completed in the future.
 
-In all cases, Cards interrupt the provider's workflow and will welcomed by the provider only when they are pertinent to the situation, when their benefit outweighs the disruption to the provider's thought process, and when their content can be quickly understood and acted upon.
+In all cases, Cards interrupt the provider's workflow and will be welcomed by the provider only when they are pertinent to the situation, when their benefit outweighs the disruption to the provider's thought process, and when their content can be quickly understood and acted upon.
 
 <p></p>
 
 **General guidelines for a REMS Administrator System returning Cards:**
 
-*  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for the a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
+*  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
 
-*  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize. In general this would be based on the name of the medication being requested.  
+*  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize. In general this would be based on the name of the drug being requested.  
 
 *  Because providers' time is limited, information returned in Cards must be quickly understandable and pertinent to the request context, the current state of the patient's treatment and the status of REMS requirements. Specifically:
 
     *  `Card.summary` **SHOULD** provide consise but actionable information. "Not Enrolled" would not be very helpful, because it is not complete enough to identify the problem fully and would require a further step by the provider to learn who or what is not registered. "Provider must enroll in the Drug X REMS program" or "Patient must enroll before taking Drug X" would be better.
 
-    *  `Card.detail` **SHOULD** present information in the order of importance to the provider, with the most critial details first and less critical information following.
+    *  `Card.detail` **SHOULD** present information in the order of importance to the provider, with the most critical details first and less critical information following.
 
     *  `Card.detail` **SHOULD** provide sufficient context for the provider to quickly understand the purpose or content of presented links. In addition, the detail should provide a clear sense of how the provider will be expected to use or interact with the link or app after they open it. This will enable the provider to determine whether they need to take action immediately during the workflow versus deferring until later.
 
     *  The number of cards should be manageable. Consider whether user workflow will be faster with separate cards for each link or a single card having multiple links. Typically, it's best to use the smallest number of cards that can convey the information and requested actions.
 
-    *  When providing links, keep document size short and/or provide linking directly to the section that is relevant for the context in order to minimize the time needed for the provider to read the critial information.
+    *  When providing links, keep document size short and/or provide linking directly to the section that is relevant for the context to minimize the time needed for the provider to read the critical information.
 
     *  While links are permitted in the markdown content of `Card.detail`, support for this is not universal, so links **SHOULD** also be provided in `Card.link`. This also provides a consistent place for users to access all relevant links.
 
@@ -103,7 +103,7 @@ As much as technically possible, links provided **SHOULD** take the user to the 
 <p></p>
 
 #### Instructions
-This response type presents a Card with textual guidance or instructions to display to the provider. The text might provide information related to updated REMS guidelines, notifying the user of an need to update a self assessment or even something as simple as "No REMS requirements currently require action". 
+This response type presents a Card with textual guidance or instructions to display to the provider. The text might provide information related to updated REMS guidelines, notifying the user of a need to update a self-assessment or even something as simple as "No REMS requirements currently require action". 
 
 Instructions **SHOULD** reflect the current status of the patient's and provider's participation in the REMS program--providing only applicable direction at the time of the request. The instruction text **SHOULD** be concise and simple for the provider to consume, omitting any general guidance that is not relevant to the situation. To accomplish this, the text returned might need to be generated uniquely each time a hook is fired.
 
