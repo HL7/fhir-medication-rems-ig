@@ -19,6 +19,7 @@ The REMS Administrator System:
 ### FHIR RESTful Capabilities
 
 The REMS Administrator System:
+- **MAY** enable its SMART app to create a DocumentReference resource, associated to the patient, in the Provider System  
 - **SHALL** support the JSON source format. 
 - **SHOULD** support the XML source format. 
 

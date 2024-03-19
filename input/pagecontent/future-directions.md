@@ -26,6 +26,9 @@ A provider prescribes a medication that has a REMS to a patient. The provider as
 #### Additional support for ongoing patient care
 Once the patient has started on the REMS drug, safety is the focus. Activities may include monitoring programs and additional authorization steps, and many participants may be involved during this period. New scenarios related to ongoing care may be identified and addressed in future versions of this guide, potentially providing additional visibility of pertinent information or improved communication between stakeholders through use of FHIR.
 
+#### Incorporate CDS Hooks or SMART App Launch features that become available in the future
+As the CDS Hooks and SMART App Launch standards continue to evolve and respond to implementers' experience, new features such as additional CDS "hook" events or additional SMART App Launch options might become available. Future releases of this guide may utilize new features in those standards to support REMS workflows.
+
 <p></p>
 
 ### Greater data and process integration

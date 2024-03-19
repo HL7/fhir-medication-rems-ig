@@ -6,7 +6,6 @@ This guide does not limit the hooks that may be used in REMS workflows, but thos
 - [`order-select`](https://cds-hooks.org/hooks/order-select) which occurs after the clinician selects the medication at the start of the ordering process
 - [`patient-view`](https://cds-hooks.org/hooks/patient-view/) which occurs when the user opens a patient's record; typically called only once at the beginning of a user's interaction with a specific patient's record
 - [`encounter-start`](https://cds-hooks.org/hooks/encounter-start) which is invoked when the user is initiating a new encounter. In an inpatient setting, this would be the time of admission. In an outpatient/community environment, this would be the time of patient-check-in for a face-to-face or equivalent for a virtual/telephone encounter
-- [`medication-refill`](https://cds-hooks.org/hooks/medication-refill) which fires when a medication refill request for an existing prescription of a specific medication is received
 
 <p> </p>
 

@@ -23,7 +23,6 @@ The Provider System:
 
 The Provider System:
 - **SHOULD** enable a REMS Administrator’s SMART app to create a DocumentReference resource associated to the patient
-- **MAY** enable a REMS Administrator’s CDS Server to create a DocumentReference resource associated to the patient using a CDS Hooks `systemAction`
 - **SHALL** support the JSON source format
 - **SHOULD** support the XML source format
 
