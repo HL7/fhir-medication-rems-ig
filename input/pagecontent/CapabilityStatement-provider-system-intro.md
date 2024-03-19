@@ -1,6 +1,6 @@
 This section describes base system capabilities a Provider System must support to be conformant with the Medication REMS FHIR IG.
 
-Additional behavior and data population expectations are defined in the [Technical Background](technical-background), [Formal Specification](specification.html) and [CDS Hooks Card Profiles](cds-cards) sections.
+Additional behavior and data population expectations are defined in the [Technical Background](technical-background.html), [Formal Specification](specification.html) and [CDS Hooks Card Profiles](cds-cards.html) sections.
 
 ### SMART App Capabilities
 The Provider System:
