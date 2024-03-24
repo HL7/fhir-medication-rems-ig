@@ -1,4 +1,2 @@
 == Suppressed Messages ==
 
-# I requested a base OID for the IG from Reuben D on 3/19 and will use the auto-oid-root parameter to generate OIDs for the IG's resources
-This resource could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)

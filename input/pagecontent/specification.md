@@ -75,7 +75,7 @@ The guide does not strictly require that either of these patterns be implemented
 - enroll the patient into the REMS program at the earliest opportunity
 - make the provider aware of REMS requirements or information needs during the course of treatment
 - supply the REMS Administrator with needed patient, provider or treatment information electronically from the Provider System--without human intervention--where possible, to reduce the burden on participants and prevent care delays
-- and save REMS Administrator-supplied information about the patient's participation in the REMS program to the patient's record in the provider system.
+- and save REMS Administrator-supplied information about the patient's participation in the REMS program to the patient's record in the Provider System.
 
 In particular, this guide strongly recommends leveraging the CDS Hooks and SMART app launch workflow at the start of the patient's therapy to raise patient enrollment requirements and enable them to be completed quickly, minimizing manual data entry and preventing a possible delay in treatment. 
 
@@ -95,13 +95,13 @@ Provider Systems **SHALL** support immediate provider responses to Cards returne
 
 #### Support for deferred SMART app launch
 
-In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach where the REMS Administrator's CDS Hooks response includes a `suggestion` Card containing a Task resource enabling the provider to launch the indicated SMART app later, as described in the [CDS Hooks Card Profiles section](cds-cards.html#deferred-smart-application-launch).
+In other cases, a provider action may not be able to be completed immediately upon receiving it in a CDS Hooks response, and instead may need to be deferred until a later time. The guide leverages an approach where the REMS Administrator's CDS Hooks response includes a `suggestion` Card containing a Task resource enabling the provider to launch the indicated SMART app later, as described in the [CDS Hooks Card Profiles section](cds-cards.html#deferred-smart-application-launch-suggestion).
 
-Provider Systems **SHOULD** support `suggestion` cards with associated `actions` to defer the launch of SMART application.
+Provider Systems **SHOULD** support `suggestion` cards with associated `actions` to defer the launch of SMART application, and **SHOULD** provide the REMS Administrator's CDS server sufficient OAuth scopes to enable the app to create a Task to enable the deferred launch, as [described here](cds-cards.html#deferred-smart-application-launch-suggestion).
 
 <p></p>
 
-#### Enabling the provider system user to manually launch the SMART app
+#### Enabling the Provider System user to manually launch the SMART app
 
 In some situations, it may be helpful for the prescriber or other provider assisting in the care of a REMS patient to manually launch the associated REMS Administrator SMART app, independent of a CDS Hooks interaction. 
 
@@ -141,14 +141,26 @@ Supplying a consistent set of FHIR resources in the CDS Hooks request is needed 
 Provider Systems and REMS Administrators **SHALL** support exchange of the following FHIR resources in CDS Hooks requests:
   - **Practitioner**, to identify the provider participating in the triggering event
   - **Patient**, to identify the patient being treated
-  - **MedicationRequest** (draft or completed) for the REMS drug being considered or ordered
+  - **MedicationRequest** for the REMS drug (which may be draft or completed, depending on when the CDS request is triggered) and other patient medications
+  - **Medication** if referenced by the MedicationRequest
 
-_To do: Add prefetch definition JSON_
+For example: 
+
+{% raw %}
+<pre class="json" style="white-space: pre;"><code class="language-json">{
+  ...
+    "prefetch" : {
+      "patient": "Patient/{{context.patientId}}",
+      "practitioner": "{{context.userId}}",
+      "medicationRequests": "MedicationRequest?subject={{context.patientId}}&_include=MedicationRequest:medication"  
+    }
+}</code></pre>
+{% endraw %}
 
 <p></p>
 
 ### Query During CDS Hooks
-- In addition, the provider system is expected to provide sufficient authorization during the CDS Hooks exchange to enable the REMS Administrator to retrieve related patient information including...
+- In addition, the Provider System is expected to provide sufficient authorization during the CDS Hooks exchange to enable the REMS Administrator to retrieve related patient information including...
   - lab results
   - vital signs
   - conditions
@@ -174,7 +186,7 @@ Implementers are expected to...
 
 Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 - the CDS Hooks [Security and Safety](https://cds-hooks.hl7.org/2.0/#security-and-safety) section
-- SMART App Launch authentication using either [asymmetric (public key)](https://hl7.org/fhir/smart-app-launch/client-confidential-asymmetric.html) or [symmetric (shared secret)](https://hl7.org/fhir/smart-app-launch/client-confidential-symmetric.html) methods.
+- [SMART App Launch  Implementation Guide](https://hl7.org/fhir/smart-app-launch).
  
 <p></p>
 <p></p>

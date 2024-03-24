@@ -39,23 +39,23 @@ However, there are situations where starting therapy with a REMS drug may involv
 <p></p>
 
 ### Use Case One: Prescriber and REMS Administrator Interact from Within the Provider System Workflow
-When seeing a patient, the prescriber decides to prescribe a drug, and is alerted by the Provider System that the drug has a REMS program. At an appropriate point in the workflow (e.g., when the prescriber starts creating the medication order, at the start of a related encounter, etc.), the provider system connects with the REMS Administrator system and enables the prescriber to interact with it. 
+When seeing a patient, the prescriber decides to prescribe a drug, and is alerted by the Provider System that the drug has a REMS program. At an appropriate point in the workflow (e.g., when the prescriber starts creating the medication order, at the start of a related encounter, etc.), the Provider System connects with the REMS Administrator System and enables the prescriber to interact with it. 
 
 At the start of this interaction, the Provider System supplies patient, provider and medication information to the REMS Administrator. 
 - This step is accomplished using a CDS Hooks call triggered by an appropriate "hook" event in the provider workflow such as "order-select". 
 - "Prefetch" data containing Practitioner, Patient and MedicationRequest FHIR resources is included in the request.
 
+Depending on the drug and other variables described in the previous section, the REMS Administrator System responds to the CDS Hooks request with information about the REMS program, a [SMART app](https://www.hl7.org/fhir/smart-app-launch) to gather needed information, alerts about steps the prescriber must take before ordering the drug, etc. 
+
+The Provider System then presents the returned information, gives the prescriber the option to open the REMS Administrator's SMART app (if one was returned) or to place the app into their work queue to launch later. When the provider launches the SMART app, it first retrieves information that it needs from the patient record in the Provider System--reducing manual data entry for the provider. The prescriber reviews the pre-filled data, makes adjustments as needed, and then completes any other app steps.
+
+Note that in some situations, the REMS Administrator will have no information or requests to return. For example, the REMS Administrator may determine that there are no unmet REMS requirements to be addressed at the time of the interaction. In this case, the Provider System will receive an empty response and allow the prescriber's workflow to continue without interruption. 
+
 <p></p>
 
-Depending on the drug and other variables described in the previous section, the REMS Administrator system may respond in a variety of ways, including but not limited to the following (using CDS response "cards" or "system actions").
+**Use Case One Scenarios**
 
-<p></p>
-
-Following the REMS Administrator's response, the provider system presents returned alerts to the prescriber and enables them to follow links to external information or to launch a returned SMART app to complete a step such as patient enrollment.
-
-If a SMART app link is returned, the prescriber or staff launches returned app from the notification, with data pre-filled from the Provider System where available in the patient's or prescriber's records as applicable. The prescriber reviews the pre-filled data, makes any adjustments required as well as filling in any additional required information and completes the app's steps.
-
-Below are possible response scenarios. Note that at a given point in a patient's care, more than one of these might apply. 
+Below are possible response scenarios (which are detailed further in [this section of the IG](specification.html#interaction-initiated-by-the-provider-system-during-the-providers-workflow)). Note that at a given point in a patient's care, more than one of these might apply.
 
 <p></p>
 
@@ -64,7 +64,7 @@ Below are possible response scenarios. Note that at a given point in a patient's
 In this scenario, the REMS Administrator notifies the provider of the need and may...
 
   - provide a URL to an external enrollment portal or training material
-  - provide a SMART app in which the prescriber enrolls (presented within their provider system's workflow)
+  - provide a SMART app in which the prescriber enrolls (presented within their Provider System's workflow)
     
 #### The patient is not eligible for the proposed therapy
 
@@ -88,12 +88,12 @@ Along with notifying the provider of the need, the REMS Administrator may option
 
 #### The REMS Administrator has information that can be stored in the Provider System
 
-The REMS Administrator may return information about the patient's participation in the REMS program to be saved to the patient's record in the provider system. 
+The REMS Administrator may return information about the patient's participation in the REMS program to be saved to the patient's record in the Provider System. 
 
 - This can be accomplished using a CDS `systemAction` that saves a note containing the information in the form of a FHIR DocumentReference.
 
 #### The REMS Administrator has no information to return
-If the REMS Administrator does not wish to present any information or requests to the prescriber, it may return an empty response. In this scenario, the provider system will not interrupt the provider's workflow with REMS-related information.
+If the REMS Administrator does not wish to present any information or requests to the prescriber, it may return an empty response. In this scenario, the Provider System will not interrupt the provider's workflow with REMS-related information.
 
 #### The REMS Administrator has other alerts, information or steps
 
@@ -108,16 +108,17 @@ This implementation guide does not constrain information or requests that a REMS
 In this variation, the provider accesses an external REMS Administrator application from outside the Provider System workflow. In a process facilitated by the provider, the external application retrieves patient, provider and drug information from the Provider System using [standalone SMART launch](https://hl7.org/fhir/smart-app-launch/STU2.1/app-launch.html#launch-app-standalone-launch).
 
 During that application's workflow:
-- The provider selects the Provider System used in the facility where the provider has the patient encounter
-- The external REMS Administrator system initiates the "standalone SMART app launch" process with the selected provider system
-- The provider interacts with the provider system during launch, signing in and optionally, locating the patient 
-- The provider system grants the external system access to appropriate patient data
+- The provider opens a web browser that is not part of the Provider System and navigates to the REMS Administrator's web site 
+- On a web page on the REMS Administrator's site, the provider indicates the Provider System used in the facility where the provider treats the patient
+- The external REMS Administrator System initiates the "standalone SMART app launch" process with the selected Provider System
+- The provider interacts with the Provider System during launch, signing in and optionally, locating the patient 
+- The Provider System grants the external system access to appropriate patient data
 - The external system retrieves patient, provider, drug and other clinical information as needed to support the associated REMS program.
- - Using the retrieved information, the external REMS Administrator system may:
+ - Using the retrieved information, the external REMS Administrator System may:
    - determine the patient's eligibility for treatment using the drug
    - update its existing patient enrollment or initiate a new enrollment
    - determine if additional REMS steps or information is needed from the provider
-   - share current patient REMS IDs, authorizations, status or other information with the provider system.
+   - share current patient REMS IDs, authorizations, status or other information with the Provider System.
 
 <p></p>
 <p></p>

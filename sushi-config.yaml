@@ -9,13 +9,12 @@ status: draft # draft | active | retired | unknown
 version: 1.0.0-ballot
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2023+
-releaseLabel: STU1 # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+releaseLabel: STU1-ballot # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 license: CC0-1.0 
 jurisdiction: urn:iso:std:iso:3166#US "United States of America"
 publisher:
   name: HL7 International / Pharmacy
   url: http://www.hl7.org/Special/committees/medication
-
 dependencies:
   hl7.fhir.us.core:
     id: uscore
@@ -29,32 +28,32 @@ dependencies:
       Defines base expectations and profiles for SMART app launch requirements
 #
 #
-#pages:
-#  index.md:
-#    title: REMS IG Home Page
-#  process.md:
-#    title: REMS Steps and Terminology
-#  roles.md:
-#    title: Participant Roles and Needs
-#  use-cases.md:
-#    title: Use Cases
-#  event-triggers.md:
-#    title: REMS Interaction Events and Triggers
-#  future-directions.md:
-#    title: Future Directions
-#  credits.md:
-#    title: Credits
-#  technical-background.md:
-#    title: Technical Background
-#  specification.md:
-#    title: Formal Specification
-#  cds-cards.md:
-#    title: CDS Hooks Card Profiles
-#  artifacts.md:
+pages:
+  index.md:
+    title: REMS IG Home Page
+  process.md:
+    title: REMS Steps and Terminology
+  roles.md:
+    title: Participant Roles and Needs
+  use-cases.md:
+    title: Use Cases
+  event-triggers.md:
+    title: REMS Interaction Events and Triggers
+  future-directions.md:
+    title: Future Directions
+  credits.md:
+    title: Credits
+  technical-background.md:
+    title: Technical Background
+  specification.md:
+    title: Formal Specification
+  cds-cards.md:
+    title: CDS Hooks Card Profiles
+#  artifacts.html:
 #    title: Artifacts
-#  downloads.md:
-#    title: Downloads
-#
+  downloads.xml:
+    title: Downloads
+
 # menu:
 #   Home: index.html
 #   Background:
@@ -74,6 +73,7 @@ contact:
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-wg
     valueCode: phx
+auto-oid-root: 2.16.840.1.113883.4.642.40.34
 
 # * modifierExtension
 # * experimental
