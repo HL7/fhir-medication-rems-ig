@@ -11,7 +11,7 @@ The guide describes the use of FHIR features including CDS Hooks and SMART App L
 The goal of this guide is to establish information exchange conventions that support...
 - notifying providers and patients of REMS requirements early in the ordering process
 - satisfying REMS information needs using data from the patient's electronic record where possible--minimizing manual data entry
-- capturing information about a specific patient's participation in a REMS program--including identifiers or other information assigned by the REMS Administrator--in the provider system
+- capturing information about a specific patient's participation in a REMS program--including identifiers or other information assigned by the REMS Administrator--in the Provider System
 - reducing prescription fulfillment delays by completing up-front REMS steps before the order is sent to the pharmacy and including relevant REMS information in the prescription
 - enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements.
 
@@ -24,7 +24,7 @@ The implementation guide is organized into the following sections:
 * [REMS Steps and Terminology](process.html) provides the high-level set of steps and timeframes the IG uses as the context for its guidance. It also describes how REMS steps fit within e-prescribing workflows and provides guidance for integrating related FHIR and NCPDP SCRIPT exchanges
 * [Participant Roles and Needs](roles.html) identifies the REMS program participants, the systems they use, and their needs addressed by this implementation guide
 * [Use Cases](use-cases.html) introduces the REMS workflows, identifies the participants and scenarios covered by the guide, and describes how the associated systems interact to support the process goals
-* [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the provider system (e.g., an EHR) and REMS Administrator system at appropriate points in the patient's care
+* [REMS Interaction Events and Triggers](event-triggers.html) provides guidance for initiating interactions between the Provider System (e.g., an EHR) and REMS Administrator System at appropriate points in the patient's care
 * [Future Directions](future-directions.html) discusses REMS flows and features that are not covered in this version of the IG, but are the focus of continued efforts
 * [Technical Background](technical-background.html) describes the specifications this implementation guide relies on and indicates what developers should read and understand prior to implementing this specification, including US Core profiles used in this IG.. It also provides background and rationale for key aspects of the IG's approach, and describes how approaches used in this guide relate to those employed in the Da Vinci "Burden Reduction" guides
 * [Formal Specification](specification.html) provides detailed implementation requirements and conformance expectations related to:

@@ -1,5 +1,5 @@
 ### Triggering CDS Hooks During Patient Care
-CDS Hooks enumerates a small set of system trigger events, referred to as ["hooks"](https://cds-hooks.hl7.org/2.0/) that represent points in a provider system workflow at which CDS Hooks requests will be made to the external CDS Server (the REMS Administrator in this guide's scenarios). 
+CDS Hooks enumerates a small set of system trigger events, referred to as ["hooks"](https://cds-hooks.hl7.org/2.0/) that represent points in a Provider System workflow at which CDS Hooks requests will be made to the external CDS Server (the REMS Administrator in this guide's scenarios). 
 
 This guide does not limit the hooks that may be used in REMS workflows, but those that may be most useful in REMS scenarios include:
 - [`order-sign`](https://cds-hooks.org/hooks/order-sign) which occurs at the point in the ordering process when the prescriber finalizes the prescription
@@ -20,18 +20,18 @@ Additional considerations when selecting which hook events to configure:
 <p></p>
 
 #### Configuring hooks based on workflow and patient information
-REMS drug therapies tend to be complex and prescribing them may involve more pre-steps (labs, assessments, etc.) than a typical ambulatory prescription. The right time to initiate REMS interactions might not be limited to the provider system order flow (where the `order-select`and `order-sign` hooks fire) and may require that the CDS Hooks exchange with the REMS Administrator occur before the prescriber begins an order (potentially utilizing the `appointment-start` or `patient-view` hooks).
+REMS drug therapies tend to be complex and prescribing them may involve more pre-steps (labs, assessments, etc.) than a typical ambulatory prescription. The right time to initiate REMS interactions might not be limited to the Provider System order flow (where the `order-select`and `order-sign` hooks fire) and may require that the CDS Hooks exchange with the REMS Administrator occur before the prescriber begins an order (potentially utilizing the `encounter-start` or `patient-view` hooks).
 
-After a patient has begun therapy, `appointment-start` or `patient-view` hooks may be useful during follow-up appointments, and `medication-refill` at the time that requests for additional fill authorizations are received by the provider.
+After a patient has begun therapy, `appointment-start` or `patient-view` hooks may be useful during follow-up appointments.
  
-Additional clinical information may also need to factor in when determining when/whether to send a CDS Hooks request to the Administrator. Additional configuration within the provider system to limit when a hook fires may be needed; for example, setting up the `patient-view` hook so that a CDS request is transmitted only when the patient has the REMS drug, a certain condition or other particular information in their medical record. This type of configuration is not addressed by the CDS Hooks standard and capabilities may vary by provider system.
+Additional clinical information may also need to factor in when determining when/whether to send a CDS Hooks request to the Administrator. Additional configuration within the Provider System to limit when a hook fires may be needed; for example, setting up the `patient-view` hook so that a CDS request is transmitted only when the patient has the REMS drug, a certain condition or other particular information in their medical record. This type of configuration is not addressed by the CDS Hooks standard and capabilities may vary by Provider System.
 
 <p></p>
 
 #### Configuring hooks based on the medication
-Because each medication is supported by one REMS Administrator among multiple, the provider system must be configured to call the correct CDS Server based on the medication being considered.
+Because each medication is supported by one REMS Administrator among multiple, the Provider System must be configured to call the correct CDS Server based on the medication being considered.
 
-Similar to clinical "filtering" of hooks described in the section above, this type of configuration is not addressed by the CDS Hooks standard and must be addressed according to the capabilities of the provider system.
+Similar to clinical "filtering" of hooks described in the section above, this type of configuration is not addressed by the CDS Hooks standard and must be addressed according to the capabilities of the Provider System.
  
 <p></p>
 <p></p>

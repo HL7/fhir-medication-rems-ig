@@ -25,6 +25,7 @@ These include, but are not limited to, the FHIR resources included in the prefet
 - [Patient](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html)
 - [Practitioner](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-practitioner.html)
 - [MedicationRequest](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html)
+- [Medication](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medication.html)
 
 ... as well as the [DocumentReference](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) containing patient REMS information returned by the REMS Administrator in a CDS Hooks response.
 

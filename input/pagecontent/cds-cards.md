@@ -12,7 +12,7 @@ This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.or
 <p></p>
 
 ### General Card Population Guidance
-All Card types, including the Suggestion type containing a system Action as described in the [Deferred SMART Application Launch](#deferred-smart-application-launch) section  below, are presented to the provider within the workflow of their Provider System. They:
+All Card types, including the Suggestion type containing a system Action as described in the [Deferred SMART Application Launch](#deferred-smart-application-launch-suggestion) section  below, are presented to the provider within the workflow of their Provider System. They:
 - display information
 - offer links that the provider may follow to external information
 - give the provider the option to complete a task by launching a SMART app immediately 
@@ -24,7 +24,7 @@ In all cases, Cards interrupt the provider's workflow and will be welcomed by th
 
 **General guidelines for a REMS Administrator System returning Cards:**
 
-*  The `Card.indicator` denotes the urgency or importance of what the card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
+*  The `Card.indicator` denotes the urgency or importance of what the Card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
 
 *  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize. In general this would be based on the name of the drug being requested.  
 
@@ -36,13 +36,13 @@ In all cases, Cards interrupt the provider's workflow and will be welcomed by th
 
     *  `Card.detail` **SHOULD** provide sufficient context for the provider to quickly understand the purpose or content of presented links. In addition, the detail should provide a clear sense of how the provider will be expected to use or interact with the link or app after they open it. This will enable the provider to determine whether they need to take action immediately during the workflow versus deferring until later.
 
-    *  The number of cards should be manageable. Consider whether user workflow will be faster with separate cards for each link or a single card having multiple links. Typically, it's best to use the smallest number of cards that can convey the information and requested actions.
+    *  The number of Cards should be manageable. Consider whether user workflow will be faster with separate Cards for each link or a single Card having multiple links. Typically, it's best to use the smallest number of Cards that can convey the information and requested actions.
 
     *  When providing links, keep document size short and/or provide linking directly to the section that is relevant for the context to minimize the time needed for the provider to read the critical information.
 
     *  While links are permitted in the markdown content of `Card.detail`, support for this is not universal, so links **SHOULD** also be provided in `Card.link`. This also provides a consistent place for users to access all relevant links.
 
-* Provider Systems might not support all card capabilities; therefore card options **SHOULD** provide sufficient information for a user to take appropriate actions manually if automated support isn't available.
+* Provider Systems might not support all Card capabilities; therefore Card options **SHOULD** provide sufficient information for a user to take appropriate actions manually if automated support isn't available.
 
 <p></p>
 
@@ -52,9 +52,9 @@ Note: While the Card types and content described below are what REMS Administrat
 <p></p>
 
 #### External Reference
-This response type presents a Card with one or more links to external web pages, PDFs, or other resources that provide relevant information with regards to the REMS program the CDS Hook was executed for. A link might provide information about the program, requirements for safe use,  printable forms, etc. Typically, these references would be links to information available from the REMS Administrator's website or other authoritative sources.  The card **SHALL** have at least one `Card.link`.  The `Link.type` **SHALL** have a type of "absolute".
+This response type presents a Card with one or more links to external web pages, PDFs, or other resources that provide relevant information with regards to the REMS program the CDS Hook was executed for. A link might provide information about the program, requirements for safe use,  printable forms, etc. Typically, these references would be links to information available from the REMS Administrator's website or other authoritative sources.  The Card **SHALL** have at least one `Card.link`.  The `Link.type` **SHALL** have a type of "absolute".
 
-When reasonable, an "External Reference" card **SHOULD** contain a summary of the actionable information from the external reference.
+When reasonable, an "External Reference" Card **SHOULD** contain a summary of the actionable information from the external reference.
 
 For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/2.0/#cds-service-response) contains five [Links](https://cds-hooks.hl7.org/2.0/#link) - a link to an overview website, a link to a PDF containing a guide for the medication itself, a link to PDF that specifics the REMS program information, a link to a PDF that contains adverse event management and a link to a provider enrollment form.  
 
@@ -80,16 +80,21 @@ For example, this CDS Hooks [Card](https://cds-hooks.hl7.org/2.0/#cds-service-re
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "absolute"
     },
     {
-      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "DRUG-X REMS Medication Guide,
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "DRUG-X REMS Medication Guide",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.url">url</a>" : "https://example.org/DRUG-X/MedicationGuide.pdf",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "absolute"
     },
-        {
+    {
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "DRUG-X REMS Program Requirements",
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.url">url</a>" : "https://example.org/DRUG-X/RemsProgramRequirements.pdf",
+      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "absolute"
+    },
+    {
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "DRUG-X Adverse Reaction Management Guide",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.url">url</a>" : "https://example.org/DRUG-X/AdverseReactionManagment.pdf",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "absolute"
-    }
-    ,{
+    },
+    {
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.label">label</a>" : "Provider Enrollment Form",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.url">url</a>" : "https://example.org/DRUG-X/ProviderEnrollmentForm.pdf",
       "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.links.type">type</a>" : "absolute"
@@ -160,10 +165,18 @@ For example, the Card below contains a SMART App [Link](https://cds-hooks.hl7.or
 
 <p></p>
 
-#### Deferred SMART Application Launch
+#### Deferred SMART Application Launch Suggestion
 This response type can be used to present a Card that indicates there is a SMART application that can be launched at a future time to satisfy a REMS step.  A recommended use within the REMS workflow is to defer launching of a SMART app for enrolling the provider or patient into the REMS program.
 
-This suggestion will always include a "create" action for a Task resource. The Task will be either a `task-ehr-launch` or a `task-standalone-launch` as defined by the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch/task-launch.html).  The Task will point to the SMART application to launch using a Task.input element with a Task.input.type.coding.code of "smartonfhir-application". The Task will include an additional Task.input element with a Task.input.type.coding.code of "smartonfhir-appcontext" which will hold the application context to use to launch the SMART application with. 
+This is accomplished by including a `suggestion` within a CDS Card that includes a `create` action for a Task resource. 
+
+Note that this `suggestion` may be reside within the same Card that contains a `link` to launch the app immediately, giving the provider a choice of launching the app now or later.
+
+The Task resource: 
+  - is based on either the [Task EHR Launch](https://hl7.org/fhir/smart-app-launch/StructureDefinition-task-ehr-launch.html) or [Task EHR Standalone](https://hl7.org/fhir/smart-app-launch/StructureDefinition-task-standalone-launch.html) profiles from the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch)
+- has a `Task.code` of either  `launch-app-ehr` or `launch-app-standalone` 
+- points to the SMART application to launch using a `Task.input` element with a `Task.input.type.coding.code` value of `smartonfhir-application`
+- includes an additional `Task.input` element with a `Task.input.type.coding.code` of `smartonfhir-appcontext` which will hold the application context to use to launch the SMART application with. 
 
 This guide defines a [Task profile which further tailors the resource for use in the REMS workflow](StructureDefinition-medication-rems-task-smart-launch.html).
  
@@ -171,64 +184,73 @@ The example below shows a CDS Hook [Suggestion](https://cds-hooks.hl7.org/2.0/#s
 
 <!-- TODO include Binary-CRDServiceResponse2-form-json-html.xhtml -->
 {% raw %}
-<pre class="json" style="white-space: pre;"><code class="language-json">
-{
-  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.label">label</a>" : "Defer patient enrollment until later (will put the DRUG-X enrollment app in your work queue",
-  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions">actions</a>" : [
-    {
-      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.type">type</a>" : "create",
-      "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.description">description</a>" : "Add deferred SMART Launch for DRUG-X to the work queue",
-      "<a href="http://hl7.org/fhir/R4/task.html#Task">resource</a>" : {
-        "<a href="http://hl7.org/fhir/R4/task.html">resourceType</a>" : "Task",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.status">status</a>" : "requested",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.intent">intent</a>" : "proposal",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.code">code</a>" : {
-          "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+<pre class="json" style="white-space: pre;"><code class="language-json">{
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.uuid">uuid</a>" : "urn:uuid:353cd963-2ecd-46f9-958b-ed7d2bbf6e01",
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.summary">summary</a>" : "Defer DRUG-X patient enrollment until later,
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.indicator">indicator</a>" : "info",
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.source">source</a>" : {
+    "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.source.label">label</a>" : "DRUG-X REMS Administrator",
+    "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.source.url">url</a>" : "https://example.org/DRUG-X",
+    "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.source.icon">icon</a>" : "https://example.org/img/icon-100px.png"
+  },
+  "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions">suggestions</a>" : {
+    "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.label">label</a>" : "Put the DRUG-X enrollment app in your work queue to complete later",
+    "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions">actions</a>" : [
+      {
+        "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.type">type</a>" : "create",
+        "<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig//StructureDefinition-CDSHooksResponse.html#CDSHooksResponse.cards.suggestions.actions.description">description</a>" : "Add deferred SMART Launch for DRUG-X to the work queue",
+        "<a href="http://hl7.org/fhir/R4/task.html#Task">resource</a>" : {
+          "<a href="http://hl7.org/fhir/R4/task.html">resourceType</a>" : "Task",
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.status">status</a>" : "requested",
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.intent">intent</a>" : "proposal",
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.code">code</a>" : {
+            "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+              {
+                "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+                "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-app-ehr",
+                 "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Launch application using the SMART EHR launch"
+              }
+            ]
+          },
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.description">description</a>" : "Complete DRUG-X REMS enrollment",
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.for">for</a>" : {
+            "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Patient/123"
+          },
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.authoredOn">authoredOn</a>" : "2024-02-13",
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.for">requester</a>" : {
+            "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Organization/rems-administrator/100",
+            "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">display</a>" : "DRUG-X REMS Administrator"        
+          },
+          "<a href="http://hl7.org/fhir/R4/task.html#Task.input">input</a>" : [
             {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "launch-app-ehr",
-               "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Launch application using the SMART EHR launch"
+              "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
+                "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+                  {
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-application",
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "SMART on FHIR application URL."
+                  }
+                ]
+              },
+              "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "https://example.org/DRG-X/smart-application"
+            },
+            {
+              "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
+                "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
+                  {
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-appcontext",
+                    "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Application context related to this launch."                  
+                   }
+                 ]
+               },
+               "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{\"providerSystemPatientId\":\"123\"}"
             }
           ]
-        },
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.description">description</a>" : "Complete DRUG-X REMS enrollment",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.for">for</a>" : {
-          "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Patient/123"
-        },
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.authoredOn">authoredOn</a>" : "2024-02-13",
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.for">requester</a>" : {
-          "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "http://example.org/fhir/Organization/rems-administrator/100",
-          "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">display</a>" : "DRUG-X REMS Administrator"        
-        },
-        "<a href="http://hl7.org/fhir/R4/task.html#Task.input">input</a>" : [
-          {
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
-                {
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-application",
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "SMART on FHIR application URL."
-                }
-              ]
-            },
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "https://example.org/DRG-X/smart-application"
-          },
-          {
-            "<a href="http://hl7.org/fhir/R4/task.html#Task.input.type">type</a>" : {
-              "<a href="http://hl7.org/fhir/R4/datatypes.html#CodeableConcept#CodeableConcept.coding">coding</a>" : [
-                {
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.system">system</a>" : "http://hl7.org/fhir/smart-app-launch/CodeSystem/smart-codes",
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a>" : "smartonfhir-appcontext",
-                  "<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.description">display</a>" : "Application context related to this launch."                  
-                 }
-               ]
-             },
-             "<a href="http://hl7.org/fhir/R4/task.html#Task.input.value[x]">valueString</a>" : "{\"providerSystemPatientId\":\"123\"}"
-          }
-        ]
+        }
       }
-    }
-  ]
+    ]
+  }
 }
 </code></pre>
 {% endraw %}

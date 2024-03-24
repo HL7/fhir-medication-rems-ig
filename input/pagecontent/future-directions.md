@@ -26,6 +26,8 @@ A provider prescribes a medication that has a REMS to a patient. The provider as
 #### Additional support for ongoing patient care
 Once the patient has started on the REMS drug, safety is the focus. Activities may include monitoring programs and additional authorization steps, and many participants may be involved during this period. New scenarios related to ongoing care may be identified and addressed in future versions of this guide, potentially providing additional visibility of pertinent information or improved communication between stakeholders through use of FHIR.
 
+<p></p>
+
 #### Incorporate CDS Hooks or SMART App Launch features that become available in the future
 As the CDS Hooks and SMART App Launch standards continue to evolve and respond to implementers' experience, new features such as additional CDS "hook" events or additional SMART App Launch options might become available. Future releases of this guide may utilize new features in those standards to support REMS workflows.
 
@@ -34,9 +36,9 @@ As the CDS Hooks and SMART App Launch standards continue to evolve and respond t
 ### Greater data and process integration
 
 Further data and process integration between REMS stakeholders may be pursued in future versions of this guide, potentially including: 
-- capturing discrete REMS information elements in the provider system in a way that enables them to be systematically populated into the e-prescription
+- capturing discrete REMS information elements in the Provider System in a way that enables them to be systematically populated into the e-prescription
 - establish standard mappings between NCPDP and FHIR prescription information models
-- further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the provider system
+- further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the Provider System
 - leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
 
 <p></p>
