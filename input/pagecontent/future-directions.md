@@ -14,17 +14,17 @@ A provider, pharmacy or other REMS stakeholder checks the status of REMS require
 #### Patient enrollment using a patient-directed application
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
 
-The patient logs into their providers patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
+The patient logs into their provider's patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
 
 <p></p>
 
 #### Validation that a pharmacy enrolled in a REMS program
-A provider prescribes a medication that has a REMS to a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the ERM queries the REMS Administration systems to determine if the pharmacy is enrolled on the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the uI of the EMR if the pharmacy is incapable of dispensing the medication. 
+A provider prescribes a medication that has a REMS for a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the EMR queries the REMS Administration systems to determine if the pharmacy is enrolled in the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the user interface of the EMR if the pharmacy is incapable of dispensing the medication. 
 
 <p></p>
 
 #### Additional support for ongoing patient care
-Once the patient has started on the REMS drug, safety is the focus. Activities may include monitoring programs and additional authorization steps, and many participants may be involved during this period. New scenarios related to ongoing care may be identified and addressed in future versions of this guide, potentially providing additional visibility of pertinent information or improved communication between stakeholders through use of FHIR.
+Once the patient has started on the REMS drug, REMS activities may include monitoring programs and additional authorization steps, and many participants may be involved during this period. New scenarios related to ongoing care may be identified and addressed in future versions of this guide, potentially providing additional visibility of pertinent information or improved communication between stakeholders through use of FHIR.
 
 <p></p>
 
@@ -36,7 +36,7 @@ As the CDS Hooks and SMART App Launch standards continue to evolve and respond t
 ### Greater data and process integration
 
 Further data and process integration between REMS stakeholders may be pursued in future versions of this guide, potentially including: 
-- capturing discrete REMS information elements in the Provider System in a way that enables them to be systematically populated into the e-prescription
+- capturing discrete REMS data elements in the Provider System in a way that enables them to be systematically populated into the e-prescription
 - establish standard mappings between NCPDP and FHIR prescription information models
 - further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the Provider System
 - leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
@@ -55,7 +55,7 @@ In addition to supporting additional workflow scenarios, work is needed to addre
 - maintaining changes to configuration when:
   - new REMS programs are established
   - REMS programs move from one Administrator to another
-  - REMS drug identifiers (used to configure CDS Hooks triggers) change or are added due to new new product variations, discontinuation or other reasons
+  - REMS drug identifiers (used to configure CDS Hooks triggers) change or are added due to new product variations, discontinuation or other reasons
 
 <p></p>
 
