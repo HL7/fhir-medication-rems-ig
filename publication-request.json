@@ -4,7 +4,7 @@
     "path": "http://hl7.org/fhir/us/medication-rems/2024May",
     "mode": "working",
     "status": "ballot",
-    "sequence": "STU1-ballot",
+    "sequence": "STU1",
     "desc": "This is the proposed STU1 version of the US Medication REMS FHIR IG for ballot in May 2024. It is sponsored by the HL7 Pharmacy Work Group",
     "changes":"changes.html",
     "first":true,

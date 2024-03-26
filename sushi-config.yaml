@@ -49,8 +49,6 @@ pages:
     title: Formal Specification
   cds-cards.md:
     title: CDS Hooks Card Profiles
-#  artifacts.html:
-#    title: Artifacts
   downloads.xml:
     title: Downloads
 

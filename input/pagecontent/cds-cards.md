@@ -170,7 +170,7 @@ This response type can be used to present a Card that indicates there is a SMART
 
 This is accomplished by including a `suggestion` within a CDS Card that includes a `create` action for a Task resource. 
 
-Note that this `suggestion` may be reside within the same Card that contains a `link` to launch the app immediately, giving the provider a choice of launching the app now or later.
+Note that this `suggestion` may reside within the same Card that contains a `link` to launch the app immediately, giving the provider a choice of launching the app now or later.
 
 The Task resource: 
   - is based on either the [Task EHR Launch](https://hl7.org/fhir/smart-app-launch/StructureDefinition-task-ehr-launch.html) or [Task EHR Standalone](https://hl7.org/fhir/smart-app-launch/StructureDefinition-task-standalone-launch.html) profiles from the [SMART App Launch IG](https://hl7.org/fhir/smart-app-launch)
