@@ -63,7 +63,7 @@ Below are terms and wording conventions used throughout this implementation guid
 <p></p>
 
 ### REMS Within the E-Prescribing Process
-Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and related medication management interactions are conducted using a set of federally-named standards and other conventions that enable consistent, nationwide exchange.This guide does not redefine the means for transmitting a drug request from the provider to a pharmacy and prescriber systems are expected to continue using named standards such as NCPDP SCRIPT for transmission of electronic REMS prescriptions.
+Nearly all drug prescriptions in the United States are transmitted electronically to pharmacies. Those data exchanges and related medication management interactions are conducted using a set of federally-named standards and other conventions that enable consistent, nationwide exchange. This guide does not redefine the means for transmitting a drug request from the provider to a pharmacy and prescriber systems are expected to continue using named standards such as NCPDP SCRIPT for transmission of electronic REMS prescriptions.
 
 <p></p>
 

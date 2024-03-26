@@ -18,7 +18,7 @@ This guide provides additional REMS-specific usage direction to be applied in ad
 
 ### US Core Profiles
 
-Resources not profiled in this implementation guide are exchanged as part of a REMS Interaction, they SHOULD conform to US Core profiles where applicable profiles exist. 
+Resources not profiled in this implementation guide that are exchanged as part of a REMS Interaction **SHOULD** conform to [US Core profiles](https://www.hl7.org/fhir/us/core/profiles-and-extensions.html) where applicable profiles exist. 
 
 These include, but are not limited to, the FHIR resources included in the prefetch content submitted with a CDS Hooks request:
 
@@ -39,7 +39,7 @@ Certain interactions described in this guide are similar to the provider / payer
 
 In particular, the Da Vinci CRD Implementation Guide was used as the basis for this guide's [guidance on using CDS Hooks response Cards](cds-cards.html), with the aim of being as consistent as possible with the CRD IG's direction while providing guidance tailored specifically to REMS workflows. 
 
-The Card examples were minimally adjusted from examples in the CRD IG, only to the extent needed to illustrate REMS-related alerts, documentation and actions rather than the coverage-related information returned in CRD's scenarios. 
+The Card examples were minimally adjusted from examples in the CRD IG, only to the extent needed to illustrate REMS-related alerts, documentation, and actions rather than the coverage-related information returned in CRD's scenarios. 
 
 Note that the Da Vinci CRD specification outlines additional return types beyond those called out in this IG related to use of FHIR Questionnaires and for other payer-related purposes. While this guide does not identify analogous REMS uses for these response types, there is nothing within this specification that precludes their use within a REMS workflow.
 
