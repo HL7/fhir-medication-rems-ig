@@ -8,7 +8,7 @@ Description: "This CapabilityStatement describes the expected capabilities of a 
 * name = "MedicationRemsCapabilityStatementRemsAdministratorSystem"
 * status = #active
 * experimental = false
-* date = "2024-03-17T00:00:00-05:00"
+* date = "2024-04-01T00:00:00-05:00"
 * publisher = "HL7 International - Pharmacy"
 * contact[0].name = "HL7 International - Pharmacy"
 * contact[=].telecom.system = #url
