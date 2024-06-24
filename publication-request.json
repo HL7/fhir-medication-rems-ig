@@ -1,15 +1,11 @@
  {
     "package-id": "hl7.fhir.us.medication-rems",
-    "version": "1.0.0-ballot",
-    "path": "http://hl7.org/fhir/us/medication-rems/2024May",
-    "mode": "working",
-    "status": "ballot",
+    "version": "1.0.0",
+    "path": "http://hl7.org/fhir/us/medication-rems/STU1",
+    "mode": "milestone",
+    "status": "trial-use",
     "sequence": "STU1",
-    "desc": "This is the proposed STU1 version of the US Medication REMS FHIR IG for ballot in May 2024. It is sponsored by the HL7 Pharmacy Work Group",
+    "desc": "This is the STU1 version of the US Medication REMS FHIR IG. It is sponsored by the HL7 Pharmacy Work Group",
     "changes":"changes.html",
-    "first":true,
-    "title" : "US Medication REMS",
-    "ci-build" : "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig",
-    "category" : "Medications / Immunizations",
-    "introduction" : "A Risk Evaluation and Mitigation Strategies (REMS) is a drug safety program that the U.S. FDA requires for certain medications with serious safety concerns. Complying with REMS can introduce manual work for the provider and potential delays in getting the medication to the patient. This IG provides guidance on using FHIR to automate notifications and information exchange between the provider and the REMS Administrator--to reduce burden on the provider and prevent delays in patient care."
+    "first":false
 }

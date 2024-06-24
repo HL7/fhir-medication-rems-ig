@@ -64,7 +64,7 @@ This implementation guide relies on the following other specifications:
 <table class="grid">
     <tbody>
 	  <tr>
-		<td colspan="2">HL7 Pharmacy Workgroup</td>
+		<td colspan="2">HL7 Pharmacy Work Group</td>
   	  </tr>
 	  <tr>
 		<td>Frank McKinney</td>

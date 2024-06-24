@@ -5,11 +5,11 @@ canonical: http://hl7.org/fhir/us/medication-rems
 name: REMS
 title: US Medication Risk Evaluation and Mitigation Strategies (REMS) FHIR IG
 description: FHIR implementation options and guidance for medication REMS participants
-status: draft # draft | active | retired | unknown
-version: 1.0.0-ballot
+status: active # draft | active | retired | unknown
+version: 1.0.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2023+
-releaseLabel: STU1 Ballot # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+releaseLabel: trial-use # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use | STU1 Ballot
 license: CC0-1.0 
 jurisdiction: urn:iso:std:iso:3166#US "United States of America"
 publisher:
@@ -23,7 +23,7 @@ dependencies:
       Defines U.S. EHR expectations on a range of resources that will be passed to and/or queried by REMS CDS servers
   hl7.fhir.uv.smart-app-launch:
     id: SmartAppLaunch
-    version: 2.1.0
+    version: 2.2.0
     reason: |
       Defines base expectations and profiles for SMART app launch requirements
 #

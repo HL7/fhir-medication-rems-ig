@@ -138,7 +138,7 @@ But individual programs may require sharing additional patient clinicals or othe
 
 Supplying a consistent set of FHIR resources in the CDS Hooks request is needed to provide sufficient context to enable the REMS Administrator to respond--regardless of the medication or situation.
 
-Provider Systems and REMS Administrators **SHALL** support exchange of the following FHIR resources in CDS Hooks requests:
+The Provider System **SHOULD** support include the following FHIR resources as prefetch data within CDS Hooks requests submitted to a REMS Administrator's CDS service. The REMS Administrator’s CDS service **SHALL** query the Provider System to retrieve the resources below if not provided in the CDS request.
   - **Practitioner**, to identify the provider participating in the triggering event
   - **Patient**, to identify the patient being treated
   - **MedicationRequest** for the REMS drug (which may be draft or completed, depending on when the CDS request is triggered) and other patient medications
