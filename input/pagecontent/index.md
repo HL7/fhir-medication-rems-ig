@@ -80,7 +80,7 @@ This implementation guide relies on the following other specifications:
 <p></p>
 
 ### Dependencies
-{% include dependency-table.xhtml %}
+{% include dependency-table-short.xhtml %}
 
 ### Cross Version Analysis
 {% include cross-version-analysis.xhtml %}
