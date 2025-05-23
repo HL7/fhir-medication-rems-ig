@@ -125,6 +125,16 @@ See an [example DocumentReference](DocumentReference-example-rems-docref-1.html)
 
 <p></p>
 
+### Provider System and Pharmacy System Interactions
+
+TODO
+
+#### Out-of-band ETASU Check
+
+TODO FHIR operation guidanceresponse/$rems-etasu link pointing to the section below and info on retrieving the case number
+
+<p></p>
+
 ### Data Exchange During CDS Hooks Interactions
 <p></p>
 
@@ -143,6 +153,7 @@ The Provider System **SHOULD** support include the following FHIR resources as p
   - **Patient**, to identify the patient being treated
   - **MedicationRequest** for the REMS drug (which may be draft or completed, depending on when the CDS request is triggered) and other patient medications
   - **Medication** if referenced by the MedicationRequest
+  - **Pharmacy** (optional) requested pharmacy as represented by a HealthcareService resource
 
 For example: 
 
@@ -171,7 +182,228 @@ For example:
 Provider Systems **SHALL** enable the REMS Administrator to query for additional patient clinical or other information during the CDS exchange, for example to retrieve lab results or other diagnostics specific to a REMS drug program
 
 <p></p>
+
+### Out-of-band ETASU Check
+
+There may be instances where a client to the REMS Administrator may want to know the current ETASU (Elements to Assure Safe Use) status of the REMS program at any given time. A new FHIR operation $rems-etasu on the GuidanceResponse resource **SHOULD** be supported by the REMS Administrator FHIR Server. This operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication input as Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that can be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the Prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
+
+#### Input 
+
+The input parameters optionally consist of a Patient and Medication FHIR Resource or a case number. These resources are used by the REMS Administrator to retrieve the REMS case for the provided patient. 
+
+##### Example Input
+{% raw %}
+<pre class="json" style="white-space: pre;"><code class="language-json">
+{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "patient",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "pat017",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2024-03-27T12:19:51.575-04:00",
+                    "source": "#rHsFtpinBxvVskjP"
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">…</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-medicare",
+                        "value": "0V843229061TB"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Snow",
+                        "given": [
+                            "Jon",
+                            "Stark"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1996-06-01",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "both",
+                        "line": [
+                            "1 Winterfell Rd"
+                        ],
+                        "city": "Winterfell",
+                        "state": "Westeros",
+                        "postalCode": "00008"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "medication",
+            "resource": {
+                "resourceType": "Medication",
+                "id": "pat017-mr-IPledge-med",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                            "code": "6064",
+                            "display": "Isotretinoin 20 MG Oral Capsule"
+                        },
+                        {
+                            "system": "http://hl7.org/fhir/sid/ndc",
+                            "code": "0245-0571-01"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "case_number",
+            "valueString": "a24e73e53b2"
+        }
+    ]
+}
+</code></pre>
+{% endraw %}
+
+#### Output
+
+The output consists of a FHIR Parameter with a FHIR Resource of the type GuidanceResponse. The GuidanceResponse contains a *status* value mapped to the REMS meaning in the following table.
+
+<table class='grid'>
+  <thead>
+    <tr>
+      <th>GuidanceResponse Value</th>
+      <th>REMS Meaning</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>success</td>
+    <td>Completed</td>
+  </tr>
+  <tr>
+    <td>data-requested</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>data-required</td>
+    <td>Incomplete / Needed</td>
+  </tr>
+  <tr>
+    <td>in-progress</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>failure</td>
+    <td>Not Found</td>
+  </tr>
+  <tr>
+    <td>entered-in-error</td>
+    <td></td>
+  </tr>
+</table>
+
+This GuidanceResponse represents the overall status of the REMS ETASU. Inside the GuidanceResponse there is a contained Parameters list named *etasuOutputParameters*. Each Parameter in this list contains a GuidanceResponse resource that is representative of one of the individual elements of the REMS program. These may include any forms or knowledge assessments that need to be completed. These parameters are referenced by the *outputParameters* field. The *status* of the GuidanceResponse values gives the completion status of the REMS ETASU requirement. The values are matched in the table above.
+
+##### Example Output
+{% raw %}
+<pre class="json" style="white-space: pre;"><code class="language-json">
+{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "rems-etasu",
+            "resource": {
+                "resourceType": "GuidanceResponse",
+                "status": "data-required",
+                "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
+                "subject": {
+                    "reference": "Patient/pat017"
+                },
+                "outputParameters": {
+                    "reference": "#etasuOutputParameters"
+                },
+                "contained": [
+                    {
+                        "resourceType": "Parameters",
+                        "id": "etasuOutputParameters",
+                        "parameter": [
+                            {
+                                "name": "Patient Enrollment",
+                                "resource": {
+                                    "resourceType": "GuidanceResponse",
+                                    "status": "success",
+                                    "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
+                                    "subject": {
+                                        "reference": "Patient/pat017"
+                                    },
+                                    "note": [
+                                        {
+                                            "text": "Patient Enrollment"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "Prescriber Enrollment",
+                                "resource": {
+                                    "resourceType": "GuidanceResponse",
+                                    "status": "data-required",
+                                    "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
+                                    "subject": {
+                                        "reference": "Practitioner/pra1234"
+                                    },
+                                    "note": [
+                                        {
+                                            "text": "Prescriber Enrollment"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "Pharmacist Enrollment",
+                                "resource": {
+                                    "resourceType": "GuidanceResponse",
+                                    "status": "success",
+                                    "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
+                                    "subject": {
+                                        "reference": "Organization/pharm0111"
+                                    },
+                                    "note": [
+                                        {
+                                            "text": "Pharmacist Enrollment"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "case_number",
+                                "valueString": "a24e73e53b2"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
+</code></pre>
+{% endraw %}
+
+<p></p>
   
+#### Automatic REMS Endpoint Registration using SPL
+
+TODO 
+
+<p></p>
+
 ### Security and Privacy
 
 #### FHIR Privacy and Security Guidance
@@ -187,6 +419,10 @@ Implementers are expected to...
 Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 - the CDS Hooks [Security and Safety](https://cds-hooks.hl7.org/2.0/#security-and-safety) section
 - [SMART App Launch  Implementation Guide](https://hl7.org/fhir/smart-app-launch).
+
+#### Prescriber Intermediary Security
+
+TODO: information about removing the FHIR Authorization from the CDS hook
  
 <p></p>
 <p></p>

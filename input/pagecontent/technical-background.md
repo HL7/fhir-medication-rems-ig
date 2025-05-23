@@ -16,6 +16,7 @@ This guide provides additional REMS-specific usage direction to be applied in ad
 
 <p></p>
 
+
 ### US Core Profiles
 
 Resources not profiled in this implementation guide that are exchanged as part of a REMS Interaction **SHOULD** conform to [US Core profiles](https://www.hl7.org/fhir/us/core/profiles-and-extensions.html) where applicable profiles exist. 
@@ -26,14 +27,30 @@ These include, but are not limited to, the FHIR resources included in the prefet
 - [Practitioner](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-practitioner.html)
 - [MedicationRequest](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html)
 - [Medication](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medication.html)
+- [QuestionnaireResponse](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-questionnaireresponse.html)
 
 ... as well as the [DocumentReference](https://hl7.org/fhir/us/core/StructureDefinition-us-core-documentreference.html) containing patient REMS information returned by the REMS Administrator in a CDS Hooks response.
+
+Other resources not included in the US Core profiles:
+
+- [HealthcareService](https://hl7.org/fhir/R4/healthcareservice.html) used to identify information about the Pharmacy when sending a CDS Hook to the REMS Administrator.
+- [Questionnaire](https://hl7.org/fhir/R4/questionnaire.html)
+
+<p></p>
+
+### FHIR Operations
+
+Several of the interactions that this guide defines make use of FHIR Operations. FHIR Operations extend the capability of a FHIR server beyond the simple [RESTful API](https://www.hl7.org/fhir/http.html) operations of Create, Read, Update, Delete actions on single FHIR Resources. They allow the user to complete more complex actions with more complicated inputs and outputs and perform an action upon the server.
+
+Implementers are to refer to the [Extended Operations](https://www.hl7.org/fhir/operations.html) section of the FHIR documentation. This outlines the capabilities and how they are defined.
 
 <p></p>
 
 ### Consistency with the Da Vinci Burden Reduction IGs
 
 This guide aims to be consistent in its guidance with other FHIR implementation guides likely to be implemented by REMS stakeholders. 
+
+#### CRD
 
 Certain interactions described in this guide are similar to the provider / payer interactions defined in the [Da Vinci Coverage Requirements Discovery \(CRD\) IG](https://hl7.org/fhir/us/davinci-crd).
 
@@ -43,11 +60,32 @@ The Card examples were minimally adjusted from examples in the CRD IG, only to t
 
 Note that the Da Vinci CRD specification outlines additional return types beyond those called out in this IG related to use of FHIR Questionnaires and for other payer-related purposes. While this guide does not identify analogous REMS uses for these response types, there is nothing within this specification that precludes their use within a REMS workflow.
 
+#### DTR
+
+Interactions with SMART Applications and form completion described in this guide are similar to the provider / payer interactions defined int he [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). With the aim to maintain compatibility where possible with only changes that were necessary to support the differing requirements of REMS workflows.
+
+Note that the Da Vinci DTR specification outlines different methods to achieve the goals with shared SMART on FHIR applications and native EHR support. These capabilities are optional with this standard as the REMS Administrators can implement their own applications with or without the use of FHIR Questionnaires and CQL (Clinical Quality Language).
+
 <p></p>
+
+### CQL - Clinical Quality Language
+
+This guide makes use of the Clinical Quality Language (CQL) for querying and pre-populating Patient and Provider data within the shared SMART on FHIR application hosted by Prescriber Intermediaries<TODO link to section detailing shared app>. 
+
+Implementers are to refer to the [CQL Specification](https://cql.hl7.org/) for general guidance. Please refer to the DTR IG for more specific implementation examples.
+
 <p></p>
 
+### SPL - Structured Product Labelling
 
-
+The FDA makes use of the SPL (Structured Product Labeling) as a document markup standard for exchanging product information. This guide uses information found in the REMS SPL submissions. Information about SPL can be found within the [FDA SPL Resources pages](https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources).
 
 <p></p>
+
+### FDA OpenAPI
+
+Information about medications and can be found within the [FDA OpenAPI](https://open.fda.gov/apis/). Much of this information including the NDC and Labelling information comes from the SPL resources submitted to the FDA. This information may include CDS Hooks and FHIR server information for REMS programs in the future. This Guide makes use of interfaces based upon these APIs (Application Programming Interface).
+
+<p></p>
+
 <p></p>

@@ -74,6 +74,10 @@ This implementation guide relies on the following other specifications:
 		<td>Robert Dingwell</td>
 		<td><a href="mailto:bobd@mitre.com">bobd@mitre.com</a></td>
 	  </tr>
+	  <tr>
+		<td>Patrick LaRocque</td>
+		<td><a href="mailto:plarocque@mitre.com">plarocque@mitre.com</a></td>
+	  </tr>
 	</tbody>
   </table>
 
