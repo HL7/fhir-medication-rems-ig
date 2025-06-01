@@ -6,6 +6,7 @@ REMS Administrator Systems dynamically create these Cards for each CDS Hooks req
 - the prescribed drug's REMS program
 - the status of required REMS steps at the time of the event
 - REMS information needs associated with the current point in the patient's treatment. 
+- Ability of optionally provided Pharmacy to dispense desired REMS medication.
 
 This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/2.0/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#consistency-with-the-da-vinci-burden-reduction-igs)).
 
@@ -41,6 +42,8 @@ In all cases, Cards interrupt the provider's workflow and will be welcomed by th
     *  When providing links, keep document size short and/or provide linking directly to the section that is relevant for the context to minimize the time needed for the provider to read the critical information.
 
     *  While links are permitted in the markdown content of `Card.detail`, support for this is not universal, so links **SHOULD** also be provided in `Card.link`. This also provides a consistent place for users to access all relevant links.
+
+    *  If a Pharmacy was provided in the prefetch, the `Card.detail` **SHOULD** include information about the pharmacy. This includes information about the status of the Pharmacy with the specific REMS program and if the medication can be dispensed or not.
 
 * Provider Systems might not support all Card capabilities; therefore Card options **SHOULD** provide sufficient information for a user to take appropriate actions manually if automated support isn't available.
 

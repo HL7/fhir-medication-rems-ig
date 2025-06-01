@@ -66,11 +66,13 @@ Below is an outline of those who play a role in the parts of the REMS process cu
 <p></p>
 
 #### Intermediary Role
-A data exchange intermediary may participate in the process on behalf of one or more REMS Administrators...
-  - acting as a CDS Server fielding CDS requests related to one or more REMS drugs
+A data exchange intermediary may participate in the process on behalf of one or more REMS Administrators. The capabilities of a fully functional Prescriber Intermediary include:
+  - acting as a CDS Server fielding CDS requests related to one or more REMS drugs and forwarding to the correct REM Administrator
   - hosting SMART apps supporting one or more REMS drugs.
+  - acting as a FHIR server forwarding requests to the correct REMS Administrator
 
-An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs.
+An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs. The benefit achieved by the Intermediary is not to be underestimated. Registering a REMS Administrator for CDS Hooks and a SMART on FHIR app with every EHR system is a burden for the rollout of any new REMS program. This guide will describe the use of intermediaries and methods for automatically registering new REMS using SPL (Structured Product Labelling). 
+TODO: provide links...
 
 <p></p>
 

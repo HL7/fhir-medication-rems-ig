@@ -50,7 +50,7 @@ Implementers are to refer to the [Extended Operations](https://www.hl7.org/fhir/
 
 This guide aims to be consistent in its guidance with other FHIR implementation guides likely to be implemented by REMS stakeholders. 
 
-#### CRD
+#### CRD - Coverage Requirements Discovery
 
 Certain interactions described in this guide are similar to the provider / payer interactions defined in the [Da Vinci Coverage Requirements Discovery \(CRD\) IG](https://hl7.org/fhir/us/davinci-crd).
 
@@ -60,11 +60,13 @@ The Card examples were minimally adjusted from examples in the CRD IG, only to t
 
 Note that the Da Vinci CRD specification outlines additional return types beyond those called out in this IG related to use of FHIR Questionnaires and for other payer-related purposes. While this guide does not identify analogous REMS uses for these response types, there is nothing within this specification that precludes their use within a REMS workflow.
 
-#### DTR
+#### DTR - Documentation Templates and Rules
 
-Interactions with SMART Applications and form completion described in this guide are similar to the provider / payer interactions defined int he [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). With the aim to maintain compatibility where possible with only changes that were necessary to support the differing requirements of REMS workflows.
+Interactions with SMART Applications and form completion described in this guide are similar to the provider / payer interactions defined in the [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). With the aim to maintain compatibility where possible with only changes that were necessary to support the differing requirements of REMS workflows.
 
 Note that the Da Vinci DTR specification outlines different methods to achieve the goals with shared SMART on FHIR applications and native EHR support. These capabilities are optional with this standard as the REMS Administrators can implement their own applications with or without the use of FHIR Questionnaires and CQL (Clinical Quality Language).
+
+The Prescriber Intermediaries **SHOULD** implement a Shared SMART on FHIR application that can be used with any REMS Administrator. This will reduce the burden on REMS Administrators to register their own applications with every EHR. The Shared SMART App uses the same methods as DTR to retrieve Questionnaires and CQL using the $questionnaire-package FHIR Operation. The REMS Administrators **SHOULD** likewise implement the operation and make any forms or documents available to be completed by the clients including Provider and Patient using this shared method.
 
 <p></p>
 
@@ -85,6 +87,12 @@ The FDA makes use of the SPL (Structured Product Labeling) as a document markup 
 ### FDA OpenAPI
 
 Information about medications and can be found within the [FDA OpenAPI](https://open.fda.gov/apis/). Much of this information including the NDC and Labelling information comes from the SPL resources submitted to the FDA. This information may include CDS Hooks and FHIR server information for REMS programs in the future. This Guide makes use of interfaces based upon these APIs (Application Programming Interface).
+
+<p></p>
+
+### NCPDP SCRIPT
+
+Prescription drug electroic prescribing and electronic prior authorization is completed using the NCPDP (National Council for Prescription Drug Programs) [SCRIPT standards](https://standards.ncpdp.org/Access-to-Standards.aspx). These standards are also used for completing the pharmacy workflow within the REMS programs. This guide describes sending NCPDP SCRIPT messages including NewRx for electronic prescribing. For more details please read through the NCPDP SCRIPT standards.
 
 <p></p>
 

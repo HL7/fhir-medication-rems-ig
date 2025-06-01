@@ -125,6 +125,26 @@ See an [example DocumentReference](DocumentReference-example-rems-docref-1.html)
 
 <p></p>
 
+#### Support for forwarding messages through Prescriber Intermediary
+
+The Prescriber Intermediary server application sits in between the EHR system and the REMS Administrator. The benefit to this is allowing the REMS Administrator system to register their CDS Hooks with any supported intermediaries instead of every EHR system. The CDS Hooks requests are sent to the Prescriber Intermediary when configured to do so. This intermediary will determine based on the medication in the hook which REMS Administrator to send the request to. The intermediary will then forward back any returned cards from the REMS Administrator to the EHR. The interaction will be transparent to the EHR system. The intermediary **SHALL** populate the prefetch if unset using the prefetch tokens provided by the REMS Administrator. Lastly, the intermediary **SHALL** remove the FHIR Authorization from the Hook before sending it to the REMS Administrator.
+
+The Prescriber Intermediary **SHOULD** also support forwarding FHIR requests from the EHR to the REMS Administrators. Similarly to the CDS Hooks requests, FHIR requests will be forwarded. This enables the `$rems-etasu` FHIR operation (for retrieving the ETASU out-of-band) and the `$questionnaire-package` operation (for retrieving Questionnaires in a shared SMART on FHIR application scenario).
+
+<p></p>
+
+#### Support for Shared SMART on FHIR Application 
+
+Similar to the burden with registering the CDS Hook server on the REMS Administrator with every EHR, there is significant effort during setup to register the SMART on FHIR application from the REMS Administrator with every EHR. The REMS Administrators have the option to implement their own SMART on FHIR application that may give them tighter control, however REMS Administrators **SHOULD** support shared SMART App launch instead. The Shared SMART app **SHALL** follow the [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). 
+
+##### Rendering the Shared SMART app
+The shared SMART app **SHALL** request the resources necessary to render the forms from the REMS Administrators using the `$questionnaire-package` operation on the Questionnaire resource. The path to the operation on the REMS administrator's FHIR server will follow the pattern `<fhir_server_base>/Questionnaire/<questionnaire-id>/$questionaire-package`. When retrieving the questionnaire package, the REMS Administrator will compile a FHIR bundle containing the Questionnaire, ValueSet, and any Library resource needed to render the form. Embedded within Library resources there **SHOULD** be CQL (Clinical Quality Language) scripts. These scripts link the Questionnaire to data within the FHIR server. Once executed by the Shared SMART App, they are able to pre-populate the forms with data. Without the CQL, the forms will be empty when loading, negating the benefit of using a SMART on FHIR application.
+
+##### Storing Completed Questionnaires
+While the forms are being completed, the data **SHALL** be stored within a QuestionnaireResponse FHIR resource. The application **SHOULD** provide a method for storing and retrieving in-progress forms from the EHR FHIR server. Upon completion of the form, submission should send the QuestionnaireReponse to the correct REMS Administrator for the medication.
+
+<p></p>
+
 ### Provider System and Pharmacy System Interactions
 
 TODO
@@ -163,7 +183,7 @@ For example:
     "prefetch" : {
       "patient": "Patient/{{context.patientId}}",
       "practitioner": "{{context.userId}}",
-      "medicationRequests": "MedicationRequest?subject={{context.patientId}}&_include=MedicationRequest:medication"  
+      "medicationRequests": "MedicationRequest?subject={{context.patientId}}&_include=MedicationRequest:medication",
     }
 }</code></pre>
 {% endraw %}
@@ -201,7 +221,7 @@ The input parameters optionally consist of a Patient and Medication FHIR Resourc
             "name": "patient",
             "resource": {
                 "resourceType": "Patient",
-                "id": "pat017",
+                "id": "example-patient-123",
                 "meta": {
                     "versionId": "1",
                     "lastUpdated": "2024-03-27T12:19:51.575-04:00",
@@ -220,25 +240,24 @@ The input parameters optionally consist of a Patient and Medication FHIR Resourc
                 "name": [
                     {
                         "use": "official",
-                        "family": "Snow",
+                        "family": "Samuels",
                         "given": [
-                            "Jon",
-                            "Stark"
+                            "August",
                         ]
                     }
                 ],
                 "gender": "male",
-                "birthDate": "1996-06-01",
+                "birthDate": "1989-03-12",
                 "address": [
                     {
                         "use": "home",
                         "type": "both",
                         "line": [
-                            "1 Winterfell Rd"
+                            "10023 Oakways Ln"
                         ],
-                        "city": "Winterfell",
-                        "state": "Westeros",
-                        "postalCode": "00008"
+                        "city": "Concord",
+                        "state": "MA",
+                        "postalCode": "01742"
                     }
                 ]
             }
@@ -247,7 +266,7 @@ The input parameters optionally consist of a Patient and Medication FHIR Resourc
             "name": "medication",
             "resource": {
                 "resourceType": "Medication",
-                "id": "pat017-mr-IPledge-med",
+                "id": "123-mr-IPledge-med",
                 "code": {
                     "coding": [
                         {
@@ -414,7 +433,7 @@ Implementers are expected to...
 
 <p></p>
   
-### REMS Workflow-Related Privacy and Security
+#### REMS Workflow-Related Privacy and Security
 
 Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 - the CDS Hooks [Security and Safety](https://cds-hooks.hl7.org/2.0/#security-and-safety) section
@@ -422,7 +441,7 @@ Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 
 #### Prescriber Intermediary Security
 
-TODO: information about removing the FHIR Authorization from the CDS hook
+The Prescriber Intermediary is useful for forwarding CDS Hooks requests from the EHR to the correct REMS Administrator. Passing the FHIR authorization on to a third party that was not registered with the EHR is a problem. Therefore, the FHIR authorization **shall** be stripped from the hook request before being forwarded to the REMS Administrator. This can leave a problem with the prefetch not properly being populated. In this case, the intermediary **shall** populate the prefetch using the FHIR authorization that it had stripped from the hook. This will provide all needed information to the REMS Administrator in order to process the hook request.
  
 <p></p>
 <p></p>

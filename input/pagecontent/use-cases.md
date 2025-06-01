@@ -42,12 +42,16 @@ However, there are situations where starting therapy with a REMS drug may involv
 When seeing a patient, the prescriber decides to prescribe a drug, and is alerted by the Provider System that the drug has a REMS program. At an appropriate point in the workflow (e.g., when the prescriber starts creating the medication order, at the start of a related encounter, etc.), the Provider System connects with the REMS Administrator System and enables the prescriber to interact with it. 
 
 At the start of this interaction, the Provider System supplies patient, provider and medication information to the REMS Administrator. 
-- This step is accomplished using a CDS Hooks call triggered by an appropriate "hook" event in the provider workflow such as "order-select". 
+- This step is accomplished using a CDS Hooks call triggered by an appropriate "hook" event in the provider workflow such as "order-select" or "order-sign". 
 - "Prefetch" data containing Practitioner, Patient and MedicationRequest FHIR resources is included in the request.
+- The CDS Hook call may be sent to REMS Prescriber Intermediary instead of directly to the REMS Administrator. The Intermediary will be responsible for forwarding the message to the correct REMS Administrator and directing the response back to the EHR.
 
 Depending on the drug and other variables described in the previous section, the REMS Administrator System responds to the CDS Hooks request with information about the REMS program, a [SMART app](https://www.hl7.org/fhir/smart-app-launch) to gather needed information, alerts about steps the prescriber must take before ordering the drug, etc. 
 
 The Provider System then presents the returned information, gives the prescriber the option to open the REMS Administrator's SMART app (if one was returned) or to place the app into their work queue to launch later. When the provider launches the SMART app, it first retrieves information that it needs from the patient record in the Provider System--reducing manual data entry for the provider. The prescriber reviews the pre-filled data, makes adjustments as needed, and then completes any other app steps.
+
+A shared SMART app may be hosted by the Prescriber Intermediary or other third party instead of the REMS Administrator. The shared SMART app will make use of the workflow described in the DaVinci DTR IG.
+TODO: provide link here...
 
 Note that in some situations, the REMS Administrator will have no information or requests to return. For example, the REMS Administrator may determine that there are no unmet REMS requirements to be addressed at the time of the interaction. In this case, the Provider System will receive an empty response and allow the prescriber's workflow to continue without interruption. 
 
@@ -100,6 +104,10 @@ If the REMS Administrator does not wish to present any information or requests t
 The REMS Administrator may recognize the opportunity to share other information or request other actions beyond those described above.
 
 This implementation guide does not constrain information or requests that a REMS Administrator may return in its CDS Hooks response. Other alerts, resources or information gathering steps may be implemented, as needed.
+
+#### The REMS Prescriber Intermediary is unaware of a REMS program for the medication
+
+If a Prescriber Intermediary is configured for this medication in the EHR system, the CDS Hooks request will be sent to it instead of directly to the REMS Administrator. If the Intermediary does not have a location to forward this request for the medication, an empty response will be returned.
 
 <p></p>
 
