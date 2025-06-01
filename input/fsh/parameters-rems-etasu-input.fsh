@@ -4,7 +4,7 @@ Usage: #example
 Description: "Example input parameters for the $rems-etasu operation"
 * parameter[0].name = "patient"
 * parameter[=].resource.resourceType = "Patient"
-* parameter[=].resource.id = "pat017"
+* parameter[=].resource.id = "example-patient-123"
 * parameter[=].resource.meta.versionId = "1"
 * parameter[=].resource.meta.lastUpdated = "2025-04-10T01:10:26.457-04:00"
 * parameter[=].resource.meta.source = "#r7DbQaYwStt3SnNl"
@@ -28,6 +28,6 @@ Description: "Example input parameters for the $rems-etasu operation"
 * parameter[=].resource.id = "123-mr-IPledge-med"
 * parameter[=].resource.code.coding[0].system = "http://www.nlm.nih.gov/research/umls/rxnorm"
 * parameter[=].resource.code.coding[0].code = #6064
-* parameter[=].resource.code.coding[0].display = "Isotretinoin 20 MG Oral Capsule"
+* parameter[=].resource.code.coding[0].display = "isotretinoin"
 * parameter[=].resource.code.coding[1].system = "http://hl7.org/fhir/sid/ndc"
 * parameter[=].resource.code.coding[1].code = #0245-0571-01

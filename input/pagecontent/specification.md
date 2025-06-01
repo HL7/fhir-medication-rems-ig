@@ -343,7 +343,7 @@ This GuidanceResponse represents the overall status of the REMS ETASU. Inside th
                 "status": "data-required",
                 "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
                 "subject": {
-                    "reference": "Patient/pat017"
+                    "reference": "Patient/example-patient-123"
                 },
                 "outputParameters": {
                     "reference": "#etasuOutputParameters"
@@ -360,7 +360,7 @@ This GuidanceResponse represents the overall status of the REMS ETASU. Inside th
                                     "status": "success",
                                     "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
                                     "subject": {
-                                        "reference": "Patient/pat017"
+                                        "reference": "Patient/example-patient-123"
                                     },
                                     "note": [
                                         {
@@ -381,22 +381,6 @@ This GuidanceResponse represents the overall status of the REMS ETASU. Inside th
                                     "note": [
                                         {
                                             "text": "Prescriber Enrollment"
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                "name": "Pharmacist Enrollment",
-                                "resource": {
-                                    "resourceType": "GuidanceResponse",
-                                    "status": "success",
-                                    "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
-                                    "subject": {
-                                        "reference": "Organization/pharm0111"
-                                    },
-                                    "note": [
-                                        {
-                                            "text": "Pharmacist Enrollment"
                                         }
                                     ]
                                 }
