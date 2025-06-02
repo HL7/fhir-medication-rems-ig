@@ -376,7 +376,7 @@ This GuidanceResponse represents the overall status of the REMS ETASU. Inside th
                                     "status": "data-required",
                                     "moduleUri": "https://build.fhir.org/ig/HL7/fhir-medication-rems-ig/",
                                     "subject": {
-                                        "reference": "Practitioner/pra1234"
+                                        "reference": "Patient/example-patient-123"
                                     },
                                     "note": [
                                         {
