@@ -401,9 +401,118 @@ This GuidanceResponse represents the overall status of the REMS ETASU. Inside th
 
 <p></p>
   
-#### Automatic REMS Endpoint Registration using SPL
+### Automatic REMS Endpoint Registration using SPL
 
-TODO 
+The use of a REMS Prescriber Intermediary server sitting between the EHR and the REMS Administrator allows for the EHR to only register a single CDS Hooks endpoint. The burden of registering all the REMS Administrators is shifted to a more centralized point within the REMS Prescriber Intermediaries. This burden can be further reduced by allowing the REMS Prescriber Intermediary to automatically discover and register the CDS Hooks endpoints provided by the REMS Administrators for each REMS program. The combined capabilities of a recommended API similar to the openFDA API and recommended use of REMS Structured Product Labeling (SPL) could enable the automated discovery of the REMS Administrator endpoints in a sustainable manner over time. 
+
+#### Background
+
+##### SPL
+
+Structured Product Labeling (SPL) is a document markup standard approved by Health Level Seven (HL7) and adopted by FDA as a mechanism for exchanging product and facility information. The REMS document and appended materials are also required to be submitted to the FDA using the SPL format. This includes details on the requirements for the REMS program and specifies all forms and Elements to Assure Safe Use (ETASU) requirements. The SPL format also allows for storing REMS Electronic Resource Information. The REMS Electronic Resource Information can be in the format of a URL (Uniform Resource Locator) or URN (Uniform Resource Name).
+
+If an SPL file includes the URL of the CDS Hook that connects the prescriber EHR to the REMS Administrator, the entire zip file from [DailyMed's SPL Resources: Download ALL Indexing & REMS Files](https://dailymed.nlm.nih.gov/dailymed/spl-resources-all-indexing-files.cfm) webpage containing the REMS SPL files can be downloaded and parsed for those CDS Hook endpoint URLs. The REMS Administrator CDS Hook URLs can then be discovered, registered, and accessed by the REMS Prescriber Intermediary to route the request to the correct REMS Administrator based upon the REMS drug ordered by the prescriber.
+
+##### openFDA API
+
+The FDA provides the openFDA Application Programming Interface (API) for querying drug product labeling information. The results from these queries are returned in JSON format. Detailed information about the openFDA API can be found at https://open.fda.gov/apis/. For guidance on using the drug labeling endpoint, one can visit “How to Use the Endpoint” at https://open.fda.gov/apis/drug/label/how-to-use-the-endpoint/. The openFDA API includes endpoints for packaged product National Drug Codes (NDCs) to query specific medication data, including naming information, ingredient information, and packaging information amongst others. 
+
+A recommended API similar to the openFDA API could provide expanded results for REMS drugs that include REMS Administrator and REMS endpoint information. If REMS endpoint information is provided for the CDS Hook URLs, they can be discovered, registered, and accessed by the REMS Prescriber Intermediary to route the request to the correct REMS Administrator based upon the REMS drug ordered by the prescriber.
+
+#### Endpoint Discovery Using an SPL Zip Archive
+
+If an SPL file includes the URL of the CDS Hook that connects the prescriber EHR to the REMS Administrator, the endpoint information can be pulled from the [DailyMed's SPL Resources: Download ALL Indexing & REMS Files](https://dailymed.nlm.nih.gov/dailymed/spl-resources-all-indexing-files.cfm) webpage or from some other resource that consistently provides the submitted REMS SPL files.
+
+##### Existing Reference Value URN Example
+To understand the construction of the reference value URN, the below is an example of the REMS Electronic Resource Information embedded in the SPL in the following format: 
+
+```
+  <subjectOf>  
+      <document> 
+          <id root="00000000-0000-0000-0000-000000000006"/>  
+          <title>REMS SPL Pilot – NCPDP D0 - Patient Data </title>  
+          <text>  
+          <reference value="urn:NCPDP:D.0:P1:610674:00000000-0000-0000-0000-000000000005"/>  
+          </text>  
+      </document>  
+  </subjectOf>  
+```
+ 
+The reference value contains a URN with the following components: 
+
+- the developer of the standard (e.g., “NCPDP”)  
+- the standard version (e.g. “D.0”),  
+- the transaction (e.g. “P1”)  
+- the destination address, such as a BIN number (e.g., “610674”)  
+- the id of a REMS material document which provides instructions for how to carry out the transaction (e.g., “00000000-0000-0000-0000-000000000005") 
+
+
+##### Example Reference Value URN for a FHIR CDS Hooks Service
+Below is an example of how this reference value might be constructed for a FHIR CDS Hooks service: 
+`<reference value="urn:HL7:FHIR4.0:rems_discovery:fhirserver.remsdrug.com/cds-services" />`
+In this case, the components of the URN are as follows:
+
+- the developer of the standard (e.g., "FHIR")  
+- the standard version (e.g. “4.0”),  
+- the transaction (e.g. “rems_discovery”)  
+- the destination address, such as a BIN number (e.g., "fhirserver.remsdrug.com/cds-services")  
+
+The example above lists the “rems_discovery” endpoint as “fhirserver.remsdrug.com/cds-services”. This URL within the URN can be used to reference the CDS Hooks server. The REMS Prescriber Intermediary can query this endpoint with a metadata request for the CapabilityStatement to find all the supported endpoints and capabilities and confirm that the capabilities match those required as described in the CodeX US Medication REMS FHIR IG. 
+
+#### Endpoint Discovery Using an API
+
+In addition to the REMS Document in SPL, a recommended API similar to the the openFDA API may provide the URL for the REMS Administrator CDS Hooks endpoint. This would in turn be readable by the REMS Prescriber Intermediary allowing for automatic registration of the REMS Administrator Endpoints. 
+
+Like the openFDA API the data elements available include the Generic Name, Brand Name, and packaged product NDC, all of which are queryable elements within this API. Additionally, the recommended API would include data elements for REMS Administrator API Endpoint, REMS Administrator, REMS Approval Date, and REMS Modification Date. A client can search for REMS medication information based on one of the three queriable data element values. The package-specific NDC is most specific and reflective of the codes that will be used in a real-world environment. The REMS Administrator API Endpoint data element (`rems_endpoint`) contains the URL of the REMS Administrator CDS Hooks endpoint for the queried medication. If there is no endpoint supplied, there may be no CDS Hooks endpoint available for the REMS Administrator yet. 
+
+##### Example Output
+When queried for the Turalio medication, the following is an example output showing the recommended REMS data elements: 
+{% raw %}
+<pre class="json" style="white-space: pre;"><code class="language-json">
+{
+    "meta": {
+        "disclaimer": "disclaimer",
+        "terms": "terms",
+        "license": "license",
+        "last_updated": "2025-03-13",
+        "results": {
+            "skip": 0,
+            "limit": 1,
+            "total": 1
+        }
+    },
+    "results": [
+        {
+            "brand_name": "Turalio",
+            "generic_name": "PEXIDARTINIB HYDROCHLORIDE",
+            "product_ndc": "65597-407",
+            "rems_administrator": "REMS Prototype",
+            "rems_endpoint": "http://localhost:3003/",
+            "rems_approval_date": "20240906",
+            "rems_modification_date": "20240906",
+            "packaging": [ 
+                { 
+                "package_ndc": "65597-407-20", 
+                "description": "1 BOTTLE in 1 CARTON (65597-407-20)  / 120 CAPSULE in 1 BOTTLE", 
+                "marketing_start_date": "20230201", 
+                "sample": false 
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+{% endraw %}
+
+<p></p>
+
+##### FHIR Server Endpoint Discovery and Registration
+
+FHIR Server endpoints for the REMS Administrator are recommended for operations such as the out-of-band ETASU check. A second endpoint in the REMS Prescriber Intermediary should be maintained pointing to the REMS Administrator’s FHIR server. This endpoint can be discovered using the methods outlined above but labelled as “fhir_server” instead of “rems_endpoint”. 
+
+#### REMS Administrator Endpoint Registration Updates
+
+The REMS Prescriber Intermediary can periodically retrieve the REMS SPL zip archive to find new REMS medications and their respective CDS Hooks endpoints. This operation could happen on a specific interval, or with a trigger such as being notified when the SPL archive has been updated. The REMS Prescriber Intermediary can also query the recommended API for a newer CDS Hooks endpoint based on the drug packaged product NDC code.
 
 <p></p>
 
