@@ -6,10 +6,6 @@ Support for additional scenarios and stakeholders such as those described below 
 <p></p>
 
 ### Possible Additional Scenarios
-#### Checking a patient's REMS status systematically
-A provider, pharmacy or other REMS stakeholder checks the status of REMS requirements associated with a patient's prescription. Information is returned in structured form that the requesting system can use to trigger next steps, etc.
- 
-<p></p>
 
 #### Patient enrollment using a patient-directed application
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
@@ -53,14 +49,17 @@ In addition to supporting additional workflow scenarios, work is needed to addre
 - maintaining CDS Hooks configuration to direct requests to different REMS Administrator Systems for different drugs
 - maintaining SMART app configuration for many REMS Administrators' apps
 - maintaining changes to configuration when:
-  - new REMS programs are established
   - REMS programs move from one Administrator to another
   - REMS drug identifiers (used to configure CDS Hooks triggers) change or are added due to new product variations, discontinuation or other reasons
 
-<p></p>
-
-**Intermediary Role.** Future approaches may include support for intermediary roles that can provide a single endpoint for multiple drugs and associated REMS programs--potentially addressing configuration challenges noted above.
-
+### Handling Errors from Pharmacy Systems
+Future versions of this guide may include further interactions between the Provider EHR system and Pharmacy systems beyond sending the Prescription. These could include:
+- REMS Prescriber Intermediary to REMS Pharmacy Intermediary
+  - sending reject codes when there are still requirements for the REMS program to be completed by the Patient or Provider
+  - information about what Pharmacies may be available for dispensing a given REMS drug
+- REMS Prescriber Intermediary to EHR
+  - develop a mechanism for sending messages to the EHR when not requested by the EHR
+  - forward messages from the Pharmacy system to the EHR alerting of needed forms or other information
 
 <p></p>
 <p></p>
