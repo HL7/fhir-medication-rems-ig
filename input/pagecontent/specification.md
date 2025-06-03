@@ -147,11 +147,19 @@ While the forms are being completed, the data **SHALL** be stored within a Quest
 
 ### Provider System and Pharmacy System Interactions
 
-TODO
+This Implementation Guide is part of a larger system whose scope encompasses not just the Patient and Provider interactions with the REMS Administrator, but also the Pharmacy. The full system completes the interaction from start with the Provider meeting with a Patient and determining that a medication is needed that has a REMS. Through the technologies outlined in this guide they are able to determine what the requirements are for the REMS program and complete those before sending on the medication to the Pharmacy. Once the medication is sent to a Pharmacy, the REMS interactions are not complete until the Patient is given the medication. In fact, there may even be follow-on visits to the Provider that check the status of the Patient and determine that the patient is still handing the medications well.
 
-#### Out-of-band ETASU Check
+The Pharmacy interactions are out of scope of this IG but are detailed in the NCPDP implementation guides (TODO: add link). These interactions detail the the use of the REMS specific messages within the NCPDP SCRIPT standard. Using the standard, the Pharmacy system is able to use standard messages to query the REMS Administrator though a REMS Pharmacy Intermediary. This intermediary forwards the messages to the correct REMS Administrator and returns reject codes if the medication cannot be dispensed. A successful message will provide dispense authorization for the Pharmacy to finally dispense the medication to the Patient. 
 
-TODO FHIR operation guidanceresponse/$rems-etasu link pointing to the section below and info on retrieving the case number
+#### Sending the Medication to the Pharmacy
+The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the NCPDP SCRIPT specification. 
+
+The message also contains a tagged value called `AuthorizationNumber`. This value **SHALL** contain the REMS Case Number for the given Patient and Medication. This case number **SHOULD** have been previously retrieved from the REMS Administrator though the [$rems-etasu FHIR Operation described below](specification.html#out-of-band-etasu-check). If there is no case number available, the `AuthorizationNumber` can be omitted. 
+
+A REMS Administrator may not create a case number for the Patient until enrollment or other forms have been completed. The case number is used to reference the case and make it easier for the case to be retrieved by the REMS Administrator internally without having to rely on Patient demographics. 
+
+#### Reminding the Provider of Incomplete Forms
+This guide does not build a specific mechanism for sending message back from the Pharmacy to the EHR. The methods currently in place should be utilized for notifying the Provider that REMS requirements still need to be completed before the medication can be dispensed. Future versions of this guide may outline the details surrounding new communications mechanisms to automate this interaction.
 
 <p></p>
 
