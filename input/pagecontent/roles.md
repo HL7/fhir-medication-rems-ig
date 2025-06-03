@@ -71,8 +71,7 @@ A data exchange intermediary may participate in the process on behalf of one or 
   - hosting SMART apps supporting one or more REMS drugs.
   - acting as a FHIR server forwarding requests to the correct REMS Administrator
 
-An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs. The benefit achieved by the Intermediary is not to be underestimated. Registering a REMS Administrator for CDS Hooks and a SMART on FHIR app with every EHR system is a burden for the rollout of any new REMS program. This guide will describe the use of intermediaries and methods for automatically registering new REMS using SPL (Structured Product Labelling). 
-TODO: provide links...
+An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs. The benefit achieved by the Intermediary is not to be underestimated. Registering a REMS Administrator for CDS Hooks and a SMART on FHIR app with every EHR system is a burden for the rollout of any new REMS program. This guide will describe [the use of intermediaries](specification.md#support-for-forwarding-messages-through-prescriber-intermediary) and methods for [automatically registering new REMS using SPL](specification.md#automatic-rems-endpoint-registration-using-spl) (Structured Product Labelling). 
 
 <p></p>
 

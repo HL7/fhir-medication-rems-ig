@@ -41,14 +41,13 @@ Future opportunities to address configuration challenges are discussed in the [F
 
 ### Triggering ETASU Status Checks
 
-FHIR Operations allow for complex queries or actions to be performed on a FHIR server beyond the normal CRUD actions (Create, Read, Update, Delete). The `$rems-etasu` FHIR operation has been added to allow clients to the REMS Administrator FHIR server to query the status of the ETASU (Elements to Assure Safe Use) at any time. 
+FHIR Operations allow for complex queries or actions to be performed on a FHIR server beyond the normal CRUD actions (Create, Read, Update, Delete). The `$rems-etasu` FHIR operation has been added to allow clients to the REMS Administrator FHIR server to query the status of the ETASU (Elements to Assure Safe Use) at any time. For more details see the [Out-of-band ETASU Check section](specification.html#out-of-band-etasu-check).
 
 #### Manually Triggering
 The EHR system may include a manual trigger through a button to query the ETASU status in either the Provider workflow or in the Patient Portal. This interaction allows the Patient, Provider, or even the Pharmacy to determine what else is needed before a medication can be dispensed to a Patient. The Patient can check and determine the Provider may have forms and can then ask the Provider to complete something as needed. 
 
 #### Querying for REMS Case before submitting Prescription to Pharmacy
 The operation is also useful before sending the medication to the Pharmacy via a NCPDP SCRIPT NewRx message. The returned FHIR `Parameters` include a `caseNumber` that represents the REMS Case Number for the given Patient and Medication. This case number is included in the NewRx message as the authNumber. The Pharmacy may use this number to reference the REMS case involving this Medication and Patient without needing to find the information via Patient demographics.
-TODO: include links...
 
 <p></p>
 

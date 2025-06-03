@@ -50,8 +50,7 @@ Depending on the drug and other variables described in the previous section, the
 
 The Provider System then presents the returned information, gives the prescriber the option to open the REMS Administrator's SMART app (if one was returned) or to place the app into their work queue to launch later. When the provider launches the SMART app, it first retrieves information that it needs from the patient record in the Provider System--reducing manual data entry for the provider. The prescriber reviews the pre-filled data, makes adjustments as needed, and then completes any other app steps.
 
-A shared SMART app may be hosted by the Prescriber Intermediary or other third party instead of the REMS Administrator. The shared SMART app will make use of the workflow described in the DaVinci DTR IG.
-TODO: provide link here...
+A [shared SMART app](specification.md#support-for-shared-smart-on-fhir-application) may be hosted by the Prescriber Intermediary or other third party instead of the REMS Administrator. The shared SMART app will make use of the workflow described in the [DaVinci DTR IG](technical-background.md#dtr---documentation-templates-and-rules).
 
 Note that in some situations, the REMS Administrator will have no information or requests to return. For example, the REMS Administrator may determine that there are no unmet REMS requirements to be addressed at the time of the interaction. In this case, the Provider System will receive an empty response and allow the prescriber's workflow to continue without interruption. 
 

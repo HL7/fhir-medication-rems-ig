@@ -72,7 +72,7 @@ The Prescriber Intermediaries **SHOULD** implement a Shared SMART on FHIR applic
 
 ### CQL - Clinical Quality Language
 
-This guide makes use of the Clinical Quality Language (CQL) for querying and pre-populating Patient and Provider data within the shared SMART on FHIR application hosted by Prescriber Intermediaries<TODO link to section detailing shared app>. 
+This guide makes use of the Clinical Quality Language (CQL) for querying and pre-populating Patient and Provider data within the [shared SMART on FHIR application hosted by Prescriber Intermediaries](specification.md#support-for-shared-smart-on-fhir-application).
 
 Implementers are to refer to the [CQL Specification](https://cql.hl7.org/) for general guidance. Please refer to the DTR IG for more specific implementation examples.
 
