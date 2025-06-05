@@ -54,6 +54,12 @@ A [shared SMART app](specification.html#support-for-shared-smart-on-fhir-applica
 
 Note that in some situations, the REMS Administrator will have no information or requests to return. For example, the REMS Administrator may determine that there are no unmet REMS requirements to be addressed at the time of the interaction. In this case, the Provider System will receive an empty response and allow the prescriber's workflow to continue without interruption. 
 
+The provider will submit the medication to the Pharmacy using using [NCPDP SCRIPT](technical-background.html#ncpdp-script), specificially with the NewRx message. This IG adds on to the well established method by adding in a key piece of information that is useful for the Pharmacy to verify the status of the REMS program for the Patient and to retrieve the dispense authorization needed to dispense the medication to the Patient. 
+
+Before sending the medication to the pharmacy, the EHR system will query the status of the REMS case for this patient using the out-of-band ETASU checking mechanism described in the [formal specification](specification.html#out-of-band-etasu-check). Within this call, the case number is retrieved. This case is attached to the prescription as described in the [pharmacy interaction portion of the specification](specification.html#provider-system-and-pharmacy-system-interactions).
+
+From there the pharmacy will receive the medication where the REMS check is completed using the SCRIPT standard. This interaction involves sending a message to the REMS Pharmacy Intermediary which queries the correct REMS Administrator for the specific drug.
+
 <p></p>
 
 **Use Case One Scenarios**
@@ -108,6 +114,14 @@ This implementation guide does not constrain information or requests that a REMS
 
 If a Prescriber Intermediary is configured for this medication in the EHR system, the CDS Hooks request will be sent to it instead of directly to the REMS Administrator. If the Intermediary does not have a location to forward this request for the medication, an empty response will be returned.
 
+#### The REMS Requirements are completed before sending Prescription to Pharmacy
+
+If the requirements are completed by the time the Pharmacy queries the REMS Administrator, a dispense authorization is provided and the Patient can pick up the medication. 
+
+#### The Prescription is sent to the Pharmacy before the REMS Requirements are completed
+
+If the requirements are not yet completed by the time the Pharmacy queries the REMS Administrator, reject codes are sent to the Pharmacy. The Pharmacy must then proceed through their normal channels to reach back to the provider and push the REMS along. Ideally the requirements are already completed since the provider has already received the requirements and should have completed them before sending the Prescription to the Pharmacy.
+
 <p></p>
 
 ### Use Case Two: Provider Using an External REMS Administrator Application
@@ -126,6 +140,16 @@ During that application's workflow:
    - update its existing patient enrollment or initiate a new enrollment
    - determine if additional REMS steps or information is needed from the provider
    - share current patient REMS IDs, authorizations, status or other information with the Provider System.
+
+<p></p>
+
+### Use Case Three: Provider sends Prescription to Pharmacy and Pharmacy Verifies REMS Status
+
+During the process of prescribing the medication, the prescription must be sent to the Pharmacy. The mechanism to do this is completed using [NCPDP SCRIPT](technical-background.html#ncpdp-script), specificially with the NewRx message. This IG adds on to the well established method by adding in a key piece of information that is useful for the Pharmacy to verify the status of the REMS program for the Patient and to retrieve the dispense authorization needed to dispense the medication to the Patient. 
+
+Before sending the medication to the pharmacy, the EHR system will query the status of the REMS case for this patient using the out-of-band ETASU checking mechanism described in the [formal specification](specification.html#out-of-band-etasu-check). Within this call, the case number is retrieved. This case is attached to the prescription as described in the [pharmacy interaction portion of the specification](specification.html#provider-system-and-pharmacy-system-interactions).
+
+From there the pharmacy will receive the medication where the REMS check is completed using the SCRIPT standard. This interaction involves sending a message to the REMS Pharmacy Intermediary which queries the correct REMS Administrator for the specific drug. If the requirements are completed, a dispense authorization is provided to the Pharmacy and the Patient can pick up the medication. If the requirements are not yet met, reject codes are sent to the Pharmacy. The Pharmacy must then proceed through their normal channels to reach back to the provider and push the REMS along. Ideally the requirements are already completed since the provider has already received the requirements and should have completed them before sending the Prescription to the Pharmacy.
 
 <p></p>
 <p></p>
