@@ -129,6 +129,19 @@ See an [example DocumentReference](DocumentReference-example-rems-docref-1.html)
 
 The Prescriber Intermediary server application sits in between the EHR system and the REMS Administrator. The benefit to this is allowing the REMS Administrator system to register their CDS Hooks with any supported intermediaries instead of every EHR system. The CDS Hooks requests are sent to the Prescriber Intermediary when configured to do so. This intermediary will determine based on the medication in the hook which REMS Administrator to send the request to. The intermediary will then forward back any returned cards from the REMS Administrator to the EHR. The interaction will be transparent to the EHR system. The intermediary **SHALL** populate the prefetch if unset using the prefetch tokens provided by the REMS Administrator. Lastly, the intermediary **SHALL** remove the FHIR Authorization from the Hook before sending it to the REMS Administrator.
 
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow with a Prescriber Intermediary</strong></figcaption>
+  <p>
+  <img src="ehr-launch-sequence-with-intermediary.png" style="float:none">  
+  </p>
+</figure>
+</div>
+
+<p></p>
+
 The Prescriber Intermediary **SHOULD** also support forwarding FHIR requests from the EHR to the REMS Administrators. Similarly to the CDS Hooks requests, FHIR requests will be forwarded. This enables the `$rems-etasu` FHIR operation (for retrieving the ETASU out-of-band) and the `$questionnaire-package` operation (for retrieving Questionnaires in a shared SMART on FHIR application scenario).
 
 <p></p>
@@ -148,6 +161,19 @@ While the forms are being completed, the data **SHALL** be stored within a Quest
 ### Provider System and Pharmacy System Interactions
 
 This Implementation Guide is part of a larger system whose scope encompasses not just the Patient and Provider interactions with the REMS Administrator, but also the Pharmacy. The full system completes the interaction from start with the Provider meeting with a Patient and determining that a medication is needed that has a REMS. Through the technologies outlined in this guide they are able to determine what the requirements are for the REMS program and complete those before sending on the medication to the Pharmacy. Once the medication is sent to a Pharmacy, the REMS interactions are not complete until the Patient is given the medication. In fact, there may even be follow-on visits to the Provider that check the status of the Patient and determine that the patient is still handing the medications well.
+
+<p></p>
+
+<div>
+<figure class="figure">
+<figcaption class="figure-caption"><strong>Figure: REMS Within the Provider System Workflow with a Prescriber Intermediary</strong></figcaption>
+  <p>
+  <img src="ehr-launch-sequence-with-pharmacy.png" style="float:none">  
+  </p>
+</figure>
+</div>
+
+<p></p>
 
 The Pharmacy interactions are out of scope of this IG but are detailed in the NCPDP implementation guides (TODO: add link). These interactions detail the the use of the REMS specific messages within the NCPDP SCRIPT standard. Using the standard, the Pharmacy system is able to use standard messages to query the REMS Administrator though a REMS Pharmacy Intermediary. This intermediary forwards the messages to the correct REMS Administrator and returns reject codes if the medication cannot be dispensed. A successful message will provide dispense authorization for the Pharmacy to finally dispense the medication to the Patient. 
 

@@ -143,13 +143,4 @@ During that application's workflow:
 
 <p></p>
 
-### Use Case Three: Provider sends Prescription to Pharmacy and Pharmacy Verifies REMS Status
-
-During the process of prescribing the medication, the prescription must be sent to the Pharmacy. The mechanism to do this is completed using [NCPDP SCRIPT](technical-background.html#ncpdp-script), specificially with the NewRx message. This IG adds on to the well established method by adding in a key piece of information that is useful for the Pharmacy to verify the status of the REMS program for the Patient and to retrieve the dispense authorization needed to dispense the medication to the Patient. 
-
-Before sending the medication to the pharmacy, the EHR system will query the status of the REMS case for this patient using the out-of-band ETASU checking mechanism described in the [formal specification](specification.html#out-of-band-etasu-check). Within this call, the case number is retrieved. This case is attached to the prescription as described in the [pharmacy interaction portion of the specification](specification.html#provider-system-and-pharmacy-system-interactions).
-
-From there the pharmacy will receive the medication where the REMS check is completed using the SCRIPT standard. This interaction involves sending a message to the REMS Pharmacy Intermediary which queries the correct REMS Administrator for the specific drug. If the requirements are completed, a dispense authorization is provided to the Pharmacy and the Patient can pick up the medication. If the requirements are not yet met, reject codes are sent to the Pharmacy. The Pharmacy must then proceed through their normal channels to reach back to the provider and push the REMS along. Ideally the requirements are already completed since the provider has already received the requirements and should have completed them before sending the Prescription to the Pharmacy.
-
-<p></p>
 <p></p>
