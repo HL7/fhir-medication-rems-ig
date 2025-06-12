@@ -483,15 +483,27 @@ The reference value contains a URN with the following components:
 
 ##### Example Reference Value URN for a FHIR CDS Hooks Service
 Below is an example of how this reference value might be constructed for a FHIR CDS Hooks service: 
-`<reference value="urn:HL7:FHIR4.0:rems_discovery:fhirserver.remsdrug.com/cds-services" />`
+`<reference value="urn:HL7:FHIR4.0:rems_cds_discovery:cdshooksserver.remsdrug.com/cds-services" />`
 In this case, the components of the URN are as follows:
 
 - the developer of the standard (e.g., "FHIR")  
 - the standard version (e.g. “4.0”),  
-- the transaction (e.g. “rems_discovery”)  
-- the destination address, such as a BIN number (e.g., "fhirserver.remsdrug.com/cds-services")  
+- the transaction (e.g. “rems_cds_discovery”)  
+- the destination address, such as a BIN number (e.g., "cdshoooksserver.remsdrug.com/cds-services")  
 
-The example above lists the “rems_discovery” endpoint as “fhirserver.remsdrug.com/cds-services”. This URL within the URN can be used to reference the CDS Hooks server. The REMS Prescriber Intermediary can query this endpoint with a metadata request for the CapabilityStatement to find all the supported endpoints and capabilities and confirm that the capabilities match those required as described in the CodeX US Medication REMS FHIR IG. 
+The example above lists the “rems_cds_discovery” endpoint as “cdshoooksserver.remsdrug.com/cds-services”. This URL within the URN can be used to reference the CDS Hooks server. The REMS Prescriber Intermediary can query this endpoint with a metadata request for the CapabilityStatement to find all the supported endpoints and capabilities and confirm that the capabilities match those required as described in the CodeX US Medication REMS FHIR IG. 
+
+
+##### Example Reference Value URN for a FHIR Server
+Below is an example of how this reference value might be constructed for a FHIR Server base url: `<reference value="urn:HL7:FHIR4.0:rems_fhir_base:fhirserver.remsdrug.com/fhir/" />`
+In this case, the components of the URN are as follows:
+
+- the developer of the standard (e.g., "FHIR")  
+- the standard version (e.g. “4.0”),  
+- the transaction (e.g. “rems_fhir_base”)  
+- the destination address, such as a BIN number (e.g., "fhirserver.remsdrug.com/fhir/")  
+
+The example above lists the “rems_fhir_base” endpoint as “fhirserver.remsdrug.com/fhir”. This URL within the URN can be used to reference the base url for the FHIR server. From this base url all FHIR queries can be completed. This base url can be used by the intermediary for forwarding requests to the `$rems-etasu` and `$questionnaire-package` operations.
 
 #### Endpoint Discovery Using an API
 
