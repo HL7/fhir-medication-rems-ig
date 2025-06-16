@@ -153,8 +153,12 @@ Similar to the burden with registering the CDS Hook server on the REMS Administr
 ##### Rendering the Shared SMART app
 The shared SMART app **SHALL** request the resources necessary to render the forms from the REMS Administrators using the `$questionnaire-package` operation on the Questionnaire resource. The path to the operation on the REMS administrator's FHIR server will follow the pattern `<fhir_server_base>/Questionnaire/<questionnaire-id>/$questionaire-package`. When retrieving the questionnaire package, the REMS Administrator will compile a FHIR bundle containing the Questionnaire, ValueSet, and any Library resource needed to render the form. Embedded within Library resources there **SHOULD** be CQL (Clinical Quality Language) scripts. These scripts link the Questionnaire to data within the FHIR server. Once executed by the Shared SMART App, they are able to pre-populate the forms with data. Without the CQL, the forms will be empty when loading, negating the benefit of using a SMART on FHIR application.
 
-##### Storing Completed Questionnaires
-While the forms are being completed, the data **SHALL** be stored within a QuestionnaireResponse FHIR resource. The application **SHOULD** provide a method for storing and retrieving in-progress forms from the EHR FHIR server. Upon completion of the form, submission should send the QuestionnaireReponse to the correct REMS Administrator for the medication.
+##### Storing Partially Completed Questionnaires
+While the forms are being completed, the data **SHALL** be stored within a QuestionnaireResponse FHIR resource. The application **SHOULD** provide a method for storing and retrieving in-progress forms from the EHR FHIR server. This storage and retrieval method **SHALL** be implemented using standard storage and retrieval methods for QuestionnaireResponse resources on the FHIR server. The shared application **SHOULD** query for all QuestionnaireResponses for this Patient and medication and give the user completing the form the option to select which they would like to continue. The shared SMART on FHIR application **SHALL** render the partially completed form with the answers already provided in the stored and loaded QuestionnaireResponse.
+
+##### Submitting Completed Questionnaires
+Upon completion of the form, the application **SHALL** send the QuestionnaireResponse to the correct REMS Administrator for the medication. The application **MAY** send the responses through the Prescriber Intermediary, or straight to the REMS Administrator. The REMS Administrator **SHALL** support a FHIR Operation `$submit` on the QuestionnaireResponse resource. The path shall be of the form `<base_fhir_url>/QuestionnaireResponse/$submit`. The REMS Administrator is then free to parse and store the QuestionnaireResponse following the requirements of the REMS program.
+
 
 <p></p>
 
