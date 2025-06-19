@@ -7,9 +7,8 @@ Description: "Example input parameters for the $rems-etasu operation"
 * parameter[=].resource.id = "example-patient-123"
 * parameter[=].resource.meta.versionId = "1"
 * parameter[=].resource.meta.lastUpdated = "2025-04-10T01:10:26.457-04:00"
-* parameter[=].resource.meta.source = "#r7DbQaYwStt3SnNl"
 * parameter[=].resource.text.status = #generated
-* parameter[=].resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Jon Stark <b>SNOW </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>0V843229061TB</td></tr><tr><td>Address</td><td><span>1 Winterfell Rd </span><br/><span>Winterfell </span><span>Westeros </span></td></tr><tr><td>Date of birth</td><td><span>01 June 1996</span></td></tr></tbody></table></div>"
+* parameter[=].resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">August <b>Samuels </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>0V843229061TB</td></tr><tr><td>Address</td><td><span>10023 Oakways Ln </span><br/><span>Concord </span><span>MA </span></td></tr><tr><td>Date of birth</td><td><span>12 March 1989</span></td></tr></tbody></table></div>"
 * parameter[=].resource.identifier.system = "http://hl7.org/fhir/sid/us-medicare"
 * parameter[=].resource.identifier.value = "0V843229061TB"
 * parameter[=].resource.name.use = #official
