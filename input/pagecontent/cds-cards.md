@@ -5,8 +5,8 @@ This page gives guidelines for populating and returning CDS Hooks response Cards
 REMS Administrator Systems dynamically create these Cards for each CDS Hooks request based on conditions including:
 - the prescribed drug's REMS program
 - the status of required REMS steps at the time of the event
-- REMS information needs associated with the current point in the patient's treatment. 
-- Ability of optionally provided Pharmacy to dispense desired REMS medication.
+- REMS information needs associated with the current point in the patient's treatment 
+- the ability of the optionally provided Pharmacy to dispense the desired REMS medication
 
 This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/2.0/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#consistency-with-the-da-vinci-burden-reduction-igs)).
 

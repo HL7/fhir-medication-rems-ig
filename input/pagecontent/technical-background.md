@@ -40,7 +40,7 @@ Other resources not included in the US Core profiles:
 
 ### FHIR Operations
 
-Several of the interactions that this guide defines make use of FHIR Operations. FHIR Operations extend the capability of a FHIR server beyond the simple [RESTful API](https://www.hl7.org/fhir/http.html) operations of Create, Read, Update, Delete actions on single FHIR Resources. They allow the user to complete more complex actions with more complicated inputs and outputs and perform an action upon the server.
+Several of the interactions that this guide defines make use of FHIR Operations. FHIR Operations extend the capability of a FHIR server beyond the simple [RESTful API](https://www.hl7.org/fhir/http.html) operations of Create, Read, Update, Delete acting on single FHIR Resources. Operations allow the user to complete actions with more complex logic and with more complicated inputs and outputs.
 
 Implementers are to refer to the [Extended Operations](https://www.hl7.org/fhir/operations.html) section of the FHIR documentation. This outlines the capabilities and how they are defined.
 
@@ -62,11 +62,11 @@ Note that the Da Vinci CRD specification outlines additional return types beyond
 
 #### DTR - Documentation Templates and Rules
 
-Interactions with SMART Applications and form completion described in this guide are similar to the provider / payer interactions defined in the [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). With the aim to maintain compatibility where possible with only changes that were necessary to support the differing requirements of REMS workflows.
+Interactions with SMART Applications and form completion described in this guide are similar to the provider / payer interactions defined in the [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). This was done with the aim to maintain compatibility where possible with only changes that were necessary to support the differing requirements of REMS workflows.
 
-Note that the Da Vinci DTR specification outlines different methods to achieve the goals with shared SMART on FHIR applications and native EHR support. These capabilities are optional with this standard as the REMS Administrators can implement their own applications with or without the use of FHIR Questionnaires and CQL (Clinical Quality Language).
+Note that the Da Vinci DTR specification outlines different methods to achieve their goals with shared SMART on FHIR applications and native EHR support. These capabilities are optional within this guide as the REMS Administrators can implement their own applications with or without the use of FHIR Questionnaires and CQL (Clinical Quality Language).
 
-The Prescriber Intermediaries **SHOULD** implement a Shared SMART on FHIR application that can be used with any REMS Administrator. This will reduce the burden on REMS Administrators to register their own applications with every EHR. The Shared SMART App uses the same methods as DTR to retrieve Questionnaires and CQL using the $questionnaire-package FHIR Operation. The REMS Administrators **SHOULD** likewise implement the operation and make any forms or documents available to be completed by the clients including Provider and Patient using this shared method.
+The Prescriber Intermediaries **SHOULD** implement a Shared SMART on FHIR application that can be used with any REMS Administrator. This will reduce the burden on REMS Administrators to register their own applications with every EHR. The Shared SMART App uses the same methods as DTR to retrieve Questionnaires and CQL using the `$questionnaire-package` FHIR Operation. The REMS Administrators **SHOULD** likewise implement the operation and make any forms or documents available to be completed by the clients, including Provider and Patient, using this shared method.
 
 <p></p>
 
@@ -78,7 +78,7 @@ Implementers are to refer to the [CQL Specification](https://cql.hl7.org/) for g
 
 <p></p>
 
-### SPL - Structured Product Labelling
+### SPL - Structured Product Labeling
 
 The FDA makes use of the SPL (Structured Product Labeling) as a document markup standard for exchanging product information. This guide uses information found in the REMS SPL submissions. Information about SPL can be found within the [FDA SPL Resources pages](https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources).
 
@@ -86,13 +86,13 @@ The FDA makes use of the SPL (Structured Product Labeling) as a document markup 
 
 ### FDA OpenAPI
 
-Information about medications and can be found within the [FDA OpenAPI](https://open.fda.gov/apis/). Much of this information including the NDC and Labelling information comes from the SPL resources submitted to the FDA. This information may include CDS Hooks and FHIR server information for REMS programs in the future. This Guide makes use of interfaces based upon these APIs (Application Programming Interface).
+Information about medications can be found within the [FDA OpenAPI](https://open.fda.gov/apis/). Much of this information including the NDC and Labeling information comes from the SPL resources submitted to the FDA. This information could benefit from including CDS Hooks and FHIR server information for REMS programs in the future. This Guide makes use of similar interfaces based upon these APIs (Application Programming Interface).
 
 <p></p>
 
 ### NCPDP SCRIPT
 
-Prescription drug electroic prescribing and electronic prior authorization is completed using the NCPDP (National Council for Prescription Drug Programs) [SCRIPT standards](https://standards.ncpdp.org/Access-to-Standards.aspx). These standards are also used for completing the pharmacy workflow within the REMS programs. This guide describes sending NCPDP SCRIPT messages including NewRx for electronic prescribing. For more details please read through the NCPDP SCRIPT standards.
+Prescription drug electronic prescribing and electronic prior authorization is completed using the NCPDP (National Council for Prescription Drug Programs) [SCRIPT standards](https://standards.ncpdp.org/Access-to-Standards.aspx). These standards are also used for completing the pharmacy workflow within the REMS programs. This guide describes sending NCPDP SCRIPT messages including NewRx for electronic prescribing. For more details, please reference the NCPDP SCRIPT standards.
 
 <p></p>
 

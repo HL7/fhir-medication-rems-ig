@@ -35,7 +35,8 @@ Further data and process integration between REMS stakeholders may be pursued in
 - capturing discrete REMS data elements in the Provider System in a way that enables them to be systematically populated into the e-prescription
 - establish standard mappings between NCPDP and FHIR prescription information models
 - further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the Provider System
-- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
+- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS
+- introducing opportunities for REMS Administrator ETASU (Elements to Assure Safe Use) checking to prevent the prescription from leaving the Provider System if adjustments still need to be made 
 
 <p></p>
 
@@ -52,9 +53,9 @@ In addition to supporting additional workflow scenarios, work is needed to addre
   - REMS programs move from one Administrator to another
   - REMS drug identifiers (used to configure CDS Hooks triggers) change or are added due to new product variations, discontinuation or other reasons
 
-### Handling Errors from Pharmacy Systems
+### Handling Information from Pharmacy Systems
 Future versions of this guide may include further interactions between the Provider EHR system and Pharmacy systems beyond sending the Prescription. These could include:
-- REMS Prescriber Intermediary to REMS Pharmacy Intermediary
+- REMS Pharmacy Intermediary to REMS Prescriber Intermediary
   - sending reject codes when there are still requirements for the REMS program to be completed by the Patient or Provider
   - information about what Pharmacies may be available for dispensing a given REMS drug
 - REMS Prescriber Intermediary to EHR

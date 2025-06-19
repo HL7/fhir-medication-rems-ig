@@ -148,23 +148,23 @@ The Prescriber Intermediary **SHOULD** also support forwarding FHIR requests fro
 
 #### Support for Shared SMART on FHIR Application 
 
-Similar to the burden with registering the CDS Hook server on the REMS Administrator with every EHR, there is significant effort during setup to register the SMART on FHIR application from the REMS Administrator with every EHR. The REMS Administrators have the option to implement their own SMART on FHIR application that may give them tighter control, however REMS Administrators **SHOULD** support shared SMART App launch instead. The Shared SMART app **SHALL** follow the [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). 
+Similar to the burden with registering the CDS Hooks server on the REMS Administrator with every EHR, there is significant effort during setup to register the SMART on FHIR application from the REMS Administrator with every EHR. The REMS Administrators have the option to implement their own SMART on FHIR application that may give them tighter control, however REMS Administrators **SHOULD** support shared SMART App launch instead. The Shared SMART app **SHALL** follow the SMART on FHIR application guidance in [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). 
 
 ##### Rendering the Shared SMART app
-The shared SMART app **SHALL** request the resources necessary to render the forms from the REMS Administrators using the `$questionnaire-package` operation on the Questionnaire resource. The path to the operation on the REMS administrator's FHIR server will follow the pattern `<fhir_server_base>/Questionnaire/<questionnaire-id>/$questionaire-package`. When retrieving the questionnaire package, the REMS Administrator will compile a FHIR bundle containing the Questionnaire, ValueSet, and any Library resource needed to render the form. Embedded within Library resources there **SHOULD** be CQL (Clinical Quality Language) scripts. These scripts link the Questionnaire to data within the FHIR server. Once executed by the Shared SMART App, they are able to pre-populate the forms with data. Without the CQL, the forms will be empty when loading, negating the benefit of using a SMART on FHIR application.
+The shared SMART app **SHALL** request the resources necessary to render the forms from the REMS Administrators using the `$questionnaire-package` operation on the Questionnaire resource. The path to the operation on the REMS Administrator's FHIR server will follow the pattern `<fhir_server_base>/Questionnaire/<questionnaire-id>/$questionaire-package`. When retrieving the questionnaire package, the REMS Administrator will compile a FHIR bundle containing the Questionnaire, ValueSet, and any Library resource needed to render the form. Embedded within Library resources there **SHOULD** be CQL (Clinical Quality Language) expressions. These expressions link the Questionnaire to data within the FHIR server. Once executed by the Shared SMART App, they are able to pre-populate the forms with data. Without the CQL, the forms will be empty when loading, negating the potential benefit of using a SMART on FHIR application.
 
 ##### Storing Partially Completed Questionnaires
-While the forms are being completed, the data **SHALL** be stored within a QuestionnaireResponse FHIR resource. The application **SHOULD** provide a method for storing and retrieving in-progress forms from the EHR FHIR server. This storage and retrieval method **SHALL** be implemented using standard storage and retrieval methods for QuestionnaireResponse resources on the FHIR server. The shared application **SHOULD** query for all QuestionnaireResponses for this Patient and medication and give the user completing the form the option to select which they would like to continue. The shared SMART on FHIR application **SHALL** render the partially completed form with the answers already provided in the stored and loaded QuestionnaireResponse.
+While the forms are being completed, the data **SHALL** be stored within a QuestionnaireResponse FHIR resource. The application **SHOULD** provide a method for storing and retrieving in-progress forms from the EHR FHIR server. This storage and retrieval method **SHALL** be implemented using standard storage and retrieval methods for QuestionnaireResponse resources on the FHIR server. The shared application **SHOULD** query for all QuestionnaireResponses for this combination of Patient and medication and give the user completing the form the option to select which they would like to continue. The shared SMART on FHIR application **SHALL** render the partially completed form with the answers already provided in the stored and loaded QuestionnaireResponse.
 
 ##### Submitting Completed Questionnaires
-Upon completion of the form, the application **SHALL** send the QuestionnaireResponse to the correct REMS Administrator for the medication. The application **MAY** send the responses through the Prescriber Intermediary, or straight to the REMS Administrator. The REMS Administrator **SHALL** support a FHIR Operation `$submit` on the QuestionnaireResponse resource. The path shall be of the form `<base_fhir_url>/QuestionnaireResponse/$submit`. The REMS Administrator is then free to parse and store the QuestionnaireResponse following the requirements of the REMS program.
+Upon completion of the form, the application **SHALL** send the QuestionnaireResponse to the correct REMS Administrator for the medication. The application **MAY** send the responses through the Prescriber Intermediary, or directly to the REMS Administrator. The REMS Administrator **SHALL** support a FHIR Operation `$submit` on the QuestionnaireResponse resource. The path will follow the pattern `<base_fhir_url>/QuestionnaireResponse/$submit`. The REMS Administrator is then free to parse and store the QuestionnaireResponse following the requirements of the REMS program.
 
 
 <p></p>
 
 ### Provider System and Pharmacy System Interactions
 
-This Implementation Guide is part of a larger system whose scope encompasses not just the Patient and Provider interactions with the REMS Administrator, but also the Pharmacy. The full system completes the interaction from start with the Provider meeting with a Patient and determining that a medication is needed that has a REMS. Through the technologies outlined in this guide they are able to determine what the requirements are for the REMS program and complete those before sending on the medication to the Pharmacy. Once the medication is sent to a Pharmacy, the REMS interactions are not complete until the Patient is given the medication. In fact, there may even be follow-on visits to the Provider that check the status of the Patient and determine that the patient is still handing the medications well.
+This Implementation Guide is part of a larger system whose scope encompasses not just the Patient and Provider interactions with the REMS Administrator, but also interactions with the Pharmacy. The full system completes the interaction from the initial Provider/Patient interaction to the final Pharmacy/Patient interaction. This starts with the Provider meeting with a Patient and determining that a medication is needed that has a REMS. Through the technologies outlined in this guide they are able to determine what the requirements are for the REMS program and complete those before sending the medication prescription on to the Pharmacy. Once the prescription is sent to a Pharmacy, the REMS interactions are not complete until the medication is dispensed to the patient. In fact, there may even be further interactions with the Provider that check the status of the Patient and determine that the benefits of the Patient using the medication still outweigh the risks.
 
 <p></p>
 
@@ -179,17 +179,17 @@ This Implementation Guide is part of a larger system whose scope encompasses not
 
 <p></p>
 
-The Pharmacy interactions are out of scope of this IG but are detailed in the NCPDP implementation guides (TODO: add link). These interactions detail the the use of the REMS specific messages within the NCPDP SCRIPT standard. Using the standard, the Pharmacy system is able to use standard messages to query the REMS Administrator though a REMS Pharmacy Intermediary. This intermediary forwards the messages to the correct REMS Administrator and returns reject codes if the medication cannot be dispensed. A successful message will provide dispense authorization for the Pharmacy to finally dispense the medication to the Patient. 
+The Pharmacy interactions are out of scope of this IG but are detailed in the NCPDP Implementation Guides (see the [NCPDP standards page](https://standards.ncpdp.org/Access-to-Standards.aspx) for more information). These interactions detail the use of the REMS specific messages within the NCPDP SCRIPT standard. Using the standard, the Pharmacy system is able to use standard messages to query the REMS Administrator though a REMS Pharmacy Intermediary. This intermediary forwards the messages to the correct REMS Administrator and returns reject codes if the medication cannot be dispensed. A successful message will provide dispense authorization for the Pharmacy to finally dispense the medication to the Patient. 
 
 #### Sending the Medication to the Pharmacy
-The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the NCPDP SCRIPT specification. 
+The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the [NCPDP SCRIPT specification](https://standards.ncpdp.org/Access-to-Standards.aspx). 
 
 The message also contains a tagged value called `AuthorizationNumber`. This value **SHALL** contain the REMS Case Number for the given Patient and Medication. This case number **SHOULD** have been previously retrieved from the REMS Administrator though the [$rems-etasu FHIR Operation described below](specification.html#out-of-band-etasu-check). If there is no case number available, the `AuthorizationNumber` can be omitted. 
 
-A REMS Administrator may not create a case number for the Patient until enrollment or other forms have been completed. The case number is used to reference the case and make it easier for the case to be retrieved by the REMS Administrator internally without having to rely on Patient demographics. 
+A REMS Administrator may not create a case number for the Patient until enrollment or other forms have been completed. The case number is used to reference the case and make it easier for the case to be retrieved by the REMS Administrator internally without having to rely on Patient demographics or other Patient matching algorithms. 
 
 #### Reminding the Provider of Incomplete Forms
-This guide does not build a specific mechanism for sending message back from the Pharmacy to the EHR. The methods currently in place should be utilized for notifying the Provider that REMS requirements still need to be completed before the medication can be dispensed. Future versions of this guide may outline the details surrounding new communications mechanisms to automate this interaction.
+This guide does not build a specific mechanism for sending a message back from the Pharmacy to the EHR. Existing methods should be utilized for notifying the Provider that REMS requirements still need to be completed before the medication can be dispensed. Future versions of this guide may outline the details surrounding new communication mechanisms to automate this interaction.
 
 <p></p>
 
@@ -221,7 +221,7 @@ For example:
     "prefetch" : {
       "patient": "Patient/{{context.patientId}}",
       "practitioner": "{{context.userId}}",
-      "medicationRequests": "MedicationRequest?subject={{context.patientId}}&_include=MedicationRequest:medication",
+      "medicationRequests": "MedicationRequest?subject={{context.patientId}}&_include=MedicationRequest:medication"
     }
 }</code></pre>
 {% endraw %}
@@ -243,7 +243,7 @@ Provider Systems **SHALL** enable the REMS Administrator to query for additional
 
 ### Out-of-band ETASU Check
 
-There may be instances where a client to the REMS Administrator may want to know the current ETASU (Elements to Assure Safe Use) status of the REMS program at any given time. A new FHIR operation $rems-etasu on the GuidanceResponse resource **SHOULD** be supported by the REMS Administrator FHIR Server. This operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication input as Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that can be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the Prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
+There may be instances where a client to the REMS Administrator may need information about the current ETASU (Elements to Assure Safe Use) status of the REMS program. A new FHIR operation `$rems-etasu` on the GuidanceResponse resource **SHOULD** be supported by the REMS Administrator FHIR Server. The path for this operation will follow the pattern `<base_fhir_url>/GuidanceResponse/$rems-etasu`. The operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication that are provided as input Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that could then be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
 
 #### Input 
 
@@ -331,13 +331,13 @@ The input parameters optionally consist of a Patient and Medication FHIR Resourc
 
 #### Output
 
-The output consists of a FHIR Parameter with a FHIR Resource of the type GuidanceResponse. The GuidanceResponse contains a *status* value mapped to the REMS meaning in the following table.
+The output consists of a FHIR Parameter with a FHIR Resource of the type GuidanceResponse. The GuidanceResponse contains a *status* value mapped to the REMS ETASU status in the following table.
 
 <table class='grid'>
   <thead>
     <tr>
-      <th>GuidanceResponse Value</th>
-      <th>REMS Meaning</th>
+      <th>GuidanceResponse Status</th>
+      <th>REMS ETASU Status</th>
     </tr>
   </thead>
   <tr>
@@ -366,7 +366,7 @@ The output consists of a FHIR Parameter with a FHIR Resource of the type Guidanc
   </tr>
 </table>
 
-This GuidanceResponse represents the overall status of the REMS ETASU. Inside the GuidanceResponse there is a contained Parameters list named *etasuOutputParameters*. Each Parameter in this list contains a GuidanceResponse resource that is representative of one of the individual elements of the REMS program. These may include any forms or knowledge assessments that need to be completed. These parameters are referenced by the *outputParameters* field. The *status* of the GuidanceResponse values gives the completion status of the REMS ETASU requirement. The values are matched in the table above.
+This GuidanceResponse represents the overall status of the REMS ETASU. Inside the GuidanceResponse there is a contained Parameters list that is referenced by the *outputParameters* field. Each parameter in this list contains a GuidanceResponse resource that is representative of one of the individual elements of the REMS program. These may include any forms or knowledge assessments that need to be completed. The *status* of the GuidanceResponse gives the completion status of the REMS ETASU requirement. The values are mapped in the table above.
 
 ##### Example Output
 {% raw %}
@@ -453,7 +453,7 @@ If an SPL file includes the URL of the CDS Hook that connects the prescriber EHR
 
 ##### openFDA API
 
-The FDA provides the openFDA Application Programming Interface (API) for querying drug product labeling information. The results from these queries are returned in JSON format. Detailed information about the openFDA API can be found at https://open.fda.gov/apis/. For guidance on using the drug labeling endpoint, one can visit “How to Use the Endpoint” at https://open.fda.gov/apis/drug/label/how-to-use-the-endpoint/. The openFDA API includes endpoints for packaged product National Drug Codes (NDCs) to query specific medication data, including naming information, ingredient information, and packaging information amongst others. 
+The FDA provides the openFDA Application Programming Interface (API) for querying drug product labeling information. The results from these queries are returned in JSON format. Detailed information about the openFDA API can be found at [https://open.fda.gov/apis/](https://open.fda.gov/apis/). For guidance on using the drug labeling endpoint, one can visit “How to Use the Endpoint” at [https://open.fda.gov/apis/drug/label/how-to-use-the-endpoint/](https://open.fda.gov/apis/drug/label/how-to-use-the-endpoint/). The openFDA API includes endpoints for packaged product National Drug Codes (NDCs) to query specific medication data, including naming information, ingredient information, and packaging information amongst others. 
 
 A recommended API similar to the openFDA API could provide expanded results for REMS drugs that include REMS Administrator and REMS endpoint information. If REMS endpoint information is provided for the CDS Hook URLs, they can be discovered, registered, and accessed by the REMS Prescriber Intermediary to route the request to the correct REMS Administrator based upon the REMS drug ordered by the prescriber.
 
@@ -487,11 +487,10 @@ The reference value contains a URN with the following components:
 
 ##### Example Reference Value URN for a FHIR CDS Hooks Service
 Below is an example of how this reference value might be constructed for a FHIR CDS Hooks service: 
-`<reference value="urn:HL7:FHIR4.0:rems_cds_discovery:cdshooksserver.remsdrug.com/cds-services" />`
-In this case, the components of the URN are as follows:
+`<reference value="urn:HL7:FHIR4.0:rems_cds_discovery:cdshooksserver.remsdrug.com/cds-services" />`. In this case, the components of the URN are as follows:
 
 - the developer of the standard (e.g., "FHIR")  
-- the standard version (e.g. “4.0”),  
+- the standard version (e.g. “4.0”)
 - the transaction (e.g. “rems_cds_discovery”)  
 - the destination address, such as a BIN number (e.g., "cdshoooksserver.remsdrug.com/cds-services")  
 
@@ -513,7 +512,7 @@ The example above lists the “rems_fhir_base” endpoint as “fhirserver.remsd
 
 In addition to the REMS Document in SPL, a recommended API similar to the the openFDA API may provide the URL for the REMS Administrator CDS Hooks endpoint. This would in turn be readable by the REMS Prescriber Intermediary allowing for automatic registration of the REMS Administrator Endpoints. 
 
-Like the openFDA API the data elements available include the Generic Name, Brand Name, and packaged product NDC, all of which are queryable elements within this API. Additionally, the recommended API would include data elements for REMS Administrator API Endpoint, REMS Administrator, REMS Approval Date, and REMS Modification Date. A client can search for REMS medication information based on one of the three queriable data element values. The package-specific NDC is most specific and reflective of the codes that will be used in a real-world environment. The REMS Administrator API Endpoint data element (`rems_endpoint`) contains the URL of the REMS Administrator CDS Hooks endpoint for the queried medication. If there is no endpoint supplied, there may be no CDS Hooks endpoint available for the REMS Administrator yet. 
+Like the openFDA API, the data elements available include the Generic Name, Brand Name, and packaged product NDC, all of which are queryable elements within this API. Additionally, the recommended API would include data elements for REMS Administrator API Endpoint, REMS Administrator, REMS Approval Date, and REMS Modification Date. A client can search for REMS medication information based on one of the three queriable data element values. The package-specific NDC is most specific and reflective of the codes that will be used in a real-world environment. The REMS Administrator API Endpoint data element (`rems_endpoint`) contains the URL of the REMS Administrator CDS Hooks endpoint for the queried medication. If there is no endpoint supplied, there may be no CDS Hooks endpoint available for the REMS Administrator yet. 
 
 ##### Example Output
 When queried for the Turalio medication, the following is an example output showing the recommended REMS data elements: 
@@ -537,7 +536,7 @@ When queried for the Turalio medication, the following is an example output show
             "generic_name": "PEXIDARTINIB HYDROCHLORIDE",
             "product_ndc": "65597-407",
             "rems_administrator": "REMS Prototype",
-            "rems_endpoint": "http://localhost:3003/",
+            "rems_endpoint": "http://cdshoooksserver.remsdrug.com/cds-services/",
             "rems_approval_date": "20240906",
             "rems_modification_date": "20240906",
             "packaging": [ 
@@ -562,7 +561,7 @@ FHIR Server endpoints for the REMS Administrator are recommended for operations 
 
 #### REMS Administrator Endpoint Registration Updates
 
-The REMS Prescriber Intermediary can periodically retrieve the REMS SPL zip archive to find new REMS medications and their respective CDS Hooks endpoints. This operation could happen on a specific interval, or with a trigger such as being notified when the SPL archive has been updated. The REMS Prescriber Intermediary can also query the recommended API for a newer CDS Hooks endpoint based on the drug packaged product NDC code.
+The REMS Prescriber Intermediary can periodically retrieve the REMS SPL zip archive to find new REMS medications and their respective CDS Hooks and FHIR server endpoints. This operation could happen on a specific interval, or with a trigger such as being notified when the SPL archive has been updated. The REMS Prescriber Intermediary can also query the recommended API for newer CDS Hooks and FHIR server endpoints based on the drug packaged product NDC code.
 
 <p></p>
 
@@ -584,7 +583,7 @@ Provider Systems and REMS Administrators **SHALL** follow guidance defined in...
 
 #### Prescriber Intermediary Security
 
-The Prescriber Intermediary is useful for forwarding CDS Hooks requests from the EHR to the correct REMS Administrator. Passing the FHIR authorization on to a third party that was not registered with the EHR is a problem. Therefore, the FHIR authorization **shall** be stripped from the hook request before being forwarded to the REMS Administrator. This can leave a problem with the prefetch not properly being populated. In this case, the intermediary **shall** populate the prefetch using the FHIR authorization that it had stripped from the hook. This will provide all needed information to the REMS Administrator in order to process the hook request.
+The Prescriber Intermediary is useful for forwarding CDS Hooks requests from the EHR to the correct REMS Administrator. Passing the FHIR authorization on to a third party that was not registered with the EHR is disallowed. Therefore, the FHIR authorization **SHALL** be stripped from the hook request before being forwarded to the REMS Administrator. This can leave a problem with the prefetch not properly being populated. In this case, the intermediary **SHALL** populate the prefetch using the FHIR authorization that it had stripped from the hook. This will provide all needed information to the REMS Administrator in order to process the hook request without sharing authorization beyond its intended scope.
  
 <p></p>
 <p></p>
