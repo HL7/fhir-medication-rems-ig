@@ -6,7 +6,7 @@ Description: "This CapabilityStatement describes the expected capabilities of a 
 * url = "http://hl7.org/fhir/us/medication-rems/CapabilityStatement/rems-administrator-system"
 * version = "1.0.0"
 * name = "MedicationRemsCapabilityStatementRemsAdministratorSystem"
-* status = #active
+* status = #draft
 * experimental = false
 * date = "2024-04-01T00:00:00-05:00"
 * publisher = "HL7 International - Pharmacy"
