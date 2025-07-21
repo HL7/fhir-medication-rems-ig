@@ -5,6 +5,7 @@ This implementation guide focuses on provider workflows during the ordering of R
 - the provider and the REMS Administrator that manages the associated program
 - the provider and the pharmacy to which the prescription is sent for dispensing
 - the pharmacist or other involved party and the REMS Administrator, to learn the status of REMS steps associated with a patient prescription and/or additional REMS requirements for which they are responsible (discuss)
+- new or existing intermediaries in place to facilitate easier communication between the various parties including the provider, REMS Administrator, and pharmacist
 
 The guide describes the use of FHIR features including CDS Hooks and SMART App Launch to exchange REMS-related information between providers and REMS Administrators during patient care, and it provides guidance for including REMS-related information in the resulting prescription sent to the pharmacy in an NCPDP SCRIPT transaction.
 
@@ -13,7 +14,8 @@ The goal of this guide is to establish information exchange conventions that sup
 - satisfying REMS information needs using data from the patient's electronic record where possible--minimizing manual data entry
 - capturing information about a specific patient's participation in a REMS program--including identifiers or other information assigned by the REMS Administrator--in the Provider System
 - reducing prescription fulfillment delays by completing up-front REMS steps before the order is sent to the pharmacy and including relevant REMS information in the prescription
-- enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements.
+- enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements
+- enabling an approach that is congruent with the Da Vinci prior authorization (PA) related IGs, CRD and DTR, mitigating implementation burden as often both PA and REMS are applicable
 
 ... with the aim of ensuring safe use in a way that gets the medication to the patient quicker.
 

@@ -93,7 +93,9 @@ This guide supports a set of scenarios involving interaction between prescribers
 
 * For certain drugs, **Prescribers and REMS Administrators** need to coordinate steps leading to the patient receiving the drug according to the provisions of the REMS. This may include:
   * the REMS Administrator sharing information about pharmacies that are enrolled in the REMS program and able to dispense the drug
+    * this process may also involve electronic (eScript) intermediaries
   * scheduling drug fulfillment and administration activities
+    * wholesalers may be involved, and their role may be defined in future versions of this guide
   * _[To be discussed further]_
 
 * **Patients** need to: 

@@ -38,7 +38,7 @@ However, there are situations where starting therapy with a REMS drug may involv
 
 <p></p>
 
-### Use Case One: Prescriber and REMS Administrator Interact from Within the Provider System Workflow
+### Use Case One (Preferred Approach): Prescriber and REMS Administrator Interact from Within the Provider System Workflow
 When seeing a patient, the prescriber decides to prescribe a drug, and is alerted by the Provider System that the drug has a REMS program. At an appropriate point in the workflow (e.g., when the prescriber starts creating the medication order, at the start of a related encounter, etc.), the Provider System connects with the REMS Administrator System and enables the prescriber to interact with it. 
 
 At the start of this interaction, the Provider System supplies patient, provider and medication information to the REMS Administrator. 

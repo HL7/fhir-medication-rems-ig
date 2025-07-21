@@ -40,7 +40,7 @@ Description: "This profile defines a Task to be returned in a REMS Administrator
 * reasonReference MS
 * reasonReference ^label = "Related medication request"
 * reasonReference ^short = "Related medication request"
-* reasonReference ^definition = "The medication request for the REMS drug that this task relates to SHOULD be populated if this task is related to a specific prescription"
+* reasonReference ^definition = "The medication request for the REMS drug that this task relates to SHALL be populated if this task is related to a specific prescription"
 * reasonReference ^min = 0
 * reasonReference.reference 1.. MS
 * reasonReference.reference ^label = "MedicationRequest reference"

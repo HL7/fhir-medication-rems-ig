@@ -59,6 +59,7 @@ Below are terms and wording conventions used throughout this implementation guid
 - The terms “medication” and “drug” refer to prescription drugs and prescription biologics.
 - The guide uses “prescriber” throughout to represent the health care provider that orders the REMS drug , their staff, or another authorized party acting on their behalf to perform REMS-related activities.
 - The guide uses “pharmacist” throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization.
+- This guide uses "intermediary" throughout to represent an application that can forward requests between one application and another. The "prescriber intermediary" defined in this guide specifically forwards messages between the EHR and the REMS Administrator.
 
 <p></p>
 
@@ -69,7 +70,7 @@ Nearly all drug prescriptions in the United States are transmitted electronicall
 
 #### Conveying REMS information in the electronic prescription
 
-By populating REMS-related data elements in the electronic prescription, the prescriber's system can improve the receiving pharmacist's workflow and reduce dispensing obstacles. The REMS-related elements below are supported in the currently-adopted NCPDP SCRIPT NewRx prescription specification (v2017071).
+By populating REMS-related data elements in the electronic prescription, the prescriber's system can improve the receiving pharmacist's workflow and reduce dispensing obstacles. The REMS-related elements below are supported in the currently-adopted NCPDP SCRIPT NewRx prescription specification (v2017071). The newly adopted NCPDP SCRIPT specification (v2023011) is also currently supported and will fully replace v2017071 when it's support ends before January 1, 2028.
 
 Provider Systems are encouraged to transmit these REMS data elements when possible, though this guide does not require it--as that may not be supported by current prescribing system processes.
 
@@ -96,7 +97,7 @@ Provider Systems are encouraged to transmit these REMS data elements when possib
 <td>REMSHealthcareSettingEnrollmentID</td>
 </tr>
 <tr>
-<td>Dispense authorization</td>
+<td>REMS Case Number</td>
 <td>REMSAuthorizationNumber</td>
 </tr>
 <tr>

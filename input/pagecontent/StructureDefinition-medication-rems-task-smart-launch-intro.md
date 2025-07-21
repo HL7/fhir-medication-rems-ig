@@ -9,7 +9,7 @@
 - **Task.owner**
   - A reference to the provider in whose work queue to add the SMART app launch task SHOULD be populated
 - **Task.reasonReference**
-  - The medication request for the REMS drug that this task relates to SHOULD be populated if this task is related to a specific prescription
+  - The medication request for the REMS drug that this task relates to SHALL be populated if this task is related to a specific prescription
 - **Input.type = `smartonfhir-application`**
   - Indicates that this input holds the URL of the SMART app to be launched
 - **Input.type = `smartonfhir-appcontext`**

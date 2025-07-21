@@ -148,7 +148,7 @@ The Prescriber Intermediary **SHOULD** also support forwarding FHIR requests fro
 
 #### Support for Shared SMART on FHIR Application 
 
-Similar to the burden with registering the CDS Hooks server on the REMS Administrator with every EHR, there is significant effort during setup to register the SMART on FHIR application from the REMS Administrator with every EHR. The REMS Administrators have the option to implement their own SMART on FHIR application that may give them tighter control, however REMS Administrators **SHOULD** support shared SMART App launch instead. The Shared SMART app **SHALL** follow the SMART on FHIR application guidance in [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). 
+Similar to the burden with registering the CDS Hooks server on the REMS Administrator with every EHR, there is significant effort during setup to register the SMART on FHIR application from the REMS Administrator with every EHR. The REMS Administrators have the option to implement their own SMART on FHIR application that may give them tighter control, however REMS Administrators **SHOULD** support shared SMART App launch instead. The Shared SMART app **SHALL** follow selected portions of the SMART on FHIR application guidance in [Da Vinci Documentation Templates and Rules \(DTR\) IG](https://hl7.org/fhir/us/davinci-dtr/). These sections include retrieving forms from the server, pre-population, loading and saving partially completed forms, and submitting forms upon completion. Optional elements include Adaptive Forms and support for EHR native applications. Strict adherence to the entire DTR IG is not necessary but enough **SHOULD** be supported for greater interoperability.
 
 ##### Rendering the Shared SMART app
 The shared SMART app **SHALL** request the resources necessary to render the forms from the REMS Administrators using the `$questionnaire-package` operation on the Questionnaire resource. The path to the operation on the REMS Administrator's FHIR server will follow the pattern `<fhir_server_base>/Questionnaire/<questionnaire-id>/$questionaire-package`. When retrieving the questionnaire package, the REMS Administrator will compile a FHIR bundle containing the Questionnaire, ValueSet, and any Library resource needed to render the form. Embedded within Library resources there **SHOULD** be CQL (Clinical Quality Language) expressions. These expressions link the Questionnaire to data within the FHIR server. Once executed by the Shared SMART App, they are able to pre-populate the forms with data. Without the CQL, the forms will be empty when loading, negating the potential benefit of using a SMART on FHIR application.
@@ -182,7 +182,7 @@ This Implementation Guide is part of a larger system whose scope encompasses not
 The Pharmacy interactions are out of scope of this IG but are detailed in the NCPDP Implementation Guides (see the [NCPDP standards page](https://standards.ncpdp.org/Access-to-Standards.aspx) for more information). These interactions detail the use of the REMS specific messages within the NCPDP SCRIPT standard. Using the standard, the Pharmacy system is able to use standard messages to query the REMS Administrator though a REMS Pharmacy Intermediary. This intermediary forwards the messages to the correct REMS Administrator and returns reject codes if the medication cannot be dispensed. A successful message will provide dispense authorization for the Pharmacy to finally dispense the medication to the Patient. 
 
 #### Sending the Medication to the Pharmacy
-The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the [NCPDP SCRIPT specification](https://standards.ncpdp.org/Access-to-Standards.aspx). 
+The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the [NCPDP SCRIPT specification](https://standards.ncpdp.org/Access-to-Standards.aspx). Under current prescribing processes, the NCPDP SCRIPT NewRx message is sent from the EHR to an eScript intermediary and then is routed to the correct pharmacy as depicted in the figure above.
 
 The message also contains a tagged value called `AuthorizationNumber`. This value **SHALL** contain the REMS Case Number for the given Patient and Medication. This case number **SHOULD** have been previously retrieved from the REMS Administrator though the [$rems-etasu FHIR Operation described below](specification.html#out-of-band-etasu-check). If there is no case number available, the `AuthorizationNumber` can be omitted. 
 
@@ -243,7 +243,7 @@ Provider Systems **SHALL** enable the REMS Administrator to query for additional
 
 ### Out-of-band ETASU Check
 
-There may be instances where a client to the REMS Administrator may need information about the current ETASU (Elements to Assure Safe Use) status of the REMS program. A new FHIR operation `$rems-etasu` on the GuidanceResponse resource **SHOULD** be supported by the REMS Administrator FHIR Server. The path for this operation will follow the pattern `<base_fhir_url>/GuidanceResponse/$rems-etasu`. The operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication that are provided as input Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that could then be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
+There may be instances where a client to the REMS Administrator may need information about the current ETASU (Elements to Assure Safe Use) status of the REMS program. A new FHIR operation `$rems-etasu` on the GuidanceResponse resource **SHALL** be supported by the REMS Administrator FHIR Server. The path for this operation will follow the pattern `<base_fhir_url>/GuidanceResponse/$rems-etasu`. The operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication that are provided as input Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that could then be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
 
 #### Input 
 
@@ -489,8 +489,8 @@ The reference value contains a URN with the following components:
 Below is an example of how this reference value might be constructed for a FHIR CDS Hooks service: 
 `<reference value="urn:HL7:FHIR4.0:rems_cds_discovery:cdshooksserver.remsdrug.com/cds-services" />`. In this case, the components of the URN are as follows:
 
-- the developer of the standard (e.g., "FHIR")  
-- the standard version (e.g. “4.0”)
+- the developer of the standard (e.g., "HL7")  
+- the standard version (e.g. “FHIR4.0”)
 - the transaction (e.g. “rems_cds_discovery”)  
 - the destination address, such as a BIN number (e.g., "cdshoooksserver.remsdrug.com/cds-services")  
 
@@ -501,8 +501,8 @@ The example above lists the “rems_cds_discovery” endpoint as “cdshoooksser
 Below is an example of how this reference value might be constructed for a FHIR Server base url: `<reference value="urn:HL7:FHIR4.0:rems_fhir_base:fhirserver.remsdrug.com/fhir/" />`
 In this case, the components of the URN are as follows:
 
-- the developer of the standard (e.g., "FHIR")  
-- the standard version (e.g. “4.0”),  
+- the developer of the standard (e.g., "HL7")  
+- the standard version (e.g. “FHIR4.0”),  
 - the transaction (e.g. “rems_fhir_base”)  
 - the destination address, such as a BIN number (e.g., "fhirserver.remsdrug.com/fhir/")  
 

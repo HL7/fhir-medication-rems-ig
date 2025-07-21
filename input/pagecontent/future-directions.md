@@ -10,12 +10,12 @@ Support for additional scenarios and stakeholders such as those described below 
 #### Patient enrollment using a patient-directed application
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
 
-The patient logs into their provider's patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
+The patient logs into their provider's patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system. This information may include required lab testing information such as pregnancy tests. 
 
 <p></p>
 
 #### Validation that a pharmacy enrolled in a REMS program
-A provider prescribes a medication that has a REMS for a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the EMR queries the REMS Administration systems to determine if the pharmacy is enrolled in the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the user interface of the EMR if the pharmacy is incapable of dispensing the medication. 
+A provider prescribes a medication that has a REMS for a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the EMR queries the REMS Administration systems to determine if the pharmacy is enrolled in the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the user interface of the EMR if the pharmacy is incapable of dispensing the medication. Electronic prescription (ePrescribing) intermediaries may hold this list of enrolled pharmacies as well, thus allowing them to forward the medication to the correct pharmacy.
 
 <p></p>
 

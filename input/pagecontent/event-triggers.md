@@ -33,7 +33,7 @@ Because each medication is supported by one REMS Administrator among multiple, t
 
 Similar to clinical "filtering" of hooks described in the section above, this type of configuration is not addressed by the CDS Hooks standard and must be addressed according to the capabilities of the Provider System.
 
-In the event that a Prescriber Intermediary is used to forward the hooks, the intermediary system must also be configured to forward the request to the correct CDS Server for the specified mediation. This may be keyed off of the medication code. Multiple Prescriber Intermediaries can be used by the EHR. Its configuration should point to the correct intermediary for each medication or selection of medications.
+In the event that a Prescriber Intermediary is used to forward the hooks, the intermediary system must also be configured to forward the request to the correct CDS Server for the specified mediation. This may be keyed off of the medication code. These codes can be provided by 3rd party vendors (e.g. First DataBank, Medi-Span, or NLM (National Library of Medicine) RxNorm). Multiple Prescriber Intermediaries can be used by the EHR. Its configuration should point to the correct intermediary for each medication or selection of medications.
 
 Future opportunities to address configuration challenges are discussed in the [Future Directions section](future-directions.html#provider-system-configuration-for-many-drugs-and-rems-programs).
  
