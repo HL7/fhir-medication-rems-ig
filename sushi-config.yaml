@@ -73,6 +73,8 @@ extension:
     valueCode: phx
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: draft
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm
+    valueInteger: 2
 auto-oid-root: 2.16.840.1.113883.4.642.40.34
 
 # * modifierExtension
