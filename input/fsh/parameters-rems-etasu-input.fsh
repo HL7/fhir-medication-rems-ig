@@ -25,6 +25,8 @@ Description: "Example input parameters for the $rems-etasu operation"
 * parameter[+].name = "medication"
 * parameter[=].resource.resourceType = "Medication"
 * parameter[=].resource.id = "123-mr-IPledge-med"
+* parameter[=].resource.text.status = #generated
+* parameter[=].resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">iPledge Medication</div></div>"
 * parameter[=].resource.code.coding[0].system = "http://www.nlm.nih.gov/research/umls/rxnorm"
 * parameter[=].resource.code.coding[0].code = #6064
 * parameter[=].resource.code.coding[0].display = "isotretinoin"
