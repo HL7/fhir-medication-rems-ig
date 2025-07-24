@@ -5,7 +5,7 @@ Description: "Example output parameters for the $rems-etasu operation"
 * parameter.name = "rems-etasu"
 * parameter.resource.resourceType = "GuidanceResponse"
 * parameter.resource.status = #success
-* parameter.resource.moduleUri = "https://hl7.org/fhir/us/medication-rems/"
+* parameter.resource.moduleCanonical = "https://example.com/"
 * parameter.resource.text.status = #generated
 * parameter.resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">REMS ETASU GuidanceResponse</div></div>"
 * parameter.resource.subject.reference = "Patient/example-patient-123"
@@ -17,7 +17,7 @@ Description: "Example output parameters for the $rems-etasu operation"
 * parameter.resource.contained.parameter[=].resource.text.status = #generated
 * parameter.resource.contained.parameter[=].resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Patient Enrollment GuidanceResponse</div></div>"
 * parameter.resource.contained.parameter[=].resource.status = #success
-* parameter.resource.contained.parameter[=].resource.moduleUri = "https://hl7.org/fhir/us/medication-rems/"
+* parameter.resource.contained.parameter[=].resource.moduleUri = "https://example.com/"
 * parameter.resource.contained.parameter[=].resource.subject.reference = "Patient/example-patient-123"
 * parameter.resource.contained.parameter[=].resource.note.text = "Patient Enrollment"
 * parameter.resource.contained.parameter[+].name = "Prescriber Enrollment"
@@ -25,7 +25,7 @@ Description: "Example output parameters for the $rems-etasu operation"
 * parameter.resource.contained.parameter[=].resource.text.status = #generated
 * parameter.resource.contained.parameter[=].resource.text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Prescriber Enrollment GuidanceResponse</div></div>"
 * parameter.resource.contained.parameter[=].resource.status = #success
-* parameter.resource.contained.parameter[=].resource.moduleUri = "https://hl7.org/fhir/us/medication-rems/"
+* parameter.resource.contained.parameter[=].resource.moduleUri = "https://example.com/"
 * parameter.resource.contained.parameter[=].resource.subject.reference = "Patient/example-patient-123"
 * parameter.resource.contained.parameter[=].resource.note.text = "Prescriber Enrollment"
 * parameter.resource.contained.parameter[+].name = "case_number"
