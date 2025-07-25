@@ -19,6 +19,11 @@ A provider prescribes a medication that has a REMS for a patient. The provider a
 
 <p></p>
 
+#### Workflows involving outpatient healthcare sites
+REMS drugs may be administered through the use of outpatient healthcare sites. The workflow involving these may be different to those explored in the IG. Future releases of this guide may explore the workflows involving outpatient healthcare sites providing a more complete approach to all REMS interactions.
+
+<p></p>
+
 #### Additional support for ongoing patient care
 Once the patient has started on the REMS drug, REMS activities may include monitoring programs and additional authorization steps, and many participants may be involved during this period. New scenarios related to ongoing care may be identified and addressed in future versions of this guide, potentially providing additional visibility of pertinent information or improved communication between stakeholders through use of FHIR.
 
@@ -41,7 +46,7 @@ Further data and process integration between REMS stakeholders may be pursued in
 <p></p>
 
 ### Other Challenges to REMS Automation
-In addition to supporting additional workflow scenarios, work is needed to address technical challenges that cause setup and maintenance work for stakeholders and may hinder broad implementation of the FHIR approaches described here.
+In addition to supporting additional workflow scenarios, work is needed to address technical challenges that cause setup and maintenance work for stakeholders and may hinder broad implementation of the FHIR approaches described here. One possibility is to use AI to analyze connections that fail and self-heal by automatically reconfiguring the interconnected system.
 
 <p></p>
 

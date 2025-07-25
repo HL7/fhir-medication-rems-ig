@@ -44,7 +44,7 @@ The implementation guide is organized into the following sections:
 This implementation guide relies on the following other specifications: 
 
 * [CDS Hooks 2.0](https://cds-hooks.hl7.org/2.0/) - The official standard for trial use publication of CDS Hooks that defines the CDS Hooks protocol and interfaces used by this implementation guide
-* [SMART on FHIR 2.1](https://hl7.org/fhir/smart-app-launch/STU2.1) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
+* [SMART on FHIR 2.2](https://hl7.org/fhir/smart-app-launch/STU2.2) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
 * [FHIR R4](http://hl7.org/fhir/R4/) - The current official version of FHIR as of the time this implementation guide was published
 * [US Core](http://hl7.org/fhir/us/core) - The current published version of US Core profiles based on FHIR R4
 
