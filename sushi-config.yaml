@@ -51,6 +51,11 @@ pages:
     title: CDS Hooks Card Profiles
   downloads.xml:
     title: Downloads
+  change-history.md:
+    title: Change History
+    extension:
+      - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+        valueCode: informative
 
 # menu:
 #   Home: index.html
