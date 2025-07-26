@@ -28,7 +28,7 @@ Description: "This CapabilityStatement describes the expected capabilities of a 
 * implementationGuide[0] = "http://hl7.org/fhir/smart-app-launch/ImplementationGuide/hl7.fhir.uv.smart-app-launch"
 * implementationGuide[=].extension.url = "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation"
 * implementationGuide[=].extension.valueCode = #SHALL
-* implementationGuide[+] = "http://cds-hooks.hl7.org"
+* implementationGuide[+] = "http://cds-hooks.hl7.org/ImplementationGuide/hl7.fhir.uv.cds-hooks"
 * implementationGuide[=].extension.url = "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation"
 * implementationGuide[=].extension.valueCode = #SHOULD
 * rest.mode = #server

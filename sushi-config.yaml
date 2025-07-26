@@ -18,7 +18,7 @@ publisher:
 dependencies:
   hl7.fhir.us.core:
     id: uscore
-    version: 8.0.0
+    version: 3.1.1
     reason: |
       Defines U.S. EHR expectations on a range of resources that will be passed to and/or queried by REMS CDS servers
   hl7.fhir.uv.smart-app-launch:
@@ -26,6 +26,11 @@ dependencies:
     version: 2.2.0
     reason: |
       Defines base expectations and profiles for SMART app launch requirements
+  hl7.fhir.uv.cds-hooks:
+    id: CDSHooks
+    version: 2.0.1
+    reason: |
+       Defines cds hooks protocol
 #
 #
 pages:
