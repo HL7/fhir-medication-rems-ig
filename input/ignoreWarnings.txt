@@ -2,3 +2,9 @@
 # Duplicate anchor warnings related to anchors created by the publisher (this Zulip thread indicates these can be ignored: https://chat.fhir.org/#narrow/stream/179252-IG-creation/topic/Publisher.20v1.2E6.2E12)
 The html source has duplicate anchor Ids: medication-rems-task-smart-launch-1
 The html source has duplicate anchor Ids: full-guide
+
+# Ignore warning about US Core 3.1.1, this is the current version in use and the version being targeted by this guide
+%The ImplementationGuide uses package hl7.fhir.us.core#3.1.1 released on 2020-08-28%
+
+# Ignore deprecated elements, as suggested by FMG Ballot QA Review Session 225-07-29
+%The extension http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet|5.2.0 is deprecated%

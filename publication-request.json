@@ -1,9 +1,9 @@
  {
     "package-id": "hl7.fhir.us.medication-rems",
-    "version": "2.0.0",
-    "path": "http://hl7.org/fhir/us/medication-rems/STU2",
-    "mode": "milestone",
-    "status": "trial-use",
+    "version": "2.0.0-ballot",
+    "path": "http://hl7.org/fhir/us/medication-rems/2025Sep",
+    "mode": "working",
+    "status": "ballot",
     "sequence": "STU2",
     "desc": "This is the STU2 version of the US Medication REMS FHIR IG. It is sponsored by the HL7 Pharmacy Work Group",
     "changes":"changes.html",
