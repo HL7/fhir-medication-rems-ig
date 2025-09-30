@@ -29,6 +29,7 @@ This implementation guide establishes two basic interaction patterns between a P
 This interaction is initiated by the Provider System during the provider's workflow, using CDS Hooks and, optionally, EHR-based SMART App Launch. 
 
 - Provider Systems **SHALL** support this interaction approach because it offers the greatest opportunity to raise and address REMS requirements when related care activities occur. 
+- Provider Systems **SHOULD** support saving DocumentReference to Patient's record as [described here](specification.html#support-for-saving-rems-information-to-the-patients-record).
 - REMS Administrators **SHOULD** implement this interaction approach.
 
 <p></p>
@@ -49,6 +50,7 @@ This interaction is initiated by the Provider System during the provider's workf
 In this interaction, a provider uses an external REMS Administrator application that accesses patient data in a Provider System using standalone SMART app launch. 
 
 - Provider Systems **SHALL** support this interaction approach to provide a transitional bridge from REMS Administrator portals that exist today or for circumstances where interaction with the REMS Administrator may more naturally occur within its external system. 
+- Provider Systems **SHOULD** support saving DocumentReference to Patient's record as [described here](specification.html#support-for-saving-rems-information-to-the-patients-record).
 - REMS Administrators **MAY** support this interaction approach.
 
 <p></p>
@@ -184,7 +186,7 @@ The Pharmacy interactions are out of scope of this IG but are detailed in the NC
 #### Sending the Medication to the Pharmacy
 The EHR **SHALL** send the medication to the Pharmacy using the standard NCPDP SCRIPT NewRx message. This message contains information about the Patient and the Medication being prescribed. For more details on the message please see the [NCPDP SCRIPT specification](https://standards.ncpdp.org/Access-to-Standards.aspx). Under current prescribing processes, the NCPDP SCRIPT NewRx message is sent from the EHR to an eScript intermediary and then is routed to the correct pharmacy as depicted in the figure above.
 
-The message also contains a tagged value called `AuthorizationNumber`. This value **SHALL** contain the REMS Case Number for the given Patient and Medication. This case number **SHOULD** have been previously retrieved from the REMS Administrator though the [$rems-etasu FHIR Operation described below](specification.html#out-of-band-etasu-check). If there is no case number available, the `AuthorizationNumber` can be omitted. 
+The message also contains a tagged value called `REMSAuthorizationNumber`. This value **SHALL** contain the REMS Case Number for the given Patient and Medication. This case number **SHOULD** have been previously retrieved from the REMS Administrator though the [$rems-etasu FHIR Operation described below](specification.html#out-of-band-etasu-check). If there is no case number available, the `REMSAuthorizationNumber` can be omitted. 
 
 A REMS Administrator may not create a case number for the Patient until enrollment or other forms have been completed. The case number is used to reference the case and make it easier for the case to be retrieved by the REMS Administrator internally without having to rely on Patient demographics or other Patient matching algorithms. 
 
@@ -243,7 +245,7 @@ Provider Systems **SHALL** enable the REMS Administrator to query for additional
 
 ### Out-of-band ETASU Check
 
-There may be instances where a client to the REMS Administrator may need information about the current ETASU (Elements to Assure Safe Use) status of the REMS program. A new FHIR operation `$rems-etasu` on the GuidanceResponse resource **SHALL** be supported by the REMS Administrator FHIR Server. The path for this operation will follow the pattern `<base_fhir_url>/GuidanceResponse/$rems-etasu`. The operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The clients to this operation may include the EHR or Pharmacy applications. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication that are provided as input Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that could then be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
+There may be instances where a client to the REMS Administrator may need information about the current ETASU (Elements to Assure Safe Use) status of the REMS program. A new FHIR operation `$rems-etasu` on the GuidanceResponse resource **SHALL** be supported by the REMS Administrator FHIR Server. The path for this operation will follow the pattern `<base_fhir_url>/GuidanceResponse/$rems-etasu`. The operation allows the clients to the REMS Administrator FHIR server to query the status of the REMS process for an individual patient at any time. The Provider and the Pharmacy Systems **MAY** query the REMS Administrator FHIR Server using the $rems-etasu operation. The users of these may include the Patient, Provider, or Pharmacist. The operation will also return the case number if available for the REMS case associated with the Patient and Medication that are provided as input Parameters. This operation allows for the systems to programmatically check the ETASU status in a parsable output format that could then be displayed to the users in a graphical and more user-friendly method. The data can also be used to determine the case number for use when sending the prescription to the Pharmacy using the NewRx NCPDP SCRIPT message.
 
 #### Input 
 

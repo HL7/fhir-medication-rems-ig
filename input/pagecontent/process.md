@@ -102,7 +102,8 @@ Provider Systems are encouraged to transmit these REMS data elements when possib
 </tr>
 <tr>
 <td>Patient Risk Category</td>
-<td>REMSPatientRiskCategory</td>
+<td>REMSPatientRiskCategory<br>
+(Note: Element is replaced with REMSReproductivePotential in NCPDP SCRIPT v2023011)</td>
 </tr>
 <tr>
 <td>Indication that prescriber REMS requirements are met</td>
