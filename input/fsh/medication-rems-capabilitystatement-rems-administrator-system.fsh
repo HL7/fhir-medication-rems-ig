@@ -6,7 +6,7 @@ Description: "This CapabilityStatement describes the expected capabilities of a 
 * url = "http://hl7.org/fhir/us/medication-rems/CapabilityStatement/rems-administrator-system"
 * version = "1.0.0"
 * name = "MedicationRemsCapabilityStatementRemsAdministratorSystem"
-* status = #active
+* status = #draft
 * experimental = false
 * date = "2024-04-01T00:00:00-05:00"
 * publisher = "HL7 International - Pharmacy"
@@ -28,7 +28,7 @@ Description: "This CapabilityStatement describes the expected capabilities of a 
 * implementationGuide[0] = "http://hl7.org/fhir/smart-app-launch/ImplementationGuide/hl7.fhir.uv.smart-app-launch"
 * implementationGuide[=].extension.url = "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation"
 * implementationGuide[=].extension.valueCode = #SHALL
-* implementationGuide[+] = "https://cds-hooks.hl7.org/2.0/"
+* implementationGuide[+] = "http://cds-hooks.hl7.org/ImplementationGuide/hl7.fhir.uv.cds-hooks"
 * implementationGuide[=].extension.url = "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation"
 * implementationGuide[=].extension.valueCode = #SHOULD
 * rest.mode = #server

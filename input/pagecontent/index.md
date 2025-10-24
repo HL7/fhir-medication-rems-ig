@@ -5,6 +5,7 @@ This implementation guide focuses on provider workflows during the ordering of R
 - the provider and the REMS Administrator that manages the associated program
 - the provider and the pharmacy to which the prescription is sent for dispensing
 - the pharmacist or other involved party and the REMS Administrator, to learn the status of REMS steps associated with a patient prescription and/or additional REMS requirements for which they are responsible (discuss)
+- new or existing intermediaries in place to facilitate easier communication between the various parties including the provider, REMS Administrator, and pharmacist
 
 The guide describes the use of FHIR features including CDS Hooks and SMART App Launch to exchange REMS-related information between providers and REMS Administrators during patient care, and it provides guidance for including REMS-related information in the resulting prescription sent to the pharmacy in an NCPDP SCRIPT transaction.
 
@@ -13,7 +14,8 @@ The goal of this guide is to establish information exchange conventions that sup
 - satisfying REMS information needs using data from the patient's electronic record where possible--minimizing manual data entry
 - capturing information about a specific patient's participation in a REMS program--including identifiers or other information assigned by the REMS Administrator--in the Provider System
 - reducing prescription fulfillment delays by completing up-front REMS steps before the order is sent to the pharmacy and including relevant REMS information in the prescription
-- enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements.
+- enabling those involved in fulfilling the prescription to learn of their responsibilities and the status of other REMS requirements
+- enabling an approach that is congruent with the Da Vinci prior authorization (PA) related IGs, CRD and DTR, mitigating implementation burden as often both PA and REMS are applicable
 
 ... with the aim of ensuring safe use in a way that gets the medication to the patient quicker.
 
@@ -42,9 +44,9 @@ The implementation guide is organized into the following sections:
 This implementation guide relies on the following other specifications: 
 
 * [CDS Hooks 2.0](https://cds-hooks.hl7.org/2.0/) - The official standard for trial use publication of CDS Hooks that defines the CDS Hooks protocol and interfaces used by this implementation guide
-* [SMART on FHIR 2.1](https://hl7.org/fhir/smart-app-launch/STU2.1) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
+* [SMART on FHIR 2.2](https://hl7.org/fhir/smart-app-launch/STU2.2) - The specification provides a reliable, secure authorization protocol for SMART apps launched from a clinical system or standalone application to support REMS information capture and data exchange
 * [FHIR R4](http://hl7.org/fhir/R4/) - The current official version of FHIR as of the time this implementation guide was published
-* [US Core](http://hl7.org/fhir/us/core) - The current published version of US Core profiles based on FHIR R4
+* [US Core 3.1.1](https://hl7.org/fhir/us/core/STU3.1.1/) - The current published version of US Core profiles based on FHIR R4
 
 <p></p>
 
@@ -73,6 +75,14 @@ This implementation guide relies on the following other specifications:
 	  <tr>
 		<td>Robert Dingwell</td>
 		<td><a href="mailto:bobd@mitre.com">bobd@mitre.com</a></td>
+	  </tr>
+	  <tr>
+		<td>Patrick LaRocque</td>
+		<td><a href="mailto:plarocque@mitre.com">plarocque@mitre.com</a></td>
+	  </tr>
+	  <tr>
+		<td>Lauren DiCristofaro</td>
+		<td><a href="mailto:laurend@mitre.org">laurend@mitre.org</a></td>
 	  </tr>
 	</tbody>
   </table>

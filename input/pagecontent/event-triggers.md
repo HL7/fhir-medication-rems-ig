@@ -33,7 +33,26 @@ Because each medication is supported by one REMS Administrator among multiple, t
 
 Similar to clinical "filtering" of hooks described in the section above, this type of configuration is not addressed by the CDS Hooks standard and must be addressed according to the capabilities of the Provider System.
 
+In the event that a Prescriber Intermediary is used to forward the hooks, the intermediary system must also be configured to forward the request to the correct CDS Server for the specified mediation. This may be keyed off of the medication code. These codes can be provided by 3rd party vendors (e.g. First DataBank, Medi-Span, or NLM (National Library of Medicine) RxNorm). Multiple Prescriber Intermediaries can be used by the EHR. Its configuration should point to the correct intermediary for each medication or selection of medications.
+
 Future opportunities to address configuration challenges are discussed in the [Future Directions section](future-directions.html#provider-system-configuration-for-many-drugs-and-rems-programs).
  
 <p></p>
+
+### Triggering ETASU Status Checks
+
+FHIR Operations allow for complex queries or actions to be performed on a FHIR server beyond the normal CRUD actions (Create, Read, Update, Delete). The `$rems-etasu` FHIR operation has been added to allow clients to the REMS Administrator FHIR server to query the status of the ETASU (Elements to Assure Safe Use) at any time. For more details see the [Out-of-band ETASU Check section](specification.html#out-of-band-etasu-check).
+
+#### Manually Triggering
+The EHR system may include a manual trigger through a button to query the ETASU status in either the Provider workflow or in the Patient Portal. This interaction allows the Patient, Provider, or even the Pharmacy to determine what else is needed before a medication can be dispensed to a Patient. One of these stakeholders can check the status and complete a form in response or prompt another stakeholder to complete a form/requirement as needed. 
+
+#### Querying for REMS Case before submitting Prescription to Pharmacy
+The operation is also useful before sending the medication to the Pharmacy via NCPDP SCRIPT NewRx message. The returned FHIR `Parameters` include a `caseNumber` that represents the REMS Case Number for the given Patient and Medication. This case number is included in the NewRx message as the authNumber. The Pharmacy may use this number to reference the REMS case involving this Medication and Patient without needing to identify the case by matching against Patient demographics.
+
+<p></p>
+
+### Triggering Prescriber Intermediary Updates
+
+The Prescriber Intermediary system can update its links to the REMS Administrator CDS Hooks and FHIR server endpoints using the mechanism described in the [Detailed Specification section](specification.html#automatic-rems-endpoint-registration-using-spl). This guide does not specify any mandatory methods of triggering the updates, but a couple of options are available. The update event may be triggered daily using a cron job or similar time-based job scheduler. Alternatively, it can be a manual process triggered by an external event or button within a user interface tied to the intermediary system.
+
 <p></p>

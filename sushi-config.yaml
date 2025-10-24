@@ -5,11 +5,11 @@ canonical: http://hl7.org/fhir/us/medication-rems
 name: REMS
 title: US Medication Risk Evaluation and Mitigation Strategies (REMS) FHIR IG
 description: FHIR implementation options and guidance for medication REMS participants
-status: active # draft | active | retired | unknown
-version: 1.0.0
+status: draft # draft | active | retired | unknown
+version: 2.0.0-ballot
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2023+
-releaseLabel: STU1 # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use | STU1 Ballot
+releaseLabel: STU 2 Ballot # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use | STU1 Ballot
 license: CC0-1.0 
 jurisdiction: urn:iso:std:iso:3166#US "United States of America"
 publisher:
@@ -26,6 +26,11 @@ dependencies:
     version: 2.2.0
     reason: |
       Defines base expectations and profiles for SMART app launch requirements
+  hl7.fhir.uv.cds-hooks:
+    id: CDSHooks
+    version: 2.0.1
+    reason: |
+       Defines cds hooks protocol
 #
 #
 pages:
@@ -51,6 +56,11 @@ pages:
     title: CDS Hooks Card Profiles
   downloads.xml:
     title: Downloads
+  change-history.md:
+    title: Change History
+    extension:
+      - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+        valueCode: informative
 
 # menu:
 #   Home: index.html
@@ -71,6 +81,10 @@ contact:
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-wg
     valueCode: phx
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+    valueCode: draft
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm
+    valueInteger: 2
 auto-oid-root: 2.16.840.1.113883.4.642.40.34
 
 # * modifierExtension

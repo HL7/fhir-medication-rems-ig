@@ -6,7 +6,7 @@ Description: "This profile defines a Task to be returned in a REMS Administrator
 * ^meta.lastUpdated = "2024-03-10T00:00:00-05:00"
 * ^url = "http://hl7.org/fhir/us/medication-rems/StructureDefinition/medication-rems-task-smart-launch"
 * ^version = "1.0.0"
-* ^status = #active
+* ^status = #draft
 * ^experimental = false
 * ^date = "2024-03-10T00:00:00-05:00"
 * ^publisher = "HL7 International - Pharmacy"
@@ -40,7 +40,7 @@ Description: "This profile defines a Task to be returned in a REMS Administrator
 * reasonReference MS
 * reasonReference ^label = "Related medication request"
 * reasonReference ^short = "Related medication request"
-* reasonReference ^definition = "The medication request for the REMS drug that this task relates to SHOULD be populated if this task is related to a specific prescription"
+* reasonReference ^definition = "The medication request for the REMS drug that this task relates to SHALL be populated if this task is related to a specific prescription"
 * reasonReference ^min = 0
 * reasonReference.reference 1.. MS
 * reasonReference.reference ^label = "MedicationRequest reference"

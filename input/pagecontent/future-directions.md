@@ -6,20 +6,21 @@ Support for additional scenarios and stakeholders such as those described below 
 <p></p>
 
 ### Possible Additional Scenarios
-#### Checking a patient's REMS status systematically
-A provider, pharmacy or other REMS stakeholder checks the status of REMS requirements associated with a patient's prescription. Information is returned in structured form that the requesting system can use to trigger next steps, etc.
- 
-<p></p>
 
 #### Patient enrollment using a patient-directed application
 A provider prescribes a medication that has a REMS for a patient and fills out the required patient enrollment forms. The patient receives a notification to attest that they have received any required education/documentation required by the REMS as well as the accuracy of the information contained on the forms. 
 
-The patient logs into their provider's patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system.
+The patient logs into their provider's patient portal and launches an application to fill out the required information and submits the results back to the REMS Administration system. This information may include required lab testing information such as pregnancy tests. 
 
 <p></p>
 
 #### Validation that a pharmacy enrolled in a REMS program
-A provider prescribes a medication that has a REMS for a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the EMR queries the REMS Administration systems to determine if the pharmacy is enrolled in the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the user interface of the EMR if the pharmacy is incapable of dispensing the medication. 
+A provider prescribes a medication that has a REMS for a patient. The provider asks the patient what their preferred pharmacy is.  Before sending the prescription to the pharmacy, the EMR queries the REMS Administration systems to determine if the pharmacy is enrolled in the REMS if required and can dispense the medication.  The REMS Administration system sends back a notification stating if the pharmacy can dispense the medication.  An alert is displayed in the user interface of the EMR if the pharmacy is incapable of dispensing the medication. Electronic prescription (ePrescribing) intermediaries may hold this list of enrolled pharmacies as well, thus allowing them to forward the medication to the correct pharmacy.
+
+<p></p>
+
+#### Workflows involving outpatient healthcare sites
+REMS drugs may be administered through the use of outpatient healthcare sites. The workflow involving these may be different to those explored in the IG. Future releases of this guide may explore the workflows involving outpatient healthcare sites providing a more complete approach to all REMS interactions.
 
 <p></p>
 
@@ -39,12 +40,13 @@ Further data and process integration between REMS stakeholders may be pursued in
 - capturing discrete REMS data elements in the Provider System in a way that enables them to be systematically populated into the e-prescription
 - establish standard mappings between NCPDP and FHIR prescription information models
 - further integrating CDS Hooks / SMART app data exchange with medication prescribing workflows in the Provider System
-- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS.
+- leveraging well-supported, existing pharmacy-to-provider exchange patterns such as the NCPDP RxChangeRequest to enable questions and other requests related to REMS
+- introducing opportunities for REMS Administrator ETASU (Elements to Assure Safe Use) checking to prevent the prescription from leaving the Provider System if adjustments still need to be made 
 
 <p></p>
 
 ### Other Challenges to REMS Automation
-In addition to supporting additional workflow scenarios, work is needed to address technical challenges that cause setup and maintenance work for stakeholders and may hinder broad implementation of the FHIR approaches described here.
+In addition to supporting additional workflow scenarios, work is needed to address technical challenges that cause setup and maintenance work for stakeholders and may hinder broad implementation of the FHIR approaches described here. One possibility is to use AI to analyze connections that fail and self-heal by automatically reconfiguring the interconnected system.
 
 <p></p>
 
@@ -53,14 +55,17 @@ In addition to supporting additional workflow scenarios, work is needed to addre
 - maintaining CDS Hooks configuration to direct requests to different REMS Administrator Systems for different drugs
 - maintaining SMART app configuration for many REMS Administrators' apps
 - maintaining changes to configuration when:
-  - new REMS programs are established
   - REMS programs move from one Administrator to another
   - REMS drug identifiers (used to configure CDS Hooks triggers) change or are added due to new product variations, discontinuation or other reasons
 
-<p></p>
-
-**Intermediary Role.** Future approaches may include support for intermediary roles that can provide a single endpoint for multiple drugs and associated REMS programs--potentially addressing configuration challenges noted above.
-
+### Handling Information from Pharmacy Systems
+Future versions of this guide may include further interactions between the Provider EHR system and Pharmacy systems beyond sending the Prescription. These could include:
+- REMS Pharmacy Intermediary to REMS Prescriber Intermediary
+  - sending reject codes when there are still requirements for the REMS program to be completed by the Patient or Provider
+  - information about what Pharmacies may be available for dispensing a given REMS drug
+- REMS Prescriber Intermediary to EHR
+  - develop a mechanism for sending messages to the EHR when not requested by the EHR
+  - forward messages from the Pharmacy system to the EHR alerting of needed forms or other information
 
 <p></p>
 <p></p>

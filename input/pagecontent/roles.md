@@ -21,7 +21,7 @@ Below is an outline of those who play a role in the parts of the REMS process cu
   - provide information to the REMS Administrator on the patient status and other clinical information 
   - perform specified clinical assessments at the start of therapy or at later points in the patient’s treatment.
   
-  _Note: The guide uses “prescriber�? throughout to represent the health care provider that orders the REMS drug , their staff, or another authorized party acting on their behalf to perform REMS-related activities._
+  _Note: The guide uses “prescriber" throughout to represent the health care provider that orders the REMS drug , their staff, or another authorized party acting on their behalf to perform REMS-related activities._
   
 - The **patient's** participation in the REMS program may include:  
   - receiving information or counseling about the risks associated with the REMS drug, actions they need to take to use the REMS drug safely (e.g., obtain lab tests),  symptoms to watch for and report to their provider and actions they need to take to mitigate those risks (e.g., decrease dose or stop medication)
@@ -30,12 +30,12 @@ Below is an outline of those who play a role in the parts of the REMS process cu
 
 - The **pharmacist** or another dispensing provider in a certified pharmacy or certified health care setting may perform a variety of functions, such the following:
   - receive information about the REMS drug risks and the REMS requirements from the manufacturer or REMS administrator
-  - determine any REMS-related actions that must be taken prior to dispensing it to the patient. This may include verifying the steps that the prescriber or other “upstream�? participant has yet to complete (e.g., confirming that patient enrollment and prescribing steps were completed)
+  - determine any REMS-related actions that must be taken prior to dispensing it to the patient. This may include verifying the steps that the prescriber or other “upstream" participant has yet to complete (e.g., confirming that patient enrollment and prescribing steps were completed)
   - complete training and other certification steps with the REMS Administrator to be authorized to dispense the REMS (as an individual pharmacist or on behalf of the pharmacy organization) 
   - provide education to the patient or perform other steps required by the applicable REMS 
   - send the REMS Administrator patient prescription or clinical information or assessments at the time of dispensing.
   
-  _Note: The guide uses “pharmacist�? throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization._
+  _Note: The guide uses “pharmacist" throughout to represent the dispensing pharmacist, other authorized pharmacy staff, the associated certified pharmacy or health care facility or operating organization._
   
 - **Other fulfilling parties** such as a drug distributor or wholesaler may also have responsibilities related to their role in getting a REMS drug to the patient. For example: 
   - a drug distributor may need to ensure that pharmacies and healthcare settings are certified prior to shipping the REMS drug. 
@@ -66,13 +66,12 @@ Below is an outline of those who play a role in the parts of the REMS process cu
 <p></p>
 
 #### Intermediary Role
-A data exchange intermediary may participate in the process on behalf of one or more REMS Administrators...
-  - acting as a CDS Server fielding CDS requests related to one or more REMS drugs
-  - hosting SMART apps supporting one or more REMS drugs.
+A data exchange intermediary may participate in the process on behalf of one or more REMS Administrators. The capabilities of a fully functional Prescriber Intermediary include:
+  - acting as a CDS Server fielding CDS requests related to one or more REMS drugs and forwarding requests to the correct REMS Administrator
+  - hosting SMART apps supporting one or more REMS drugs
+  - acting as a FHIR server forwarding requests to the correct REMS Administrator
 
-An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs.
-
-This guide does not provide direction for implementing an intermediary role serving these REMS interactions. A future version may add guidance in this area.
+An intermediary that provides a single connecting point for multiple REMS drugs will simplify setup work for the Provider System--reducing the number of different CDS Hooks endpoints and SMART apps that need to be configured to support that set of REMS drugs. The benefit achieved by the Intermediary is not to be underestimated. Registering a REMS Administrator for CDS Hooks and a SMART on FHIR app with every EHR system is a burden for the rollout of any new REMS program. This guide will describe [the use of intermediaries](specification.html#support-for-forwarding-messages-through-prescriber-intermediary) and methods for [automatically registering new REMS endpoints using SPL](specification.html#automatic-rems-endpoint-registration-using-spl) (Structured Product Labeling) to reduce that burden. 
 
 <p></p>
 
@@ -94,7 +93,9 @@ This guide supports a set of scenarios involving interaction between prescribers
 
 * For certain drugs, **Prescribers and REMS Administrators** need to coordinate steps leading to the patient receiving the drug according to the provisions of the REMS. This may include:
   * the REMS Administrator sharing information about pharmacies that are enrolled in the REMS program and able to dispense the drug
+    * this process may also involve electronic (eScript) intermediaries
   * scheduling drug fulfillment and administration activities
+    * wholesalers may be involved, and their role may be defined in future versions of this guide
   * _[To be discussed further]_
 
 * **Patients** need to: 

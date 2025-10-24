@@ -5,7 +5,8 @@ This page gives guidelines for populating and returning CDS Hooks response Cards
 REMS Administrator Systems dynamically create these Cards for each CDS Hooks request based on conditions including:
 - the prescribed drug's REMS program
 - the status of required REMS steps at the time of the event
-- REMS information needs associated with the current point in the patient's treatment. 
+- REMS information needs associated with the current point in the patient's treatment 
+- the ability of the specified Pharmacy to dispense the desired REMS medication
 
 This guidance is based on [the CDS Hooks specification](https://cds-hooks.hl7.org/2.0/#card-attributes) as applied to the REMS workflow. In addition, this guide aims to provide direction that is consistent with that given in the Da Vinci Coverage Requirements Discovery (CRD) IG to the extent possible (as described further [here](technical-background.html#consistency-with-the-da-vinci-burden-reduction-igs)).
 
@@ -26,7 +27,7 @@ In all cases, Cards interrupt the provider's workflow and will be welcomed by th
 
 *  The `Card.indicator` denotes the urgency or importance of what the Card conveys. It **SHOULD** be populated from the perspective of _clinical importance and/or risk_ to the patient, versus importance from an administrative perspective. For example, while a REMS Administrator might perceive a provider not being registered for a REMS Program as very important and urgent from the perspective of being able to prescribe and dispense a REMS drug, it would be, at most, a `warning` to the user according to the conventions for presenting Cards. The indicator value, `critical`, must be reserved for reporting the risk of life or death or other serious clinical outcomes. Most REMS responses **SHOULD** be marked as `info`.
 
-*  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize. In general this would be based on the name of the drug being requested.  
+*  The `Card.source.label` **SHOULD** be populated with the name of the REMS program that the user and patient would recognize.  
 
 *  Because providers' time is limited, information returned in Cards must be quickly understandable and pertinent to the request context, the current state of the patient's treatment and the status of REMS requirements. Specifically:
 
@@ -41,6 +42,8 @@ In all cases, Cards interrupt the provider's workflow and will be welcomed by th
     *  When providing links, keep document size short and/or provide linking directly to the section that is relevant for the context to minimize the time needed for the provider to read the critical information.
 
     *  While links are permitted in the markdown content of `Card.detail`, support for this is not universal, so links **SHOULD** also be provided in `Card.link`. This also provides a consistent place for users to access all relevant links.
+
+    *  If a Pharmacy was provided in the prefetch, the `Card.detail` **SHOULD** include information about the pharmacy. This includes information about the certification status of the Pharmacy with the specific REMS program and if the medication can be dispensed or not.
 
 * Provider Systems might not support all Card capabilities; therefore Card options **SHOULD** provide sufficient information for a user to take appropriate actions manually if automated support isn't available.
 
@@ -132,7 +135,7 @@ This example CDS Hook [Card](https://cds-hooks.hl7.org/2.0/#cds-service-response
 <p></p>
 
 #### Launch SMART application
-Unlike External References, SMART apps can be launched within the Provider System workflow and use data from the Provider System to support their features. They allow interaction between the REMS Administrator and Provider System and can be authorized to access patient clinical data to help guide the interactive experience and minimize data entry. Apps can provide a wide variety of functions in the REMS workflow, including patient enrollment, providing education, collecting periodic clinical information required by the REMS, etc. 
+Unlike External References, SMART (Substitutable Medical Applications, Reusable Technologies) apps can be launched within the Provider System workflow and use data from the Provider System to support their features. They allow interaction between the REMS Administrator and Provider System and can be authorized to access patient clinical data to help guide the interactive experience and minimize data entry. Apps can provide a wide variety of functions in the REMS workflow, including patient enrollment, providing education, collecting periodic clinical information required by the REMS, etc. 
 
 Card population for this response type is similar to the [External Reference](#external-reference) response type, except with the `Link.type` set to "smart" instead of "absolute". The `Link.appContext` will typically also be present, providing context information that is useful to the app, which will be included when the EHR launches it.
 
