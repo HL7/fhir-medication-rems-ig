@@ -90,13 +90,13 @@ This implementation guide relies on the following other specifications:
 <p></p>
 
 ### Dependencies
-{% include dependency-table-short.xhtml %}
+{% lang-fragment dependency-table-short.xhtml %}
 
 ### Cross Version Analysis
-{% include cross-version-analysis.xhtml %}
+{% lang-fragment cross-version-analysis.xhtml %}
 
 ### Global Profiles
-{% include globals-table.xhtml %}
+{% lang-fragment globals-table.xhtml %}
 
 ### IP Statements
-{% include ip-statements.xhtml %}
+{% lang-fragment ip-statements.xhtml %}
