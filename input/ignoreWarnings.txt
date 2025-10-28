@@ -8,3 +8,6 @@ The html source has duplicate anchor Ids: full-guide
 
 # Ignore deprecated elements, as suggested by FMG Ballot QA Review Session 2025-07-29
 %The extension http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet|5.2.0 is deprecated%
+
+# Ignore conformance clause message about 'SHALL' and 'SHOULD'
+%but it is not in a text phrase marked as a conformance clause%
